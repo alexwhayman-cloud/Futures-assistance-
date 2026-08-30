@@ -203,7 +203,8 @@ class UkEpcSource(Source):
             built_form=self._lookup(
                 BUILT_FORMS, row.get("built-form"), BuiltForm.UNKNOWN
             ),
-            # Deliberately not set from EPC "TENURE" — see module docstring.
+            # legal_tenure stays None: EPC has no tenure certificate field,
+            # and its TENURE column is occupancy. See module docstring.
             occupancy=self._lookup(OCCUPANCY, row.get("tenure"), Occupancy.UNKNOWN),
             floor_area_sqm=units.normalise_area(
                 row.get("total-floor-area"), "sqm"

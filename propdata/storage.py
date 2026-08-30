@@ -39,14 +39,20 @@ CREATE TABLE IF NOT EXISTS properties (
     country               TEXT NOT NULL,
     postcode              TEXT,
     address_lines         TEXT,
+    admin_code            TEXT,
     uprn                  TEXT,
     latitude              REAL,
     longitude             REAL,
     property_type         TEXT,
     built_form            TEXT,
-    legal_tenure          TEXT,
+    tenure_family         TEXT,
+    tenure_local_name     TEXT,
+    tenure_local_code     TEXT,
+    tenure_years_left     INTEGER,
+    tenure_foreign_ok     INTEGER,
     occupancy             TEXT,
     floor_area_sqm        REAL,
+    land_area_sqm         REAL,
     habitable_rooms       INTEGER,
     bedrooms              INTEGER,
     bathrooms             INTEGER,
@@ -62,6 +68,7 @@ CREATE TABLE IF NOT EXISTS properties (
 
 CREATE INDEX IF NOT EXISTS idx_properties_postcode ON properties (postcode);
 CREATE INDEX IF NOT EXISTS idx_properties_uprn ON properties (uprn);
+CREATE INDEX IF NOT EXISTS idx_properties_admin ON properties (admin_code);
 
 CREATE TABLE IF NOT EXISTS raw_records (
     property_id      TEXT NOT NULL,
@@ -79,11 +86,13 @@ CREATE TABLE IF NOT EXISTS raw_records (
 UPSERT = """
 INSERT INTO properties VALUES (
     :property_id, :source_id, :source_record_id, :tier, :licence, :source_url,
-    :retrieved_at, :country, :postcode, :address_lines, :uprn, :latitude,
-    :longitude, :property_type, :built_form, :legal_tenure, :occupancy,
-    :floor_area_sqm, :habitable_rooms, :bedrooms, :bathrooms,
-    :construction_age_band, :energy_band, :energy_score, :assessed_on,
-    :asking_price, :price_currency, :listed_on
+    :retrieved_at, :country, :postcode, :address_lines, :admin_code, :uprn,
+    :latitude, :longitude, :property_type, :built_form, :tenure_family,
+    :tenure_local_name, :tenure_local_code, :tenure_years_left,
+    :tenure_foreign_ok, :occupancy, :floor_area_sqm, :land_area_sqm,
+    :habitable_rooms, :bedrooms, :bathrooms, :construction_age_band,
+    :energy_band, :energy_score, :assessed_on, :asking_price,
+    :price_currency, :listed_on
 )
 ON CONFLICT (property_id, source_id) DO UPDATE SET
     source_record_id      = excluded.source_record_id,
@@ -91,12 +100,18 @@ ON CONFLICT (property_id, source_id) DO UPDATE SET
     retrieved_at          = excluded.retrieved_at,
     postcode              = excluded.postcode,
     address_lines         = excluded.address_lines,
+    admin_code            = excluded.admin_code,
     uprn                  = excluded.uprn,
     property_type         = excluded.property_type,
     built_form            = excluded.built_form,
-    legal_tenure          = excluded.legal_tenure,
+    tenure_family         = excluded.tenure_family,
+    tenure_local_name     = excluded.tenure_local_name,
+    tenure_local_code     = excluded.tenure_local_code,
+    tenure_years_left     = excluded.tenure_years_left,
+    tenure_foreign_ok     = excluded.tenure_foreign_ok,
     occupancy             = excluded.occupancy,
     floor_area_sqm        = excluded.floor_area_sqm,
+    land_area_sqm         = excluded.land_area_sqm,
     habitable_rooms       = excluded.habitable_rooms,
     bedrooms              = excluded.bedrooms,
     bathrooms             = excluded.bathrooms,
@@ -119,6 +134,7 @@ def _iso(value: Any) -> str | None:
 
 def _row(prop: Property) -> dict[str, Any]:
     energy = prop.energy
+    tenure = prop.legal_tenure
     return {
         "property_id": prop.property_id,
         "source_id": prop.provenance.source_id,
@@ -130,14 +146,24 @@ def _row(prop: Property) -> dict[str, Any]:
         "country": prop.address.country,
         "postcode": prop.address.postcode,
         "address_lines": json.dumps(prop.address.lines),
+        "admin_code": prop.address.admin_code,
         "uprn": prop.address.uprn,
         "latitude": prop.address.latitude,
         "longitude": prop.address.longitude,
         "property_type": prop.property_type.value,
         "built_form": prop.built_form.value,
-        "legal_tenure": prop.legal_tenure.value,
+        "tenure_family": tenure.family.value if tenure else None,
+        "tenure_local_name": tenure.local_name if tenure else None,
+        "tenure_local_code": tenure.local_code if tenure else None,
+        "tenure_years_left": tenure.years_remaining if tenure else None,
+        "tenure_foreign_ok": (
+            None
+            if tenure is None or tenure.foreign_holdable is None
+            else int(tenure.foreign_holdable)
+        ),
         "occupancy": prop.occupancy.value,
         "floor_area_sqm": prop.floor_area_sqm,
+        "land_area_sqm": prop.land_area_sqm,
         "habitable_rooms": prop.habitable_rooms,
         "bedrooms": prop.bedrooms,
         "bathrooms": prop.bathrooms,

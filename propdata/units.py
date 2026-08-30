@@ -13,6 +13,16 @@ SQFT_PER_SQM = 10.763910416709722
 TSUBO_PER_SQM = 0.3025
 PYEONG_PER_SQM = 0.3025
 
+#: Indonesian land is quoted in are almost universally — a Bali listing says
+#: "5 are", never "500 sqm". 1 are = 100 m2 (it is the metric are, not a local
+#: unit), so getting this wrong is a clean factor-of-100 error.
+SQM_PER_ARE = 100.0
+SQM_PER_HECTARE = 10_000.0
+#: Java/Sunda listings also use tumbak (a.k.a. ubin). Commonly quoted as 14 m2;
+#: the surveyed value is 14.0625 m2 and regional variation exists. Verify
+#: against the source before relying on tumbak figures.
+SQM_PER_TUMBAK = 14.0625
+
 #: Values that mean "absent" across the registers seen so far. Compared
 #: case-insensitively after stripping.
 NULL_TOKENS = frozenset(
@@ -84,6 +94,10 @@ def pyeong_to_sqm(pyeong: float) -> float:
     return pyeong / PYEONG_PER_SQM
 
 
+def are_to_sqm(are: float) -> float:
+    return are * SQM_PER_ARE
+
+
 def normalise_area(value: object, unit: str) -> float | None:
     """Convert an area in `unit` to square metres, rounded to 2dp.
 
@@ -101,6 +115,12 @@ def normalise_area(value: object, unit: str) -> float | None:
         "ft2": sqft_to_sqm,
         "tsubo": tsubo_to_sqm,
         "pyeong": pyeong_to_sqm,
+        "are": are_to_sqm,
+        "a": are_to_sqm,
+        "hectare": lambda n: n * SQM_PER_HECTARE,
+        "ha": lambda n: n * SQM_PER_HECTARE,
+        "tumbak": lambda n: n * SQM_PER_TUMBAK,
+        "ubin": lambda n: n * SQM_PER_TUMBAK,
     }
     key = unit.strip().lower()
     if key not in converters:

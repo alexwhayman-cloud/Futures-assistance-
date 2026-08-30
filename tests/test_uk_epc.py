@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from propdata.schema import BuiltForm, LegalTenure, Occupancy, PropertyType, Tier
+from propdata.schema import BuiltForm, Occupancy, PropertyType, Tier
 from propdata.sources.uk_epc import UkEpcSource
 from propdata.storage import Store
 
@@ -38,7 +38,9 @@ class TestUkEpcNormalisation(unittest.TestCase):
         # never be silently promoted to freehold.
         prop = self.by_lmk["1111111111111111111111111"]
         self.assertEqual(prop.occupancy, Occupancy.OWNER_OCCUPIED)
-        self.assertEqual(prop.legal_tenure, LegalTenure.UNKNOWN)
+        # EPC carries no certificate type at all, so tenure stays absent
+        # rather than being invented from the occupancy column.
+        self.assertIsNone(prop.legal_tenure)
 
         rented = self.by_lmk["2222222222222222222222222"]
         self.assertEqual(rented.occupancy, Occupancy.RENTED_PRIVATE)
