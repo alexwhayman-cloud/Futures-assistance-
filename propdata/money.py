@@ -25,6 +25,8 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 
+from propdata.units import parse_number
+
 CURRENCY_SYMBOLS = {
     "rp": "IDR",
     "idr": "IDR",
@@ -36,6 +38,8 @@ CURRENCY_SYMBOLS = {
     "gbp": "GBP",
     "€": "EUR",
     "eur": "EUR",
+    "euro": "EUR",
+    "euros": "EUR",
     "aud": "AUD",
     "sgd": "SGD",
 }
@@ -50,6 +54,10 @@ MULTIPLIERS = {
     "jt": 1_000_000,
     "mio": 1_000_000,
     "million": 1_000_000,
+    "mil": 1_000,
+    "millones": 1_000_000,
+    "millon": 1_000_000,
+    "mill": 1_000_000,
     "miliar": 1_000_000_000,
     "milyar": 1_000_000_000,
     "billion": 1_000_000_000,
@@ -65,8 +73,12 @@ MULTIPLIERS_BY_CURRENCY = {
 }
 DEFAULT_M = 1_000_000  # million, everywhere else
 
+#: Accent-folded before lookup, so "año" matches "ano".
 PERIODS = {
     "year": "year",
+    "ano": "year",
+    "anual": "year",
+    "anuales": "year",
     "yr": "year",
     "pa": "year",
     "annum": "year",
@@ -75,11 +87,28 @@ PERIODS = {
     "month": "month",
     "bulan": "month",
     "mo": "month",
+    "mes": "month",
+    "mensual": "month",
     "night": "night",
     "malam": "night",
+    "noche": "night",
+    "semana": "week",
+    "week": "week",
 }
 
+_ACCENTS = str.maketrans("áàâéèêíìîóòôúùûñç", "aaaeeeiiiooouuunc")
+
+
+def _tokens(text: str) -> list[str]:
+    """Word tokens, accent-folded so "año" and "ano" agree."""
+    return re.findall(r"[a-z]+", text.translate(_ACCENTS))
+
 _NUMBER = re.compile(r"\d[\d.,]*")
+
+#: How far past the number a multiplier or period word may sit. Without a
+#: window, a stray "mil" or "year" anywhere later in a long description gets
+#: applied to the price.
+_SUFFIX_WINDOW = 20
 
 #: How far from the currency token a price may sit. Wide enough for
 #: "Rp. 1.500.000.000" and "IDR 3,5 miliar", tight enough that a number in an
@@ -94,43 +123,6 @@ class Money:
     #: None for an outright price; "year"/"month"/"night" for a rental rate.
     #: A caller storing this as `asking_price` must check it is None.
     period: str | None = None
-
-
-def parse_number(text: str) -> float | None:
-    """Parse a number written under either separator convention.
-
-    The rule: when both separators appear, the rightmost is the decimal point.
-    When only one appears, three trailing digits mean it was a thousands
-    separator ("1.500" / "250,000") and one or two mean it was a decimal
-    point ("3,5" / "3.5").
-
-    "1,500" is genuinely ambiguous — 1500 under English convention, 1.5 under
-    Indonesian. It resolves to 1500 here, because a bare grouped thousand is
-    far more common in listing text than a decimal with trailing zeroes.
-    """
-    text = text.strip()
-    if not text:
-        return None
-
-    has_dot = "." in text
-    has_comma = "," in text
-
-    if has_dot and has_comma:
-        decimal_sep = "." if text.rfind(".") > text.rfind(",") else ","
-        thousands_sep = "," if decimal_sep == "." else "."
-        text = text.replace(thousands_sep, "").replace(decimal_sep, ".")
-    elif has_dot or has_comma:
-        sep = "." if has_dot else ","
-        tail = text.rsplit(sep, 1)[1]
-        if len(tail) == 3 or text.count(sep) > 1:
-            text = text.replace(sep, "")
-        else:
-            text = text.replace(sep, ".")
-
-    try:
-        return float(text)
-    except ValueError:
-        return None
 
 
 def _currency_span(text: str) -> tuple[int, int] | None:
@@ -205,9 +197,9 @@ def parse_money(text: str, *, default_currency: str | None = None) -> Money | No
     if value is None:
         return None
 
-    remainder = text[match.end():].lower()
+    remainder = text[match.end():match.end() + _SUFFIX_WINDOW].lower()
     multiplier = 1
-    for word in re.findall(r"[a-z]+", remainder):
+    for word in _tokens(remainder):
         if word == "m":
             multiplier = MULTIPLIERS_BY_CURRENCY.get(currency, {}).get("m", DEFAULT_M)
             break
@@ -218,7 +210,7 @@ def parse_money(text: str, *, default_currency: str | None = None) -> Money | No
             break  # a period word ends the amount; no multiplier applied
 
     period = None
-    for word in re.findall(r"[a-z]+", remainder):
+    for word in _tokens(remainder):
         if word in PERIODS:
             period = PERIODS[word]
             break

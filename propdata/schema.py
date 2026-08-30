@@ -71,15 +71,22 @@ class TenureFamily(str, Enum):
     that legally matters.
     """
 
-    FREEHOLD = "freehold"           # UK freehold, ID Hak Milik
+    FREEHOLD = "freehold"           # UK freehold, ID Hak Milik, ES pleno dominio
     LEASEHOLD = "leasehold"         # UK leasehold, ID Hak Sewa
-    BUILD_RIGHT = "build_right"     # ID Hak Guna Bangunan
+    BUILD_RIGHT = "build_right"     # ID Hak Guna Bangunan, ES derecho de superficie
     USE_RIGHT = "use_right"         # ID Hak Pakai
     CULTIVATION_RIGHT = "cultivation_right"  # ID Hak Guna Usaha
     CUSTOMARY = "customary"         # ID girik / letter C / tanah adat
     STRATA = "strata"               # ID SHMSRS, AU strata, condominium title
     COMMONHOLD = "commonhold"
     SHARED_OWNERSHIP = "shared_ownership"
+    # Ownership split along a lifetime interest rather than a term of years.
+    # ES nuda propiedad is sold at a deep discount precisely because someone
+    # else holds the right to live there until they die; treating it as
+    # freehold makes it look like the cheapest property on the street.
+    BARE_OWNERSHIP = "bare_ownership"    # ES nuda propiedad
+    USUFRUCT = "usufruct"                # ES usufructo, FR usufruit
+    TIMESHARE = "timeshare"              # ES aprovechamiento por turno
     UNKNOWN = "unknown"
 
 
@@ -120,6 +127,11 @@ class Tenure:
     expires_on: date | None = None
     extendable: bool | None = None
     foreign_holdable: bool | None = None
+    #: Any other restriction on who may acquire, or at what price. Spain's
+    #: VPO (protected housing) caps the resale price and restricts buyers by
+    #: income and residency; that is not a tenure family and not a nationality
+    #: rule, but it decides whether a given buyer can transact at all.
+    transfer_restriction: str | None = None
 
 
 @dataclass(slots=True)

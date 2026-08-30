@@ -54,15 +54,53 @@ def clean(value: object) -> str | None:
     return text
 
 
-def to_float(value: object) -> float | None:
-    text = clean(value)
-    if text is None:
+def parse_number(text: str) -> float | None:
+    """Parse a number written under either separator convention.
+
+    The rule: when both separators appear, the rightmost is the decimal point.
+    When only one appears, three trailing digits mean it was a thousands
+    separator ("1.500" / "250,000") and one or two mean it was a decimal
+    point ("3,5" / "3.5").
+
+    "1,500" is genuinely ambiguous — 1500 under English convention, 1.5 under
+    Spanish or Indonesian. It resolves to 1500 here, because a bare grouped
+    thousand is far more common in listing text than a decimal with trailing
+    zeroes.
+
+    This lives with the units rather than with prices because areas have the
+    same problem: a Spanish listing's "parcela 1.100 m2" is 1100 square
+    metres, and English rules read it as 1.1.
+    """
+    text = text.strip()
+    if not text:
         return None
-    text = text.replace(",", "")
+
+    has_dot = "." in text
+    has_comma = "," in text
+
+    if has_dot and has_comma:
+        decimal_sep = "." if text.rfind(".") > text.rfind(",") else ","
+        thousands_sep = "," if decimal_sep == "." else "."
+        text = text.replace(thousands_sep, "").replace(decimal_sep, ".")
+    elif has_dot or has_comma:
+        sep = "." if has_dot else ","
+        tail = text.rsplit(sep, 1)[1]
+        if len(tail) == 3 or text.count(sep) > 1:
+            text = text.replace(sep, "")
+        else:
+            text = text.replace(sep, ".")
+
     try:
         return float(text)
     except ValueError:
         return None
+
+
+def to_float(value: object) -> float | None:
+    text = clean(value)
+    if text is None:
+        return None
+    return parse_number(text)
 
 
 def to_int(value: object) -> int | None:

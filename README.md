@@ -31,11 +31,14 @@ propdata/
   cli.py               python -m propdata ...
   regions/
     indonesia.py       Indonesian tenure vocabulary, Bali admin lookup
+    spain.py           cadastral references, Spanish rights, INE provinces
   sources/
     base.py            Source ABC: fetch -> parse -> normalise
+    jsonld.py          shared JSON-LD portal framework
     registry.py        source lookup by id
     uk_epc.py          Tier 1: UK EPC register (England & Wales)
-    id_bali.py         Tier 2: Bali listings (saved HTML, JSON-LD first)
+    id_bali.py         Tier 2: Bali listings
+    es_listings.py     Tier 2: Spanish listings
 ```
 
 No third-party dependencies. Python 3.11+.
@@ -46,6 +49,7 @@ No third-party dependencies. Python 3.11+.
 python -m propdata sources
 python -m propdata ingest uk-epc --path /data/epc/ --db properties.db
 python -m propdata ingest id-bali-listings --path /data/bali-html/ --db properties.db
+python -m propdata ingest es-listings --path /data/es-html/ --db properties.db
 python -m unittest discover -s tests -t .
 ```
 
@@ -141,27 +145,93 @@ BAG. So Bali inverts the sourcing order the rest of the project relies on:
 portals are not enrichment on top of a register spine, they are the only
 source, and every weakness of listing data lands unmitigated.
 
+## What Spain changed
+
+Spain was picked as the second portal market because it is the sharpest
+available contrast with Bali: listings routinely quote a **referencia
+catastral**, so portal records arrive with authoritative identity rather than
+weak. Two portal adapters at opposite corners of the identity model were
+enough to extract the framework — which was the point of building it second.
+
+**`sources/jsonld.py` now holds what portal adapters share**: fetching saved
+HTML, finding structured data, walking a decoded tree for listing nodes,
+flattening `additionalProperty`, the schema.org field mapping, and the shared
+failure modes (unknown area unit, rental rate posing as a sale price,
+implausible area ratio). Bali went from 502 lines to about 90 and its tests
+did not change — which is what makes the extraction believable rather than
+merely plausible. What stayed country-specific became the hooks: property-type
+vocabulary, location resolution, tenure, default currency and land unit.
+
+**Spain's tenure hazard is a different kind from Indonesia's.** Indonesia's
+question is *who may hold this right*. Spain's is *what is actually being
+sold*: `nuda propiedad` is ownership stripped of the right to use it, because
+a lifetime usufruct is retained, and it sells at a deep discount that is not a
+bargain. To anything treating it as freehold it is the cheapest flat on the
+street. `TenureFamily` gained `BARE_OWNERSHIP`, `USUFRUCT` and `TIMESHARE`.
+
+**VPO forced a field.** Protected housing is not a tenure family — it is
+ordinary ownership with a statutory price ceiling and buyer eligibility rules.
+`foreign_holdable` could not express it, since the restriction is by income
+and residency rather than nationality, so `Tenure.transfer_restriction`
+carries it.
+
+Three bugs surfaced that only a third locale could have exposed:
+
+- **`units.to_float` was parsing numbers under English rules**, so a Spanish
+  "parcela 1.100 m2" became 1.1 sqm. Number parsing moved out of `money.py`
+  and into `units.py`, where areas get it too.
+- **The area-unit regex could not capture the digit in "m2"**, silently
+  dropping every area quoted that way.
+- **"2.400 € / mes" was stored as an asking price**, because the period
+  vocabulary was English and Indonesian only.
+
+## On identity across the three markets
+
+The same field means very different things by market, which is why
+`Address.identity_confidence` exists rather than a boolean:
+
+| | key | confidence |
+|---|---|---|
+| UK EPC | UPRN | authoritative |
+| Spain | referencia catastral, when quoted | authoritative, else weak |
+| Bali | none | always weak |
+
+Records below "authoritative" carry a warning naming what was missing, so a
+downstream merge step can refuse them rather than discovering the problem as
+duplicate villas.
+
 ## Adding a source
 
-Subclass `Source`, set `id` / `country` / `tier` / `licence`, implement the
-three stages, register it in `sources/registry.py`. `run()` wires the pipeline.
+For a register, subclass `Source`, set `id` / `country` / `tier` / `licence`,
+implement the three stages, and register it in `sources/registry.py`.
+
+For a listing portal, subclass `JsonLdPortalSource` instead: set the locale
+class attributes, override `resolve_location`, and implement `localise` for
+tenure and title handling. `es_listings.py` is about 120 lines and most of
+that is vocabulary.
 
 ## Roadmap
 
-Two adapters exist across two countries and two tiers. The generic scraper
-framework still should not be extracted yet — one portal adapter is not
-enough evidence about what portal adapters have in common.
+Three adapters, three countries, both tiers, one framework. The portal
+framework has been extracted and is now evidence-backed rather than guessed.
 
-Next: a third market that is neither a clean register nor a bare listing
-portal. Denmark BBR or the Dutch BAG would confirm the register path
-generalises; a second portal market would give the two data points the
-framework extraction actually needs.
+The register path is still a single implementation, so it is the weaker half:
+Denmark BBR or the Dutch BAG would test whether `Source` generalises the way
+`JsonLdPortalSource` did. Spain also has a Tier 1 register — the Catastro
+publishes parcel and building data through downloadable INSPIRE services — so
+`es-catastro` would give the first market with both tiers and a real join
+between them on the cadastral reference.
 
 Open problems, in order of how much engineering they will absorb:
 
 - **Cross-portal deduplication.** One villa, twelve agents, two languages,
   fuzzed map pins, no cadastral key. With Bali records at weak identity
-  confidence this is now the blocking problem rather than a future one.
+  confidence this is the blocking problem. Spain shows what the solution
+  looks like where a key exists — and how little of the world has one.
+- **Merging.** Nothing merges records yet. Two sources describing one
+  property produce two rows sharing a `property_id`, which is the right
+  shape but not the finished job: field-level precedence between a register
+  and a portal is undecided.
 - **Photo copyright.** `image_urls` stores URLs, never bytes, on purpose.
   Listing photographs are separately copyrighted from the listing facts,
   usually by the agency or photographer. Internal matching is one thing;
@@ -180,11 +250,18 @@ UK EPC data is Open Government Licence v3.0, subject to the register's terms
 of use. Bulk download requires free registration at
 <https://epc.opendatacommunities.org/>.
 
-Bali listing data carries no such licence. Portal records are stored with
-`licence = "per-portal terms; not redistributable without review"` and tier
-`portal`, so a redistribution query can exclude them by tier alone.
+Listing data carries no such licence. Portal records from both Bali and Spain
+are stored with `licence = "per-portal terms; not redistributable without
+review"` and tier `portal`, so a redistribution query can exclude them by tier
+alone.
 
-The Indonesian tenure flags in `regions/indonesia.py` are a coarse engineering
-aid, not legal advice: they describe the ordinary case for an individual
-foreign natural person, and PT PMA structures, nominee arrangements and
-regulatory amendments all change the answer.
+Spanish Catastro data is published under its own reuse terms and the Catastro
+is a fiscal register: its boundaries are not conclusive as to title, which the
+Registro de la Propiedad governs. The cadastral reference is used here as an
+identity key, nothing more.
+
+The tenure vocabularies in `regions/` are a coarse engineering aid, not legal
+advice. The Indonesian flags describe the ordinary case for an individual
+foreign natural person; PT PMA structures, nominee arrangements and regulatory
+amendments all change the answer. Spanish VPO regimes vary by autonomous
+community and vintage.

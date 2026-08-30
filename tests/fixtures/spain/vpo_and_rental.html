@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es"><head><title>Dos anuncios</title>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "RealEstateListing",
+      "url": "https://ejemplo-portal.test/anuncio/vpo-sevilla",
+      "name": "Piso VPO en Sevilla",
+      "description": "Vivienda de protección oficial. Superficie construida 85 m2.",
+      "offers": {"@type": "Offer", "price": "112000", "priceCurrency": "EUR"},
+      "address": {"@type": "PostalAddress", "addressLocality": "Sevilla", "postalCode": "41004", "addressCountry": "ES"}
+    },
+    {
+      "@type": "RealEstateListing",
+      "url": "https://ejemplo-portal.test/anuncio/alquiler-ibiza",
+      "name": "Apartamento en Ibiza",
+      "description": "Apartamento junto al mar. Superficie construida 64 m2.",
+      "additionalProperty": [{"@type": "PropertyValue", "name": "Precio", "value": "2.400 € / mes"}],
+      "address": {"@type": "PostalAddress", "addressLocality": "Ibiza", "addressCountry": "ES"}
+    }
+  ]
+}
+</script></head><body></body></html>

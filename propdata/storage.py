@@ -50,6 +50,7 @@ CREATE TABLE IF NOT EXISTS properties (
     tenure_local_code     TEXT,
     tenure_years_left     INTEGER,
     tenure_foreign_ok     INTEGER,
+    tenure_restriction    TEXT,
     occupancy             TEXT,
     floor_area_sqm        REAL,
     land_area_sqm         REAL,
@@ -89,7 +90,8 @@ INSERT INTO properties VALUES (
     :retrieved_at, :country, :postcode, :address_lines, :admin_code, :uprn,
     :latitude, :longitude, :property_type, :built_form, :tenure_family,
     :tenure_local_name, :tenure_local_code, :tenure_years_left,
-    :tenure_foreign_ok, :occupancy, :floor_area_sqm, :land_area_sqm,
+    :tenure_foreign_ok, :tenure_restriction, :occupancy, :floor_area_sqm,
+    :land_area_sqm,
     :habitable_rooms, :bedrooms, :bathrooms, :construction_age_band,
     :energy_band, :energy_score, :assessed_on, :asking_price,
     :price_currency, :listed_on
@@ -109,6 +111,7 @@ ON CONFLICT (property_id, source_id) DO UPDATE SET
     tenure_local_code     = excluded.tenure_local_code,
     tenure_years_left     = excluded.tenure_years_left,
     tenure_foreign_ok     = excluded.tenure_foreign_ok,
+    tenure_restriction    = excluded.tenure_restriction,
     occupancy             = excluded.occupancy,
     floor_area_sqm        = excluded.floor_area_sqm,
     land_area_sqm         = excluded.land_area_sqm,
@@ -161,6 +164,7 @@ def _row(prop: Property) -> dict[str, Any]:
             if tenure is None or tenure.foreign_holdable is None
             else int(tenure.foreign_holdable)
         ),
+        "tenure_restriction": tenure.transfer_restriction if tenure else None,
         "occupancy": prop.occupancy.value,
         "floor_area_sqm": prop.floor_area_sqm,
         "land_area_sqm": prop.land_area_sqm,
