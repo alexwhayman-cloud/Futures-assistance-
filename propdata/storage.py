@@ -10,6 +10,9 @@ Two tables, on purpose:
 * `properties`  one row per (property_id, source_id) — the normalised view.
 * `raw_records` the untouched source payload, keyed the same way.
 
+The schema itself lives in `propdata.db.migrations`, which is append-only and
+versioned; this module only reads and writes.
+
 Keeping raw records means a mapping bug is a re-normalise, not a re-crawl.
 For portal sources, where re-fetching is slow, rate-limited and legally
 awkward, that distinction is most of the value.
@@ -25,65 +28,8 @@ from datetime import date, datetime
 from pathlib import Path
 from typing import Any
 
+from propdata.db.migrations import migrate
 from propdata.schema import Property
-
-SCHEMA = """
-CREATE TABLE IF NOT EXISTS properties (
-    property_id           TEXT NOT NULL,
-    source_id             TEXT NOT NULL,
-    source_record_id      TEXT NOT NULL,
-    tier                  TEXT NOT NULL,
-    licence               TEXT NOT NULL,
-    source_url            TEXT,
-    retrieved_at          TEXT NOT NULL,
-    country               TEXT NOT NULL,
-    postcode              TEXT,
-    address_lines         TEXT,
-    admin_code            TEXT,
-    identity_confidence   TEXT,
-    identity_tier         TEXT,
-    uprn                  TEXT,
-    latitude              REAL,
-    longitude             REAL,
-    property_type         TEXT,
-    built_form            TEXT,
-    tenure_family         TEXT,
-    tenure_local_name     TEXT,
-    tenure_local_code     TEXT,
-    tenure_years_left     INTEGER,
-    tenure_foreign_ok     INTEGER,
-    tenure_restriction    TEXT,
-    occupancy             TEXT,
-    floor_area_sqm        REAL,
-    land_area_sqm         REAL,
-    habitable_rooms       INTEGER,
-    bedrooms              INTEGER,
-    bathrooms             INTEGER,
-    construction_age_band TEXT,
-    energy_band           TEXT,
-    energy_score          INTEGER,
-    assessed_on           TEXT,
-    asking_price          INTEGER,
-    price_currency        TEXT,
-    listed_on             TEXT,
-    PRIMARY KEY (property_id, source_id)
-);
-
-CREATE INDEX IF NOT EXISTS idx_properties_postcode ON properties (postcode);
-CREATE INDEX IF NOT EXISTS idx_properties_uprn ON properties (uprn);
-CREATE INDEX IF NOT EXISTS idx_properties_admin ON properties (admin_code);
-CREATE INDEX IF NOT EXISTS idx_properties_identity
-    ON properties (identity_confidence);
-
-CREATE TABLE IF NOT EXISTS raw_records (
-    property_id      TEXT NOT NULL,
-    source_id        TEXT NOT NULL,
-    source_record_id TEXT NOT NULL,
-    retrieved_at     TEXT NOT NULL,
-    payload          TEXT NOT NULL,
-    PRIMARY KEY (property_id, source_id)
-);
-"""
 
 #: Replace an existing row only when the incoming record is at least as recent.
 #: EPC re-assessments mean the same dwelling arrives many times; without this
@@ -196,7 +142,8 @@ def _row(prop: Property) -> dict[str, Any]:
 class Store:
     def __init__(self, path: str | Path) -> None:
         self.connection = sqlite3.connect(str(path))
-        self.connection.executescript(SCHEMA)
+        self.connection.execute("PRAGMA foreign_keys = ON")
+        migrate(self.connection)
 
     def __enter__(self) -> "Store":
         return self

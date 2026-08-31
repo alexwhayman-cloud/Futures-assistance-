@@ -25,6 +25,14 @@ Scraped listings without that spine are floating strings.
 ```
 propdata/
   schema.py            canonical Property record, enums, identity
+  db/
+    migrations.py      append-only versioned schema
+  outreach/
+    models.py          organisations, contacts, campaigns, suppressions
+    rules.py           per-country direct-marketing rules
+    compliance.py      the gate every message passes through
+    store.py           persistence
+    campaign.py        contact list -> validated outbox
   units.py             area conversion and null-sentinel coercion
   money.py             price parsing across number conventions
   storage.py           SQLite sink: properties + retained raw payloads
@@ -49,6 +57,7 @@ No third-party dependencies. Python 3.11+.
 ```bash
 python -m propdata sources
 python -m propdata identity --tier S
+python -m propdata outreach-rules GB
 python -m propdata ingest uk-epc --path /data/epc/ --db properties.db
 python -m propdata ingest id-bali-listings --path /data/bali-html/ --db properties.db
 python -m propdata ingest es-listings --path /data/es-html/ --db properties.db
@@ -228,6 +237,70 @@ Every stored row carries `identity_confidence` and `identity_tier`, so a
 merge step can select what is safe to merge instead of discovering the
 problem later as duplicate villas.
 
+## Outreach
+
+Outreach targets **businesses — estate agencies and their staff — not
+homeowners.** That is a deliberate scope limit, not an oversight. Marketing to
+homeowners means processing personal data for direct marketing with no consent
+trail and no existing relationship; it is a different system with a much worse
+legal position, and nothing here is built for it.
+
+The whole thing is arranged around one function. `compliance.evaluate` is the
+only place that decides whether a contact may be approached, and it returns a
+`Decision` that gets written to the audit log **whether it allowed or refused**.
+A refusal with a reason is better evidence than a row that was never written:
+"we did not contact them" is a claim, and an absent row does not support it.
+
+### What the UK rules actually turn on
+
+The regime is UK GDPR for the personal data and PECR for the electronic
+marketing, and they ask different questions. GDPR asks whether there is a
+lawful basis to process the data at all; PECR asks whether this channel may be
+used to market to this subscriber. A contact can pass one and fail the other,
+which is why `corporate_subscriber` still requires a recorded basis.
+
+The distinction doing the real work is **corporate versus individual
+subscriber**. A limited company, PLC, LLP or Scottish partnership may receive
+B2B marketing email without prior consent. A sole trader or unincorporated
+partnership is an individual subscriber and may not — despite being a
+business. A large share of estate agencies are sole traders, so this is not an
+edge case, and it is why `Organisation.legal_form` is a first-class field
+rather than bookkeeping.
+
+Unknown legal form is treated as *not* corporate. Misclassifying a sole trader
+as a company is an unlawful send; the reverse is a missed email. The default
+fails towards the missed email.
+
+### Rules that are enforced
+
+- **Suppression outranks consent.** An opt-out recorded after consent is a
+  withdrawal of it. There is deliberately no `unsuppress`: re-permission is a
+  new consent event with its own evidence, not the deletion of a refusal.
+- **Suppression is checked at build time against live state**, keyed on the
+  normalised identifier rather than a contact row — so deleting and
+  re-importing a contact cannot resurrect someone who opted out. The classic
+  failure is a list built Monday, sent Friday, and an opt-out on Wednesday.
+- **An invalid campaign evaluates nobody.** Missing sender identity or opt-out
+  is unlawful for every recipient, so it fails once rather than per contact.
+- **Retention expiry blocks.** A contact past `retain_until` should have been
+  deleted, and is refused until it is.
+- **An unimplemented country is refused, never approximated.** Spain is Tier A
+  for identity and its marketing rules are not written, so a Spanish campaign
+  is refused rather than run under UK rules.
+
+### What it deliberately does not do
+
+It does not send. No SMTP, no ESP, no dialler — same reasoning as the portal
+adapters not crawling. Choosing a transport means accepting its terms,
+authentication, rate limits and deliverability practices, and those are
+decisions to make deliberately. It produces a validated outbox for a transport
+to consume, and **whatever sends must re-check suppression at send time.**
+
+It also does not screen against CTPS/TPS, and does not write your legitimate
+interests assessment. `propdata outreach-rules GB` prints the obligations the
+system leaves to the operator. None of this is legal advice; the rules encode
+a conservative reading so the default is to refuse.
+
 ## Adding a source
 
 For a register, subclass `Source`, set `id` / `country` / `tier` / `licence`,
@@ -270,6 +343,8 @@ Open problems, in order of how much engineering they will absorb:
   fuzzed map pins, no cadastral key. With Bali records at weak identity
   confidence this is the blocking problem. Spain shows what the solution
   looks like where a key exists — and how little of the world has one.
+- **Transport.** The outbox has no sender. Whatever fills that gap must
+  re-check suppression immediately before each send.
 - **Merging.** Nothing merges records yet. Two sources describing one
   property produce two rows sharing a `property_id`, which is the right
   shape but not the finished job: field-level precedence between a register

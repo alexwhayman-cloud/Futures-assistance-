@@ -7,6 +7,7 @@ import itertools
 import sys
 from collections.abc import Iterator
 
+from propdata.outreach import rules as marketing_rules
 from propdata.regions.identity import REGISTRY
 from propdata.schema import Property
 from propdata.sources.registry import SOURCES, get_source
@@ -63,6 +64,33 @@ def cmd_ingest(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_outreach_rules(args: argparse.Namespace) -> int:
+    """Show the marketing rules for a country, and what it will refuse."""
+    rules = marketing_rules.get(args.country)
+    print(f"{rules.country}  {rules.regime}")
+    print(f"  implemented: {rules.implemented}")
+    if not rules.implemented:
+        print("  campaigns for this country are refused until rules are written")
+        return 0
+    print(
+        "  corporate channels without consent: "
+        + ", ".join(sorted(c.value for c in rules.corporate_channels_without_consent))
+    )
+    print(
+        "  corporate legal forms: "
+        + ", ".join(sorted(f.value for f in rules.corporate_forms))
+    )
+    if rules.phone_preference_service:
+        print(f"  phone screening: {rules.phone_preference_service}")
+    if rules.notes:
+        print(f"  note: {rules.notes}")
+    if rules.operator_obligations:
+        print("  obligations this system does NOT enforce for you:")
+        for obligation in rules.operator_obligations:
+            print(f"    - {obligation}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="propdata")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -83,6 +111,12 @@ def main(argv: list[str] | None = None) -> int:
     ingest.add_argument("--db", default="properties.db", help="SQLite file")
     ingest.add_argument("--limit", type=int, default=None, help="stop after N records")
     ingest.set_defaults(func=cmd_ingest)
+
+    outreach = subparsers.add_parser(
+        "outreach-rules", help="direct-marketing rules for a country"
+    )
+    outreach.add_argument("country", help="ISO 3166-1 alpha-2, e.g. GB")
+    outreach.set_defaults(func=cmd_outreach_rules)
 
     args = parser.parse_args(argv)
     return int(args.func(args))
