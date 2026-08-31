@@ -30,6 +30,7 @@ propdata/
   storage.py           SQLite sink: properties + retained raw payloads
   cli.py               python -m propdata ...
   regions/
+    identity.py        per-country identity schemes and confidence rules
     indonesia.py       Indonesian tenure vocabulary, Bali admin lookup
     spain.py           cadastral references, Spanish rights, INE provinces
   sources/
@@ -47,6 +48,7 @@ No third-party dependencies. Python 3.11+.
 
 ```bash
 python -m propdata sources
+python -m propdata identity --tier S
 python -m propdata ingest uk-epc --path /data/epc/ --db properties.db
 python -m propdata ingest id-bali-listings --path /data/bali-html/ --db properties.db
 python -m propdata ingest es-listings --path /data/es-html/ --db properties.db
@@ -185,20 +187,46 @@ Three bugs surfaced that only a third locale could have exposed:
 - **"2.400 € / mes" was stored as an asking price**, because the period
   vocabulary was English and Indonesian only.
 
-## On identity across the three markets
+## Identity is assessed per country
 
-The same field means very different things by market, which is why
-`Address.identity_confidence` exists rather than a boolean:
+`identity_confidence` started as one heuristic for the whole world: a
+cadastral key means authoritative, a postcode plus an address line means
+probably-right, anything else is weak. That is wrong in both directions, and
+`regions/identity.py` now holds a table of 25 countries instead.
 
-| | key | confidence |
-|---|---|---|
-| UK EPC | UPRN | authoritative |
-| Spain | referencia catastral, when quoted | authoritative, else weak |
-| Bali | none | always weak |
+Two things the global heuristic could not express:
 
-Records below "authoritative" carry a warning naming what was missing, so a
-downstream merge step can refuse them rather than discovering the problem as
-duplicate villas.
+**A postcode is not a postcode.** An Irish Eircode identifies a single
+delivery point, so it is authoritative on its own. A Singapore postcode
+identifies a *building*, so it needs a unit number. A UK postcode covers
+around fifteen addresses and an Indonesian kode pos covers a district. Same
+field, four different verdicts.
+
+**A key can be real and still be too coarse.** A French parcelle is a good
+identifier and cannot tell one apartment from another in the same building —
+so it is authoritative for a house and degrades to "address" for a flat.
+That is why `assess_identity` takes the property type. Likewise a US APN is
+solid within a county and there are ~3,100 of them with no national
+namespace, so an unqualified APN degrades until it carries its county.
+
+Identity strength is three conditions, and most countries fail the third:
+
+1. a stable unique ID at **dwelling** granularity, not just parcel
+2. it is in open or obtainable bulk data
+3. it is recoverable **from a listing** — quoted, or derivable from the address
+
+Germany and Italy are the instructive failures: both have excellent cadastral
+identifiers (Italy's subalterno is genuinely unit-level) and both fail (2) and
+(3). A perfect key you cannot get from a listing is worth nothing here.
+
+`python -m propdata identity` prints the table. Entries marked `*` are
+believed correct but unverified against the current source — licensing in
+particular moves, as several national mapping agencies have opened up in
+recent years. Verify before building an adapter that depends on one.
+
+Every stored row carries `identity_confidence` and `identity_tier`, so a
+merge step can select what is safe to merge instead of discovering the
+problem later as duplicate villas.
 
 ## Adding a source
 
@@ -215,12 +243,26 @@ that is vocabulary.
 Three adapters, three countries, both tiers, one framework. The portal
 framework has been extracted and is now evidence-backed rather than guessed.
 
-The register path is still a single implementation, so it is the weaker half:
-Denmark BBR or the Dutch BAG would test whether `Source` generalises the way
-`JsonLdPortalSource` did. Spain also has a Tier 1 register — the Catastro
-publishes parcel and building data through downloadable INSPIRE services — so
-`es-catastro` would give the first market with both tiers and a real join
-between them on the cadastral reference.
+**The Netherlands is the highest-value next adapter.** It is the only Tier S
+market where all three identity conditions hold cleanly: BAG gives every
+address a dwelling-level id, it is open, and postcode plus house number makes
+address -> BAG deterministic. It would be the first market where portal
+records reliably reach `authoritative`, which makes it the right place to
+build the merge step — merging is far easier to get right where identity is
+certain, and it can then be ported down the tiers.
+
+The register path is also still a single implementation, so it is the weaker
+half: Denmark BBR or the Dutch BAG would test whether `Source` generalises
+the way `JsonLdPortalSource` did. Spain has a Tier 1 register too — the
+Catastro publishes parcel and building data through downloadable INSPIRE
+services — so `es-catastro` would give the first market with both tiers and a
+real join between them on the cadastral reference.
+
+Markets deliberately not next: Vietnam and Thailand are Tier C and would add
+no identity capability. Vietnam is still worth building eventually, but for a
+different reason — it has no private land ownership at all, only time-bounded
+use rights, so it tests the assumption that the thing being owned is the
+land.
 
 Open problems, in order of how much engineering they will absorb:
 

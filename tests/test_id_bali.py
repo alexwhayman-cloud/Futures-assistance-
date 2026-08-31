@@ -122,7 +122,7 @@ class TestBaliListings(unittest.TestCase):
         for prop in self.properties:
             with self.subTest(prop=prop.property_id):
                 self.assertEqual(prop.address.identity_confidence, "weak")
-                self.assertIn("must not be auto-merged", warnings_of(prop))
+                self.assertIn("do not auto-merge", warnings_of(prop))
 
     def test_images_are_urls_only(self):
         prop = self.by_slug["villa-melati-canggu"]

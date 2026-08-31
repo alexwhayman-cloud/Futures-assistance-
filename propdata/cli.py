@@ -7,6 +7,7 @@ import itertools
 import sys
 from collections.abc import Iterator
 
+from propdata.regions.identity import REGISTRY
 from propdata.schema import Property
 from propdata.sources.registry import SOURCES, get_source
 from propdata.storage import Store
@@ -22,6 +23,32 @@ def cmd_sources(_args: argparse.Namespace) -> int:
         print(f"{source.id:<12} {source.country}  {source.tier.value:<9} {source.licence}")
         if source.notes:
             print(f"{'':<12} {source.notes}")
+    return 0
+
+
+def cmd_identity(args: argparse.Namespace) -> int:
+    """Print the per-country identity table, strongest first."""
+    order = {"S": 0, "A": 1, "B": 2, "B-": 3, "C": 4, "?": 5}
+    entries = sorted(
+        REGISTRY.values(), key=lambda e: (order[e.tier.value], e.country)
+    )
+    for entry in entries:
+        if args.tier and entry.tier.value != args.tier:
+            continue
+        flags = "".join(
+            [
+                "o" if entry.open_data else "-",
+                "l" if entry.listing_derivable else "-",
+            ]
+        )
+        mark = "*" if entry.confidence == "medium" else " "
+        print(
+            f"{entry.tier.value:<3}{mark}{entry.country}  {flags}  "
+            f"{entry.granularity.value:<9} pc:{entry.postcode_precision.value:<9} "
+            f"{entry.key_name or '(none)'}"
+        )
+    print("\nflags: o=open data, l=derivable from a listing")
+    print("*      entry not verified against the current source")
     return 0
 
 
@@ -43,6 +70,12 @@ def main(argv: list[str] | None = None) -> int:
     subparsers.add_parser("sources", help="list registered sources").set_defaults(
         func=cmd_sources
     )
+
+    identity = subparsers.add_parser(
+        "identity", help="per-country property identity schemes"
+    )
+    identity.add_argument("--tier", help="filter to one tier, e.g. S")
+    identity.set_defaults(func=cmd_identity)
 
     ingest = subparsers.add_parser("ingest", help="load a source into the store")
     ingest.add_argument("source", help="source id, e.g. uk-epc")

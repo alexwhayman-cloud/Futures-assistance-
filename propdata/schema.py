@@ -27,6 +27,8 @@ from datetime import date, datetime
 from enum import Enum
 from typing import Any
 
+from propdata.regions import identity
+
 
 class Tier(str, Enum):
     """Where a source sits in the sourcing split.
@@ -175,23 +177,27 @@ class Address:
         joined = re.sub(r"[^\w\s]", " ", joined.lower())
         return re.sub(r"\s+", " ", joined).strip()
 
+    def assess_identity(
+        self, property_type: str | None = None
+    ) -> identity.IdentityAssessment:
+        """How much weight `property_id` can bear, judged per country.
+
+        "authoritative"  a key that identifies this dwelling; collisions are
+                         intentional and merging is safe.
+        "address"        narrows to a building or street, or a key too coarse
+                         for this property type. Usually right, not safe alone.
+        "weak"           neither. Do not auto-merge without a second signal.
+
+        `property_type` matters: a parcel-level key is authoritative for a
+        house and misleading for a flat, because every apartment in the
+        building shares it. See `propdata.regions.identity`.
+        """
+        return identity.assess(self, property_type)
+
     @property
     def identity_confidence(self) -> str:
-        """How much weight `property_id` can bear for this address.
-
-        "authoritative"  a cadastral/registry key is present; collisions are
-                         intentional and merging is safe.
-        "address"        postcode plus a real address line; usually right,
-                         defeated by formatting differences.
-        "weak"           neither. Common for Indonesian listings, which give
-                         a village and a road name and nothing else. Do not
-                         auto-merge on a weak id without a second signal.
-        """
-        if self.uprn or self.bag_id or self.parcel_id:
-            return "authoritative"
-        if self.postcode and self.normalised_line:
-            return "address"
-        return "weak"
+        """Confidence with no property-type context. Prefer `assess_identity`."""
+        return self.assess_identity().confidence
 
 
 @dataclass(slots=True)
@@ -251,6 +257,11 @@ class Property:
     listed_on: date | None = None
     description: str | None = None
     image_urls: list[str] = field(default_factory=list)
+
+    #: Filled in by the source once the record is complete. Kept on the
+    #: record rather than recomputed downstream, because it depends on the
+    #: property type as well as the address.
+    identity: identity.IdentityAssessment | None = None
 
     raw: dict[str, Any] = field(default_factory=dict)
 

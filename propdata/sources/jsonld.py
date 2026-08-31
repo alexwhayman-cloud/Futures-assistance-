@@ -273,15 +273,13 @@ class JsonLdPortalSource(Source):
 
         self.localise(prop, context)
 
-        confidence = prop.address.identity_confidence
-        if confidence != "authoritative":
-            missing = "no cadastral key" if confidence == "address" else (
-                "no cadastral key, and no postcode with an address line"
-            )
+        verdict = prop.address.assess_identity(prop.property_type.value)
+        prop.identity = verdict
+        if verdict.confidence != "authoritative":
             context.warnings.append(
-                f"{missing}; property_id is a text hash "
-                f"(identity_confidence={confidence!r}) and must not be "
-                "auto-merged without a second signal"
+                f"identity {verdict.confidence} (country tier "
+                f"{verdict.tier.value}): {verdict.reason}; do not auto-merge "
+                "without a second signal"
             )
 
         prop.raw = dict(node)

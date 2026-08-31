@@ -92,7 +92,7 @@ class TestSpainListings(unittest.TestCase):
         prop = self.by_slug["villa-marbella"]
         self.assertEqual(prop.address.identity_confidence, "authoritative")
         self.assertEqual(prop.property_id, "parcel:ES:9872023VH5797S0001WX")
-        self.assertNotIn("must not be auto-merged", warnings_of(prop))
+        self.assertNotIn("do not auto-merge", warnings_of(prop))
 
     def test_spanish_thousands_separator_in_area(self):
         # "parcela 1.100 m2" is 1100 sqm, not 1.1.

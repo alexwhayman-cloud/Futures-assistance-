@@ -40,6 +40,8 @@ CREATE TABLE IF NOT EXISTS properties (
     postcode              TEXT,
     address_lines         TEXT,
     admin_code            TEXT,
+    identity_confidence   TEXT,
+    identity_tier         TEXT,
     uprn                  TEXT,
     latitude              REAL,
     longitude             REAL,
@@ -70,6 +72,8 @@ CREATE TABLE IF NOT EXISTS properties (
 CREATE INDEX IF NOT EXISTS idx_properties_postcode ON properties (postcode);
 CREATE INDEX IF NOT EXISTS idx_properties_uprn ON properties (uprn);
 CREATE INDEX IF NOT EXISTS idx_properties_admin ON properties (admin_code);
+CREATE INDEX IF NOT EXISTS idx_properties_identity
+    ON properties (identity_confidence);
 
 CREATE TABLE IF NOT EXISTS raw_records (
     property_id      TEXT NOT NULL,
@@ -87,7 +91,8 @@ CREATE TABLE IF NOT EXISTS raw_records (
 UPSERT = """
 INSERT INTO properties VALUES (
     :property_id, :source_id, :source_record_id, :tier, :licence, :source_url,
-    :retrieved_at, :country, :postcode, :address_lines, :admin_code, :uprn,
+    :retrieved_at, :country, :postcode, :address_lines, :admin_code,
+    :identity_confidence, :identity_tier, :uprn,
     :latitude, :longitude, :property_type, :built_form, :tenure_family,
     :tenure_local_name, :tenure_local_code, :tenure_years_left,
     :tenure_foreign_ok, :tenure_restriction, :occupancy, :floor_area_sqm,
@@ -103,6 +108,8 @@ ON CONFLICT (property_id, source_id) DO UPDATE SET
     postcode              = excluded.postcode,
     address_lines         = excluded.address_lines,
     admin_code            = excluded.admin_code,
+    identity_confidence   = excluded.identity_confidence,
+    identity_tier         = excluded.identity_tier,
     uprn                  = excluded.uprn,
     property_type         = excluded.property_type,
     built_form            = excluded.built_form,
@@ -138,6 +145,9 @@ def _iso(value: Any) -> str | None:
 def _row(prop: Property) -> dict[str, Any]:
     energy = prop.energy
     tenure = prop.legal_tenure
+    # Registers do not set `identity`; assess on the way in so every row
+    # carries a verdict regardless of which source produced it.
+    verdict = prop.identity or prop.address.assess_identity(prop.property_type.value)
     return {
         "property_id": prop.property_id,
         "source_id": prop.provenance.source_id,
@@ -150,6 +160,8 @@ def _row(prop: Property) -> dict[str, Any]:
         "postcode": prop.address.postcode,
         "address_lines": json.dumps(prop.address.lines),
         "admin_code": prop.address.admin_code,
+        "identity_confidence": verdict.confidence,
+        "identity_tier": verdict.tier.value,
         "uprn": prop.address.uprn,
         "latitude": prop.address.latitude,
         "longitude": prop.address.longitude,
