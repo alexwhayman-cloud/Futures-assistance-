@@ -28,6 +28,10 @@ propdata/
   db/
     migrations.py      append-only versioned schema
   outreach/
+    loaders/
+      companies_house.py  UK incorporated agencies (evidences legal form)
+      hmrc_aml.py         UK AML-supervised agencies (includes sole traders)
+      matching.py         evidence legal form by matching the two
     models.py          organisations, contacts, campaigns, suppressions
     rules.py           per-country direct-marketing rules
     compliance.py      the gate every message passes through
@@ -58,6 +62,9 @@ No third-party dependencies. Python 3.11+.
 python -m propdata sources
 python -m propdata identity --tier S
 python -m propdata outreach-rules GB
+python -m propdata orgs-load gb-companies-house --path BasicCompanyData.zip --db properties.db
+python -m propdata orgs-load gb-hmrc-aml --path hmrc-aml.csv --db properties.db
+python -m propdata orgs-match --db properties.db
 python -m propdata ingest uk-epc --path /data/epc/ --db properties.db
 python -m propdata ingest id-bali-listings --path /data/bali-html/ --db properties.db
 python -m propdata ingest es-listings --path /data/es-html/ --db properties.db
@@ -270,6 +277,54 @@ rather than bookkeeping.
 Unknown legal form is treated as *not* corporate. Misclassifying a sole trader
 as a company is an unlawful send; the reverse is a missed email. The default
 fails towards the missed email.
+
+### Sourcing UK agencies
+
+Two public registers, and the interesting part is that neither is sufficient
+alone — they fail in exactly complementary ways.
+
+**Companies House** publishes free monthly bulk data under the OGL, and
+filtering it to SIC 68310/68320 gives every incorporated estate agency in the
+UK *with its legal form stated by the register*. That is the evidence PECR's
+corporate-subscriber test needs. It also **contains no sole traders at all** —
+they are not registered anywhere in it — so everything it yields is a
+corporate subscriber by construction, and a list built only from it is
+structurally incapable of containing the half of the market that is not.
+
+**HMRC's AML supervised business register** covers that gap, because the duty
+to register attaches to the activity rather than to incorporation, so sole
+traders and unincorporated partnerships appear. It does not state legal form.
+
+So the pipeline is load, load, match:
+
+```
+orgs-load gb-companies-house   ->  evidenced legal form, corporate only
+orgs-load gb-hmrc-aml          ->  includes sole traders, form UNKNOWN
+orgs-match                     ->  unique name match evidences the form
+```
+
+**Legal form is never inferred from a name.** "Smith Estates Ltd" is almost
+certainly a limited company and that is not good enough: guessing corporate
+authorises a marketing email, so the failure direction is unlawful. A name
+suffix is recorded in `notes` as a hint for a human and nothing else. Only an
+actual Companies House match sets the form.
+
+The matcher refuses ambiguity for the same reason. Two companies sharing a
+name once legal suffixes are stripped means no match is recorded — picking one
+would assign a legal form on a coin flip, and one side of that flip authorises
+an email. Failing to match costs an email; matching wrongly is unlawful.
+
+An organisation that appears in HMRC's register and nowhere in Companies House
+is very likely a sole trader, and the system now knows that before sending
+rather than after.
+
+Neither register publishes email addresses. These loaders produce
+organisations only; contacts must come from elsewhere with their own lawful
+basis recorded, which is why this cannot by itself produce a send list.
+
+The TPO and PRS redress registers are the other obvious source and are
+deliberately not built: they are web directories with no bulk download, so
+using them means a per-site terms review rather than a loader written blind.
 
 ### Rules that are enforced
 

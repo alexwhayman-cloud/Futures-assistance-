@@ -1,0 +1,10 @@
+CompanyName,CompanyNumber,RegAddress.AddressLine1,RegAddress.PostTown,RegAddress.PostCode,CompanyCategory,CompanyStatus,SICCode.SicText_1,SICCode.SicText_2,URI
+THAMES RESIDENTIAL LTD,01234567,1 River Road,London,EC1A 1AA,Private Limited Company,Active,68310 - Real estate agencies,,http://business.data.gov.uk/id/company/01234567
+NORTHERN LETTINGS LLP,OC345678,4 Mill Street,Manchester,M1 4BT,Limited Liability Partnership,Active,68320 - Management of real estate on a fee or contract basis,,
+BIG PROPERTY PLC,09876543,10 Tower Way,Leeds,LS1 1AA,Public Limited Company,Active,68310 - Real estate agencies,,
+DISSOLVED AGENTS LTD,05555555,9 Gone Road,Bristol,BS1 1AA,Private Limited Company,Dissolved,68310 - Real estate agencies,,
+CORNER SHOP LTD,06666666,2 High Street,York,YO1 1AA,Private Limited Company,Active,47110 - Retail sale in non-specialised stores,,
+HIGHLAND PROPERTY PARTNERSHIP,SP123456,3 Glen Road,Inverness,IV1 1AA,Scottish Partnership,Active,68310 - Real estate agencies,,
+AMBIGUOUS ESTATES LTD,07777777,5 Same Street,London,N1 1AA,Private Limited Company,Active,68310 - Real estate agencies,,
+AMBIGUOUS ESTATES LIMITED,08888888,6 Same Street,London,N1 1AB,Private Limited Company,Active,68310 - Real estate agencies,,
+ODD FORM ESTATES,OF999999,7 Odd Road,Cardiff,CF1 1AA,Registered Society,Active,68310 - Real estate agencies,,

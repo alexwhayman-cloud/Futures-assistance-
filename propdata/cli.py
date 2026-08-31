@@ -8,6 +8,10 @@ import sys
 from collections.abc import Iterator
 
 from propdata.outreach import rules as marketing_rules
+from propdata.outreach.loaders.companies_house import CompaniesHouseSource
+from propdata.outreach.loaders.hmrc_aml import HmrcAmlSource
+from propdata.outreach.loaders.matching import match_to_companies_house
+from propdata.outreach.store import OutreachStore
 from propdata.regions.identity import REGISTRY
 from propdata.schema import Property
 from propdata.sources.registry import SOURCES, get_source
@@ -91,6 +95,53 @@ def cmd_outreach_rules(args: argparse.Namespace) -> int:
     return 0
 
 
+ORG_LOADERS = {
+    CompaniesHouseSource.id: CompaniesHouseSource,
+    HmrcAmlSource.id: HmrcAmlSource,
+}
+
+
+def cmd_orgs_load(args: argparse.Namespace) -> int:
+    """Load a business register into the organisations table."""
+    loader = ORG_LOADERS[args.source]()
+    organisations = loader.load_all(args.path)
+    with OutreachStore(args.db) as store:
+        for org in organisations:
+            store.save_organisation(org)
+    evidenced = sum(1 for o in organisations if o.legal_form.value != "unknown")
+    print(
+        f"{loader.id}: loaded {len(organisations)} organisations -> {args.db} "
+        f"({evidenced} with an evidenced legal form)"
+    )
+    if not loader.evidences_legal_form:
+        print(
+            "  this register does not state legal form; these are blocked "
+            "from marketing email until matched (propdata orgs-match)"
+        )
+    return 0
+
+
+def cmd_orgs_match(args: argparse.Namespace) -> int:
+    """Evidence legal form by matching unknown organisations to Companies House."""
+    with OutreachStore(args.db) as store:
+        rows = store.connection.execute("SELECT org_id FROM organisations").fetchall()
+        everything = [store.get_organisation(row["org_id"]) for row in rows]
+        companies = [
+            o for o in everything if o.source == CompaniesHouseSource.id
+        ]
+        unevidenced = [
+            o for o in everything
+            if o.legal_form.value == "unknown" and o.source != CompaniesHouseSource.id
+        ]
+        report = match_to_companies_house(unevidenced, companies)
+        for org in report.matched + report.unmatched:
+            store.save_organisation(org)
+    print(report.summary())
+    for name in report.ambiguous:
+        print(f"  ambiguous, left unevidenced: {name}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="propdata")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -117,6 +168,20 @@ def main(argv: list[str] | None = None) -> int:
     )
     outreach.add_argument("country", help="ISO 3166-1 alpha-2, e.g. GB")
     outreach.set_defaults(func=cmd_outreach_rules)
+
+    orgs = subparsers.add_parser(
+        "orgs-load", help="load a business register into organisations"
+    )
+    orgs.add_argument("source", choices=sorted(ORG_LOADERS), help="register id")
+    orgs.add_argument("--path", required=True, help="local copy of the register")
+    orgs.add_argument("--db", default="properties.db", help="SQLite file")
+    orgs.set_defaults(func=cmd_orgs_load)
+
+    match = subparsers.add_parser(
+        "orgs-match", help="evidence legal form against Companies House"
+    )
+    match.add_argument("--db", default="properties.db", help="SQLite file")
+    match.set_defaults(func=cmd_orgs_match)
 
     args = parser.parse_args(argv)
     return int(args.func(args))
