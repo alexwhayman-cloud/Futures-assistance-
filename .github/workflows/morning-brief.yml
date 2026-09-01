@@ -1,0 +1,38 @@
+name: Morning Brief
+
+on:
+  schedule:
+    # 07:00 Asia/Bangkok (UTC+7) every day
+    - cron: "0 0 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  brief:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Generate and send the morning brief
+        env:
+          # Personal access token with read access to all three repos.
+          # The default GITHUB_TOKEN can only see this repo, so private
+          # repos are skipped unless GH_PAT is set.
+          GH_PAT: ${{ secrets.GH_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          MAIL_TO: ${{ vars.MAIL_TO }}
+        run: python scripts/morning_brief.py
