@@ -1,0 +1,128 @@
+{
+  "_note": "One listing record in the resale.json schema (see resale/data/schema.md in phuket-property-hub). Append the object under `listing` to `listings` in resale/data/resale.json, then rebuild. Every figure here comes from the thbot sweep of 1 September 2026 — structured facts only. The portal's own title, description and photography are deliberately not reproduced.",
+
+  "provenance": {
+    "source": "PropertyScout, via thbot sweep",
+    "portalRef": "1546662",
+    "sweptAt": "2026-09-01",
+    "opsReview": 43,
+    "opsIssueType": "owner_opportunity",
+    "opsSeverity": "high",
+    "opsStatus": "open",
+    "marketJsonRef": "1546662",
+    "note": "thbot ops review #43 opened this listing as an owner opportunity. The review's headline 44.4% discount is not repeated in the brochure — see the discount-basis flag below."
+  },
+
+  "listing": {
+    "id": "L43",
+    "name": "4-Bed Pool Villa, The Teak Phuket Phase 2",
+    "realName": "The Teak Phuket (Phase 2), Laguna — PropertyScout 1546662",
+    "area": "laguna-phuket",
+    "segment": "Villa",
+    "status": "available",
+    "via": "PropertyScout portal listing, owner-listed. Two Coasts holds no instruction on this property.",
+    "listedAt": "2024-06-24",
+    "lastVerifiedAt": "2026-09-01",
+    "vendorContact": null,
+
+    "beds": 4,
+    "bathrooms": 5,
+    "guestWc": null,
+    "floors": null,
+    "sizeSqm": 567.3,
+    "sizeBasis": "built-up",
+    "landSqm": 571.09,
+    "landSqwah": 142.77,
+
+    "price": 39590000,
+    "pricePerSqm": 69787,
+    "priceBasis": "asking",
+    "currency": "THB",
+
+    "ownership": "Listing states the foreign freehold quota. Not verified against the title deed or the Land Office record.",
+    "tenure": {
+      "type": "foreign-quota",
+      "registeredYears": null,
+      "renewalOptions": null,
+      "buildingOwnership": "Not stated by the listing. Whether the structure transfers separately from the land has not been established.",
+      "transferable": "Not stated.",
+      "documentsSeen": false
+    },
+
+    "cam": null,
+    "sinkingFund": null,
+    "taxNote": "Thailand's Land and Building Tax residential rates are low, but the exemption on the first ฿50 million applies to an owner-occupied principal residence recorded in the house registration book. A foreign owner holding through the quota will not automatically qualify. Confirm with Thai counsel.",
+
+    "completed": "Completed — resale",
+    "furnished": false,
+    "privatePool": null,
+    "specs": "4 bedrooms, 5 bathrooms. 567.3 sq.m built-up on 571.09 sq.m (142.77 sq.wah) of land. Partially furnished.",
+    "note": "On the portal since 24 June 2024 — two years and two months at the time of the sweep. Long portal tenure is worth understanding before treating the asking price as keen.",
+
+    "features": [],
+    "nearby": [],
+    "nearbyBasis": "approximate",
+
+    "links": [
+      {
+        "label": "Photography — supplied Drive folder",
+        "url": "https://drive.google.com/drive/folders/1H0uRgJOpDNugSgPPmj1mWnxNjh6wp8Nk",
+        "type": "marketing",
+        "clientVisible": false
+      },
+      {
+        "label": "Portal listing (source record)",
+        "url": "https://propertyscout.co.th/en/1546662/",
+        "type": "marketing",
+        "clientVisible": false
+      }
+    ],
+    "assets": "L43",
+
+    "flags": [
+      {
+        "field": "via",
+        "summary": "No instruction held — portal listing, owner-listed",
+        "detail": "This reached the desk through the thbot PropertyScout sweep, not from the owner. Two Coasts has no mandate and no agreed fee. Do not present it to a buyer as stock held; establish the position with the owner first.",
+        "values": ["Owner-listed on PropertyScout", "First seen 24 June 2024"]
+      },
+      {
+        "field": "tenure",
+        "summary": "Foreign quota stated by the listing, no document seen",
+        "detail": "thbot's tenure enrichment read the detail page and recorded sale_quota = foreigner_quota. That is what the lister states, not what the deed says. Only 8 of the 47 listings checked on this sweep stated tenure at all, so a stated quota is unusually specific — and still unverified. Request the title deed and confirm the quota position at the Land Office before any tenure statement goes to a buyer.",
+        "values": ["Listing states: foreigner quota", "Title deed: not seen", "Quota certificate: not seen"]
+      },
+      {
+        "field": "pricePerSqm",
+        "summary": "The 44.4% discount headline is not safe to repeat",
+        "detail": "thbot ops review #43 records discount_pct 44.4 against 7 size-band comparables. Reconstructing the band on market.json (567.3 sq.m ± 25) returns a bucket whose upper half is POETRY Villas at ~฿118,000/sqm and Laguna Homes 2 at ฿114,865/sqm — a different product tier, which is exactly the case the project's own extreme-discount rule exists to catch. Against a defensible basis the villa is 18.5% below the Laguna villa median, and priced in line with its own scheme. Quote that, never 44%.",
+        "values": [
+          "Ops review #43: 44.4% below 7 size-band comparables",
+          "Laguna villa median ฿85,602/sqm (n=188): 18.5% below",
+          "Corridor villa median ฿87,562/sqm (n=333): 20.3% below",
+          "Other Teak 4-beds: ฿68,677–฿74,246/sqm"
+        ]
+      },
+      {
+        "field": "sizeBasis",
+        "summary": "Size basis is the portal's own figure",
+        "detail": "PropertyScout does not state whether its area figure is internal, built-up or total. It is recorded here as built-up because that is the corridor convention, but the price per sq.m inherits that assumption. Confirm the basis against the building permit before using the rate in a comparison a buyer relies on.",
+        "values": ["567.3 sq.m, basis not stated by the source"]
+      },
+      {
+        "field": "assets",
+        "summary": "Supplied photography not yet reviewed",
+        "detail": "The photographer's Drive folder (owner photographer.ramee@gmail.com, created 1 June 2026, link-shared 2 September 2026) is attached to this record but its frames have not been opened. Nobody has confirmed they show this villa, and nobody has checked them for identifiable people, who must agree before publication. The link is clientVisible: false and no frame is embedded in the brochure until that check is done.",
+        "values": ["Drive folder: L43", "Frames reviewed: no", "People-release check: not done"]
+      },
+      {
+        "field": "features",
+        "summary": "No feature list, and none invented",
+        "detail": "market.json carries structured facts only — the sweep deliberately does not reproduce portal titles, descriptions or photography. So there is no verified feature list for this villa. The brochure renders no features section rather than inventing one.",
+        "values": []
+      }
+    ],
+
+    "showcase": false
+  }
+}
