@@ -5,6 +5,14 @@
     "source": "PropertyScout, via thbot sweep",
     "portalRef": "1546662",
     "sweptAt": "2026-09-01",
+    "portalTitle": "4-BR Villa at The Teak Phuket (Phase 2) close to Laguna",
+    "postedBy": "landlord",
+    "listingSource": "flexstay",
+    "deskRank": 1,
+    "deskComparables": 7,
+    "deskDiscountPct": 44.4,
+    "deskReason": "size",
+    "deskScope": "550.0–575.0 sqm",
     "opsReview": 43,
     "opsIssueType": "owner_opportunity",
     "opsSeverity": "high",
@@ -20,7 +28,7 @@
     "area": "laguna-phuket",
     "segment": "Villa",
     "status": "available",
-    "via": "PropertyScout portal listing, owner-listed. Two Coasts holds no instruction on this property.",
+    "via": "PropertyScout portal listing. The portal records the poster as the landlord, but the listing reached it through the 'flexstay' source channel — see the via flag. Two Coasts holds no instruction on this property.",
     "listedAt": "2024-06-24",
     "lastVerifiedAt": "2026-09-01",
     "vendorContact": null,
@@ -82,9 +90,13 @@
     "flags": [
       {
         "field": "via",
-        "summary": "No instruction held — portal listing, owner-listed",
-        "detail": "This reached the desk through the thbot PropertyScout sweep, not from the owner. Two Coasts has no mandate and no agreed fee. Do not present it to a buyer as stock held; establish the position with the owner first.",
-        "values": ["Owner-listed on PropertyScout", "First seen 24 June 2024"]
+        "summary": "No instruction held, and 'owner direct' is not certain",
+        "detail": "This reached the desk through the thbot PropertyScout sweep, not from the owner. Two Coasts has no mandate and no agreed fee. The desk shows it as owner direct because build_desk.py sets own = 1 when posted_by == 'landlord'; but posted_by and listing_source are independent portal fields, and this listing's source is 'flexstay', which carries 811 owner-flagged and 143 agency-flagged listings on this sweep. So the desk tooltip's 'no agency between you and the seller' does not follow. Establish who actually controls the instruction before approaching.",
+        "values": [
+          "posted_by: landlord",
+          "listing_source: flexstay",
+          "First seen 24 June 2024"
+        ]
       },
       {
         "field": "tenure",

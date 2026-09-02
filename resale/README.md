@@ -70,8 +70,12 @@ populations named.
 
 Two flags are blocking, and the brochure leads with both:
 
-1. **No instruction.** This is an owner's own portal listing found by the sweep. Two Coasts has no
-   mandate and no agreed fee. The owner conversation has to happen before a buyer sees it.
+1. **No instruction, and "owner direct" is not certain.** Two Coasts has no mandate and no agreed
+   fee. The desk shows the property as owner direct because `build_desk.py` sets
+   `own = 1 if r["posted_by"] == "landlord"`. But `posted_by` and `listing_source` are independent
+   portal fields: this listing's source is `flexstay`, which carries 811 owner-flagged **and** 143
+   agency-flagged listings on the same sweep. The desk tooltip's "no agency between you and the
+   seller" therefore does not follow from the flag. Establish who controls the instruction first.
 2. **Tenure stated, not proven.** The tenure enrichment recorded `sale_quota = foreigner_quota`
    from the detail page. That is the lister's statement. No title deed, quota certificate or
    building permit has been read. Foreign freehold of land is not available in Thailand, so the
