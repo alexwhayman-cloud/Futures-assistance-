@@ -8,6 +8,16 @@ produced it.
 | `data/L43.json` | One listing record in the `resale.json` schema, ready to append to `listings` in the phuket-property-hub resale database. Also carries the provenance block tying it back to the sweep. |
 | `dist/listing-L43.html` | The brochure. Hand-written in the Two Coasts resale house style rather than emitted by `build-resale.mjs`, because there is no photography to inline yet. |
 | `assets/L43/SOURCE.md` | Where the supplied photography lives and how to pull it in. |
+| `check-L43.mjs` | Runs the hub's own firewall against both. |
+
+```bash
+node resale/check-L43.mjs ../phuket-property-hub/build/lib/firewall.mjs
+```
+
+Passing, including the control case: scanned *without* `allowOwn` the page fails on Alex's own
+WhatsApp number, which proves the scan is live rather than silently matching nothing. The firewall
+is deliberately not vendored into this repo — two divergent copies is how one of them quietly
+stops matching a pattern the other still catches.
 
 **Published:** https://claude.ai/code/artifact/83f7433d-4b46-4b38-9373-b61326636445
 
