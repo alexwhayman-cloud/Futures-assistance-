@@ -23,6 +23,9 @@ cannot reach drive.google.com. The frames therefore have to be pulled by hand on
    the rest form the two-up gallery.
 4. Hold back any frame that shows an identifiable person until they have agreed to
    publication. Put it outside `assets/`, not in here.
+4a. **Check every frame for the address.** A villa number, a gate plate, a neighbour's
+   plate or a street sign in shot publishes the exact address just as surely as writing
+   it. Any frame showing one is held back or the plate is removed. See `CLAUDE.md`.
 5. Drop at most one walkthrough video (`.mp4`, `.webm` or `.mov`, target ~8 MB raw) in
    here as well, or leave the `links[]` video entry to the Drive-hosted copy.
 6. Rebuild and republish:

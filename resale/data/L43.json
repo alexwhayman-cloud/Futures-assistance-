@@ -1,86 +1,88 @@
 {
-  "_note": "One listing record in the resale.json schema (see resale/data/schema.md in phuket-property-hub). Append the object under `listing` to `listings` in resale/data/resale.json, then rebuild. Every figure here comes from the thbot sweep of 1 September 2026 — structured facts only. The portal's own title, description and photography are deliberately not reproduced.",
+  "_note": "Desk record for L43. INTERNAL — this file carries the exact address; the published brochure must not. See CLAUDE.md at the repo root for the publication rule. Fields are null where nothing has been established: null means 'not known', never 'none'.",
+
+  "_publication": {
+    "maxPublishedLocation": "L frond, Palm Jumeirah",
+    "preferredPublishedLocation": "Palm Jumeirah",
+    "neverPublish": [
+      "villa/plot number",
+      "full street address",
+      "title deed reference",
+      "owner identity",
+      "any photograph showing a villa number, gate plate or neighbouring plate"
+    ]
+  },
 
   "provenance": {
-    "source": "PropertyScout, via thbot sweep",
-    "portalRef": "1546662",
-    "sweptAt": "2026-09-01",
-    "portalTitle": "4-BR Villa at The Teak Phuket (Phase 2) close to Laguna",
-    "postedBy": "landlord",
-    "listingSource": "flexstay",
-    "deskRank": 1,
-    "deskComparables": 7,
-    "deskDiscountPct": 44.4,
-    "deskReason": "size",
-    "deskScope": "550.0–575.0 sqm",
-    "opsReview": 43,
-    "opsIssueType": "owner_opportunity",
-    "opsSeverity": "high",
-    "opsStatus": "open",
-    "marketJsonRef": "1546662",
-    "note": "thbot ops review #43 opened this listing as an owner opportunity. The review's headline 44.4% discount is not repeated in the brochure — see the discount-basis flag below."
+    "reference": "L43",
+    "meaning": "Frond L, villa 43, Palm Jumeirah, Dubai",
+    "confirmedBy": "Owner instruction, 3 September 2026",
+    "photography": {
+      "driveFolder": "https://drive.google.com/drive/folders/1H0uRgJOpDNugSgPPmj1mWnxNjh6wp8Nk",
+      "folderLabel": "L43",
+      "suppliedBy": "photographer.ramee@gmail.com",
+      "folderCreated": "2026-06-01",
+      "sharedWithAlex": "2026-09-02",
+      "framesReviewed": false,
+      "peopleReleaseChecked": false,
+      "platesChecked": false
+    }
   },
 
   "listing": {
     "id": "L43",
-    "name": "4-Bed Pool Villa, The Teak Phuket Phase 2",
-    "realName": "The Teak Phuket (Phase 2), Laguna — PropertyScout 1546662",
-    "area": "laguna-phuket",
+    "name": "Frond villa, Palm Jumeirah",
+    "publishedLocation": "Palm Jumeirah — L frond",
+    "market": "Dubai",
+    "community": "Palm Jumeirah",
+    "frond": "L",
     "segment": "Villa",
-    "status": "available",
-    "via": "PropertyScout portal listing. The portal records the poster as the landlord, but the listing reached it through the 'flexstay' source channel — see the via flag. Two Coasts holds no instruction on this property.",
-    "listedAt": "2024-06-24",
-    "lastVerifiedAt": "2026-09-01",
+    "status": null,
+
+    "via": null,
+    "listedAt": null,
+    "lastVerifiedAt": null,
     "vendorContact": null,
 
-    "beds": 4,
-    "bathrooms": 5,
-    "guestWc": null,
+    "beds": null,
+    "bathrooms": null,
     "floors": null,
-    "sizeSqm": 567.3,
-    "sizeBasis": "built-up",
-    "landSqm": 571.09,
-    "landSqwah": 142.77,
+    "villaType": null,
+    "sizeSqft": null,
+    "sizeBasis": null,
+    "plotSqft": null,
 
-    "price": 39590000,
-    "pricePerSqm": 69787,
-    "priceBasis": "asking",
-    "currency": "THB",
+    "price": null,
+    "pricePerSqft": null,
+    "priceBasis": "on-application",
+    "currency": "AED",
 
-    "ownership": "Listing states the foreign freehold quota. Not verified against the title deed or the Land Office record.",
+    "ownership": null,
     "tenure": {
-      "type": "foreign-quota",
-      "registeredYears": null,
-      "renewalOptions": null,
-      "buildingOwnership": "Not stated by the listing. Whether the structure transfers separately from the land has not been established.",
-      "transferable": "Not stated.",
+      "type": null,
+      "titleDeedSeen": false,
+      "dldChecked": false,
+      "restrictions": null,
       "documentsSeen": false
     },
 
-    "cam": null,
-    "sinkingFund": null,
-    "taxNote": "Thailand's Land and Building Tax residential rates are low, but the exemption on the first ฿50 million applies to an owner-occupied principal residence recorded in the house registration book. A foreign owner holding through the quota will not automatically qualify. Confirm with Thai counsel.",
+    "serviceCharge": null,
+    "serviceChargeYear": null,
+    "outstandingBalance": null,
 
-    "completed": "Completed — resale",
-    "furnished": false,
+    "completed": null,
+    "furnished": null,
     "privatePool": null,
-    "specs": "4 bedrooms, 5 bathrooms. 567.3 sq.m built-up on 571.09 sq.m (142.77 sq.wah) of land. Partially furnished.",
-    "note": "On the portal since 24 June 2024 — two years and two months at the time of the sweep. Long portal tenure is worth understanding before treating the asking price as keen.",
+    "beachFrontage": null,
+    "orientation": null,
 
     "features": [],
     "nearby": [],
-    "nearbyBasis": "approximate",
 
     "links": [
       {
         "label": "Photography — supplied Drive folder",
         "url": "https://drive.google.com/drive/folders/1H0uRgJOpDNugSgPPmj1mWnxNjh6wp8Nk",
-        "type": "marketing",
-        "clientVisible": false
-      },
-      {
-        "label": "Portal listing (source record)",
-        "url": "https://propertyscout.co.th/en/1546662/",
         "type": "marketing",
         "clientVisible": false
       }
@@ -89,48 +91,27 @@
 
     "flags": [
       {
-        "field": "via",
-        "summary": "No instruction held, and 'owner direct' is not certain",
-        "detail": "This reached the desk through the thbot PropertyScout sweep, not from the owner. Two Coasts has no mandate and no agreed fee. The desk shows it as owner direct because build_desk.py sets own = 1 when posted_by == 'landlord'; but posted_by and listing_source are independent portal fields, and this listing's source is 'flexstay', which carries 811 owner-flagged and 143 agency-flagged listings on this sweep. So the desk tooltip's 'no agency between you and the seller' does not follow. Establish who actually controls the instruction before approaching.",
-        "values": [
-          "posted_by: landlord",
-          "listing_source: flexstay",
-          "First seen 24 June 2024"
-        ]
+        "field": "all",
+        "summary": "No specification, price or tenure on file",
+        "detail": "Nothing about this villa has been entered beyond its location and the existence of the photography. The brochure is published as a shell so the link is stable, and says on its face that it is not for circulation. It must not go to a buyer until the specification, price and title position are entered.",
+        "values": []
       },
       {
         "field": "tenure",
-        "summary": "Foreign quota stated by the listing, no document seen",
-        "detail": "thbot's tenure enrichment read the detail page and recorded sale_quota = foreigner_quota. That is what the lister states, not what the deed says. Only 8 of the 47 listings checked on this sweep stated tenure at all, so a stated quota is unusually specific — and still unverified. Request the title deed and confirm the quota position at the Land Office before any tenure statement goes to a buyer.",
-        "values": ["Listing states: foreigner quota", "Title deed: not seen", "Quota certificate: not seen"]
-      },
-      {
-        "field": "pricePerSqm",
-        "summary": "The 44.4% discount headline is not safe to repeat",
-        "detail": "thbot ops review #43 records discount_pct 44.4 against 7 size-band comparables. Reconstructing the band on market.json (567.3 sq.m ± 25) returns a bucket whose upper half is POETRY Villas at ~฿118,000/sqm and Laguna Homes 2 at ฿114,865/sqm — a different product tier, which is exactly the case the project's own extreme-discount rule exists to catch. Against a defensible basis the villa is 18.5% below the Laguna villa median, and priced in line with its own scheme. Quote that, never 44%.",
-        "values": [
-          "Ops review #43: 44.4% below 7 size-band comparables",
-          "Laguna villa median ฿85,602/sqm (n=188): 18.5% below",
-          "Corridor villa median ฿87,562/sqm (n=333): 20.3% below",
-          "Other Teak 4-beds: ฿68,677–฿74,246/sqm"
-        ]
-      },
-      {
-        "field": "sizeBasis",
-        "summary": "Size basis is the portal's own figure",
-        "detail": "PropertyScout does not state whether its area figure is internal, built-up or total. It is recorded here as built-up because that is the corridor convention, but the price per sq.m inherits that assumption. Confirm the basis against the building permit before using the rate in a comparison a buyer relies on.",
-        "values": ["567.3 sq.m, basis not stated by the source"]
+        "summary": "Title not read",
+        "detail": "Palm Jumeirah is a designated freehold area, but that is a fact about the area, not proof of what this deed says. Read the title deed and check the DLD record for restrictions, mortgages and outstanding service charge before any tenure statement is made.",
+        "values": []
       },
       {
         "field": "assets",
-        "summary": "Supplied photography not yet reviewed",
-        "detail": "The photographer's Drive folder (owner photographer.ramee@gmail.com, created 1 June 2026, link-shared 2 September 2026) is attached to this record but its frames have not been opened. Nobody has confirmed they show this villa, and nobody has checked them for identifiable people, who must agree before publication. The link is clientVisible: false and no frame is embedded in the brochure until that check is done.",
-        "values": ["Drive folder: L43", "Frames reviewed: no", "People-release check: not done"]
+        "summary": "Photography not reviewed",
+        "detail": "The supplied Drive folder has not been opened. Three checks are outstanding: that the frames show this villa, that no identifiable person appears without agreement, and that no frame shows the villa number, a gate plate or a neighbour's plate. The last one is a publication rule, not a preference.",
+        "values": ["Frames reviewed: no", "People release: not checked", "Plates checked: no"]
       },
       {
-        "field": "features",
-        "summary": "No feature list, and none invented",
-        "detail": "market.json carries structured facts only — the sweep deliberately does not reproduce portal titles, descriptions or photography. So there is no verified feature list for this villa. The brochure renders no features section rather than inventing one.",
+        "field": "via",
+        "summary": "Instruction not confirmed",
+        "detail": "Who holds the instruction, on what terms, and whether it is exclusive has not been recorded.",
         "values": []
       }
     ],

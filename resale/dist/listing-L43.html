@@ -1,11 +1,11 @@
-<title>Villa L43, The Teak Phuket</title>
+<title>Palm Jumeirah Frond Villa</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600;700&display=swap">
 
 <style>
-/* Two Coasts — resale brochure.
+/* Two Coasts — Dubai resale brochure.
    Palette from brand/BRANDING.md: navy #0E2A3D, sand #C9A66B, teal #3F7C6B.
    Type follows the hub's Newsreader / Inter pairing.
    Every colour is declared on bare :root first, then redefined per theme — never only
@@ -147,12 +147,7 @@ a:focus-visible {
   opacity: 0.7;
 }
 
-.meta-row {
-  display: flex; flex-wrap: wrap; gap: 10px 26px;
-  font-size: 0.84rem; color: var(--ink-3);
-  font-variant-numeric: tabular-nums;
-}
-.meta-row b { color: var(--ink); font-weight: 600; }
+.standfirst { color: var(--ink-2); max-width: var(--readw); font-size: 1.01rem; }
 
 /* ---------- the verification spine ---------- */
 
@@ -185,7 +180,6 @@ a:focus-visible {
 main { padding: 40px 0 0; }
 section { padding: 0 0 44px; }
 .section-head { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
-.standfirst { color: var(--ink-2); max-width: var(--readw); font-size: 1.01rem; }
 
 .card {
   background: var(--surface);
@@ -197,38 +191,6 @@ section { padding: 0 0 44px; }
 }
 .stack { display: flex; flex-direction: column; gap: 16px; }
 
-/* price header — the figure and its basis travel together */
-.headline {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 18px 32px;
-  align-items: start;
-}
-@media (max-width: 640px) { .headline { grid-template-columns: 1fr; } }
-.price {
-  font-family: var(--display);
-  font-size: clamp(1.9rem, 1.4rem + 1.8vw, 2.5rem);
-  line-height: 1.1;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-.price-side { text-align: right; }
-@media (max-width: 640px) { .price-side { text-align: left; } }
-.price-note { font-size: 0.8rem; color: var(--ink-3); }
-.rate {
-  font-family: var(--display);
-  font-size: 1.3rem;
-  font-variant-numeric: tabular-nums;
-  color: var(--accent);
-}
-
-.status {
-  display: inline-block; font-size: 0.68rem; font-weight: 600;
-  text-transform: uppercase; letter-spacing: 0.09em;
-  padding: 3px 9px; border-radius: 999px;
-  background: var(--teal-soft); color: var(--teal);
-}
-
 /* ---------- tables ---------- */
 
 .table-scroll { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--line); }
@@ -237,14 +199,7 @@ th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--li
 th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-3); font-weight: 600; }
 tbody th { font-weight: 600; color: var(--ink-2); text-transform: none; font-size: 0.9rem; letter-spacing: 0; white-space: nowrap; }
 tr:last-child td, tr:last-child th { border-bottom: 0; }
-td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
-
-/* ---------- the price-position scale ---------- */
-
-.scale-card { display: flex; flex-direction: column; gap: 6px; }
-.scale-wrap { overflow-x: auto; }
-.scale { display: block; width: 100%; min-width: 520px; height: auto; }
-.scale-note { font-size: 0.82rem; color: var(--ink-3); max-width: var(--readw); }
+td.pending { color: var(--ink-3); }
 
 /* ---------- checklist ---------- */
 
@@ -262,25 +217,6 @@ td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
   border-radius: 3px;
 }
 .checks strong { color: var(--ink); font-weight: 600; }
-
-/* ---------- flags ---------- */
-
-.flag {
-  border-top: 1px solid var(--line-soft);
-  padding-top: 14px;
-  display: flex; flex-direction: column; gap: 7px;
-}
-.flag:first-child { border-top: 0; padding-top: 0; }
-.flag-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.flag h3 { font-family: var(--ui); font-size: 0.95rem; font-weight: 600; }
-.flag p { font-size: 0.9rem; color: var(--ink-2); max-width: var(--readw); }
-.values { display: flex; flex-wrap: wrap; gap: 6px; }
-.value {
-  font-size: 0.78rem;
-  background: var(--raised); color: var(--ink-2);
-  border-radius: 5px; padding: 3px 8px;
-  font-variant-numeric: tabular-nums;
-}
 
 /* ---------- contact ---------- */
 
@@ -317,15 +253,10 @@ td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
       <span class="brand-tag">Two Coasts. One Introduction.</span>
     </div>
     <hr class="horizon">
-    <span class="eyebrow">Laguna · Villa · Desk reference L43</span>
-    <h1>4-Bed Pool Villa, The Teak Phuket Phase 2</h1>
-    <div class="meta-row">
-      <span><b>4</b> bed</span>
-      <span><b>5</b> bath</span>
-      <span><b>567.3 sq.m</b> built-up</span>
-      <span><b>571.09 sq.m</b> land · <b>142.77</b> sq.wah</span>
-      <span>Partially furnished</span>
-    </div>
+    <span class="eyebrow">Dubai · Palm Jumeirah · Frond villa</span>
+    <h1>Frond villa, Palm Jumeirah</h1>
+    <p class="standfirst">A private resale on one of the Palm's residential fronds. Location is
+    given to frond level and no further, by instruction.</p>
   </div>
 </header>
 
@@ -333,159 +264,34 @@ td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
 
   <section>
     <div class="spine is-stop">
-      <div><span class="mark mark-stop">Read this first</span></div>
-      <p><strong>Two Coasts holds no instruction on this property.</strong> It reached the desk
-      through the PropertyScout sweep of 1 September 2026, not from the owner. There is no mandate
-      and no agreed fee. Establish the position with whoever controls the instruction before
-      showing it to a buyer as stock.</p>
-      <p>Every figure below is a structured fact from that sweep. The portal's own title,
-      description and photography are deliberately not reproduced.</p>
+      <div><span class="mark mark-stop">Draft — not for circulation</span></div>
+      <p><strong>This page is a shell.</strong> The property has been identified and the
+      photography is in hand, but no specification, price or tenure detail has been entered yet.
+      Nothing below is a figure a buyer should act on, because there are no figures yet.</p>
+      <p>It is published so the link is stable while the detail is assembled. Do not send it to a
+      buyer in this state.</p>
     </div>
   </section>
 
   <section>
     <div class="section-head">
-      <h2>Asking price</h2>
+      <h2>What is settled</h2>
     </div>
-    <div class="card">
-      <div class="headline">
-        <div class="stack">
-          <div><span class="status">Available</span></div>
-          <div class="price">฿39,590,000</div>
-          <p class="price-note">Asking price stated on the portal listing. Not a valuation, and
-          not a figure the owner has confirmed to Two Coasts.</p>
-        </div>
-        <div class="price-side stack">
-          <div class="rate">฿69,787<span style="font-size:0.8rem;color:var(--ink-3)"> /sq.m</span></div>
-          <p class="price-note">On the built-up area of 567.3 sq.m</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="section-head">
-      <h2>Where that sits, and against what</h2>
-      <p class="standfirst">A price per square metre means nothing without the population it is
-      being compared against. Each comparison below names its own.</p>
-    </div>
-
-    <div class="stack">
-      <div class="card scale-card">
-        <div class="scale-wrap">
-          <svg class="scale" viewBox="0 0 720 148" role="img"
-               aria-label="Asking rate of 69,787 baht per square metre plotted against the corridor villa range: 10th percentile 45,558, Laguna median 85,602, corridor median 87,562, 90th percentile 153,693.">
-            <!-- baseline -->
-            <line x1="60" y1="86" x2="660" y2="86" stroke="var(--line)" stroke-width="1.5" />
-
-            <!-- middle 80% band -->
-            <rect x="60" y="76" width="600" height="20" fill="var(--accent-soft)" />
-
-            <!-- p10 -->
-            <line x1="60" y1="70" x2="60" y2="102" stroke="var(--ink-3)" stroke-width="1.5" />
-            <text x="60" y="120" fill="var(--ink-3)" font-family="Inter, sans-serif" font-size="11"
-                  text-anchor="start">฿45,558</text>
-            <text x="60" y="134" fill="var(--ink-3)" font-family="Inter, sans-serif" font-size="10"
-                  text-anchor="start">10th pct</text>
-
-            <!-- p90 -->
-            <line x1="660" y1="70" x2="660" y2="102" stroke="var(--ink-3)" stroke-width="1.5" />
-            <text x="660" y="120" fill="var(--ink-3)" font-family="Inter, sans-serif" font-size="11"
-                  text-anchor="end">฿153,693</text>
-            <text x="660" y="134" fill="var(--ink-3)" font-family="Inter, sans-serif" font-size="10"
-                  text-anchor="end">90th pct</text>
-
-            <!-- Laguna villa median 85,602 -->
-            <line x1="282" y1="66" x2="282" y2="106" stroke="var(--teal)" stroke-width="2" />
-            <text x="282" y="58" fill="var(--teal)" font-family="Inter, sans-serif" font-size="11"
-                  font-weight="600" text-anchor="middle">฿85,602</text>
-            <text x="282" y="122" fill="var(--teal)" font-family="Inter, sans-serif" font-size="10"
-                  text-anchor="middle">Laguna villa median</text>
-
-            <!-- subject 69,787 -->
-            <circle cx="215" cy="86" r="8" fill="var(--accent)" />
-            <line x1="215" y1="86" x2="215" y2="30" stroke="var(--accent)" stroke-width="1.5" />
-            <text x="215" y="22" fill="var(--accent)" font-family="Newsreader, Georgia, serif"
-                  font-size="15" font-weight="600" text-anchor="middle">฿69,787</text>
-            <text x="215" y="8" fill="var(--ink-3)" font-family="Inter, sans-serif" font-size="10"
-                  text-anchor="middle">This villa</text>
-          </svg>
-        </div>
-        <p class="scale-note">Asking rates per sq.m across the 333 villa listings tracked in the
-        Cherngtalay, Laguna and Layan corridor, read from PropertyScout on 1 September 2026.
-        Asking prices, not transactions.</p>
-      </div>
-
-      <div class="table-scroll">
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">Compared against</th>
-              <th scope="col">Rate</th>
-              <th scope="col">This villa</th>
-              <th scope="col">What the population is</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Laguna villas</th>
-              <td class="num">฿85,602/sq.m</td>
-              <td class="num">18.5% below</td>
-              <td>188 villa listings in Laguna on the 1 September sweep. The closest defensible
-              comparison, and the one to quote.</td>
-            </tr>
-            <tr>
-              <th scope="row">Corridor villas</th>
-              <td class="num">฿87,562/sq.m</td>
-              <td class="num">20.3% below</td>
-              <td>333 villa listings across Cherngtalay, Laguna and Layan.</td>
-            </tr>
-            <tr>
-              <th scope="row">Its own scheme</th>
-              <td class="num">฿68,677–74,246/sq.m</td>
-              <td class="num">In line</td>
-              <td>The other 4-bed villas tracked at The Teak Phuket. The Phase 2 five-bed asks
-              ฿82,362/sq.m. Against its neighbours this villa is ordinary — the discount is
-              The Teak's against Laguna, not this villa's against The Teak.</td>
-            </tr>
-            <tr>
-              <th scope="row">Size-band peers</th>
-              <td class="num">฿114,865/sq.m</td>
-              <td class="num">39–44% below</td>
-              <td>The bucket that opened the desk review: the 550–575 sq.m band. Its
-              upper half is POETRY Villas and Laguna Homes 2 at ฿115,000–119,000/sq.m, a different
-              product tier. <strong>Do not quote this comparison to a buyer.</strong></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="spine">
-        <div><span class="mark mark-claim">Unverified</span></div>
-        <p>All four rows are <strong>asking prices, not transactions</strong>. Nothing here is a
-        valuation, a yield, or a forecast of what this property will earn. Thailand has no
-        published transaction record to check them against.</p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="section-head"><h2>Specification</h2></div>
     <div class="table-scroll">
       <table>
         <tbody>
-          <tr><th scope="row">Type</th><td>Villa — completed, resale</td></tr>
-          <tr><th scope="row">Development</th><td>The Teak Phuket (Phase 2)</td></tr>
-          <tr><th scope="row">Location</th><td>Laguna, Cherngtalay corridor</td></tr>
-          <tr><th scope="row">Bedrooms</th><td class="num">4</td></tr>
-          <tr><th scope="row">Bathrooms</th><td class="num">5</td></tr>
-          <tr><th scope="row">Built-up area</th><td class="num">567.3 sq.m</td></tr>
-          <tr><th scope="row">Land</th><td class="num">571.09 sq.m · 142.77 sq.wah</td></tr>
-          <tr><th scope="row">Furnishing</th><td>Partially furnished</td></tr>
-          <tr><th scope="row">Ownership stated</th><td>Foreign freehold quota — see Tenure</td></tr>
-          <tr><th scope="row">On the market since</th><td>24 June 2024 — two years and two months</td></tr>
-          <tr><th scope="row">Posted by</th><td>Recorded as the landlord, through the “flexstay” source channel — see the flag below</td></tr>
-          <tr><th scope="row">Private pool</th><td>Not stated by the source</td></tr>
+          <tr><th scope="row">Location</th><td>Palm Jumeirah — L frond</td></tr>
+          <tr><th scope="row">Emirate</th><td>Dubai</td></tr>
+          <tr><th scope="row">Type</th><td>Villa, frond plot</td></tr>
+          <tr><th scope="row">Address detail</th><td>Withheld by instruction — frond level is the
+          maximum published, and the villa number is never published</td></tr>
+          <tr><th scope="row">Photography</th><td>Supplied and held. Not yet reviewed or placed.</td></tr>
+          <tr><th scope="row">Asking price</th><td class="pending">Not yet entered</td></tr>
+          <tr><th scope="row">Plot and built-up area</th><td class="pending">Not yet entered</td></tr>
+          <tr><th scope="row">Bedrooms and bathrooms</th><td class="pending">Not yet entered</td></tr>
+          <tr><th scope="row">Villa type</th><td class="pending">Not yet entered</td></tr>
+          <tr><th scope="row">Tenure and title</th><td class="pending">Not yet entered</td></tr>
+          <tr><th scope="row">Service charge</th><td class="pending">Not yet entered</td></tr>
         </tbody>
       </table>
     </div>
@@ -493,151 +299,46 @@ td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
 
   <section>
     <div class="section-head">
-      <h2>Tenure</h2>
-      <p class="standfirst">The field that gets Phuket brochures into trouble, so it is set out
-      as what is stated and what is proven, separately.</p>
-    </div>
-    <div class="stack">
-      <div class="spine">
-        <div><span class="mark mark-claim">Lister's statement</span></div>
-        <p><strong>Foreign freehold quota.</strong> The tenure check read the listing's detail page
-        and recorded the sale quota as foreigner quota. That is what the lister states about the
-        property, not what the deed records.</p>
-        <p>Only 8 of the 47 listings checked on this sweep stated tenure at all, so a stated quota
-        is unusually specific for this market — and still unverified.</p>
-      </div>
-      <div class="spine is-stop">
-        <div><span class="mark mark-stop">Not established</span></div>
-        <p>Nobody has read the title deed, the quota certificate or the building permit for this
-        property. Whether the structure transfers separately from the land has not been
-        established, and transferability has not been stated at all.</p>
-        <p>Foreign freehold in a Thai condominium building runs against a 49% quota that can be
-        full. For a villa on land, foreign freehold of the land is not available at all, so the
-        structure of any "foreign freehold" offer needs reading before it is repeated. Take Thai
-        legal advice.</p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="section-head">
-      <h2>Photography</h2>
+      <h2>On the address</h2>
     </div>
     <div class="card">
-      <p>A photographer has supplied a Drive folder labelled L43, created on 1 June 2026 and
-      shared on 2 September 2026. It is attached to the desk record.</p>
-      <p><strong>No frame is published here yet.</strong> Nobody has opened the folder to confirm
-      the frames show this villa, and nobody has checked them for identifiable people — who have
-      to agree before their picture is published. Until both checks are done the folder stays out
-      of the client-visible build, and this brochure carries no photography rather than the wrong
-      photography.</p>
+      <p>Palm Jumeirah fronds are numbered plot by plot, so a villa number is an exact address.
+      Publishing one puts the owner on the map for anyone who reads the page.</p>
+      <p><strong>This brochure gives the frond and stops there.</strong> The plot number, the
+      title deed reference and the owner's identity stay on the desk record and out of every
+      client-facing document. A buyer gets the address when there is a reason to have it.</p>
     </div>
   </section>
 
   <section>
     <div class="section-head">
-      <h2>Before this goes to a buyer</h2>
-      <p class="standfirst">In order. The first two decide whether there is anything to sell.</p>
+      <h2>Before this becomes a brochure</h2>
     </div>
     <ul class="checks">
-      <li><strong>Establish who holds the instruction.</strong> The portal records the landlord as
-      the poster, but the listing arrived through a channel that also carries agency stock.
-      Confirm the property is still available, at what price, and on what terms Two Coasts may
-      introduce a buyer.</li>
-      <li><strong>Read the title deed.</strong> Establish what the stated foreign quota actually
-      is, in writing, and whether the building transfers with it. Thai counsel, not the lister.</li>
-      <li><strong>Confirm the area basis.</strong> The source does not say whether 567.3 sq.m is
-      internal, built-up or total. The price per sq.m inherits that assumption, so check it
-      against the building permit before any rate goes into a comparison.</li>
-      <li><strong>Ask why it has been listed since June 2024.</strong> Two years and two months on
-      a portal is the single most useful question to put to the owner.</li>
-      <li><strong>Review the photography</strong> for subject and for identifiable people, then
-      republish this page with the frames embedded.</li>
-      <li><strong>Establish the running costs.</strong> No common-area maintenance charge, sinking
-      fund or completion record is on file.</li>
+      <li><strong>Enter the specification</strong> — villa type, plot and built-up area,
+      bedrooms, bathrooms, orientation, pool and beach frontage.</li>
+      <li><strong>Enter the price</strong> and say whose figure it is: an owner's asking price and
+      an agent's guide are different things and should never read the same.</li>
+      <li><strong>Establish tenure from the title deed.</strong> Palm Jumeirah is a designated
+      freehold area, but that is a statement about the area, not proof of what this particular
+      deed says. Read it.</li>
+      <li><strong>Get the service charge</strong> per square foot and the current year's
+      statement, plus any outstanding balance on the plot.</li>
+      <li><strong>Review the photography</strong> for subject and for identifiable people, and
+      check no frame shows the villa number, a gate plate, or a neighbouring plate.</li>
+      <li><strong>Confirm the instruction</strong> — who holds it, on what terms, and whether it
+      is exclusive.</li>
     </ul>
   </section>
 
   <section>
-    <div class="section-head">
-      <h2>Open flags on this record</h2>
-      <p class="standfirst">Carried from the desk record, so nothing has to be remembered
-      separately.</p>
-    </div>
+    <div class="section-head"><h2>Enquiries</h2></div>
     <div class="card">
-      <div class="flag">
-        <div class="flag-head">
-          <h3>No instruction held, and “owner direct” is not certain</h3>
-          <span class="mark mark-stop">Blocking</span>
-        </div>
-        <p>Two Coasts has no mandate and no agreed fee. The desk shows this as owner direct
-        because the portal records the poster as the landlord — but the poster field and the
-        source channel are independent, and this listing's channel carries agency-posted stock
-        too. Establish who actually controls the instruction before approaching.</p>
-        <div class="values">
-          <span class="value">Posted by: landlord</span>
-          <span class="value">Source channel: flexstay</span>
-          <span class="value">First seen 24 June 2024</span>
-        </div>
-      </div>
-      <div class="flag">
-        <div class="flag-head">
-          <h3>Tenure stated, not proven</h3>
-          <span class="mark mark-stop">Blocking</span>
-        </div>
-        <p>Foreign quota is the lister's statement. Title deed and quota certificate not seen.</p>
-        <div class="values">
-          <span class="value">Listing states: foreigner quota</span>
-          <span class="value">Title deed: not seen</span>
-        </div>
-      </div>
-      <div class="flag">
-        <div class="flag-head">
-          <h3>The 44% discount headline is not safe to repeat</h3>
-          <span class="mark mark-claim">Corrected</span>
-        </div>
-        <p>The desk review opened on a 44.4% discount against seven size-band comparables. That
-        bucket mixes product tiers. Against the Laguna villa median the figure is 18.5%.</p>
-        <div class="values">
-          <span class="value">Review figure: 44.4%</span>
-          <span class="value">Defensible figure: 18.5%</span>
-        </div>
-      </div>
-      <div class="flag">
-        <div class="flag-head">
-          <h3>Size basis assumed</h3>
-          <span class="mark mark-claim">Unverified</span>
-        </div>
-        <p>567.3 sq.m is recorded as built-up because that is the corridor convention. The source
-        does not state a basis.</p>
-      </div>
-      <div class="flag">
-        <div class="flag-head">
-          <h3>Photography not reviewed</h3>
-          <span class="mark mark-claim">Unverified</span>
-        </div>
-        <p>Supplied Drive folder attached to the record, frames not opened, people-release check
-        not done.</p>
-      </div>
-      <div class="flag">
-        <div class="flag-head">
-          <h3>No feature list</h3>
-          <span class="mark mark-fact">By design</span>
-        </div>
-        <p>The sweep stores structured facts only and does not reproduce portal descriptions.
-        Rather than invent a feature list, this brochure has none.</p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="section-head"><h2>Arrange a viewing</h2></div>
-    <div class="card">
-      <p>Alex Whayman handles the Phuket end personally — the owner approach, the viewing, and the
-      title and quota checks set out above.</p>
+      <p>Alex Whayman handles this personally — the owner, the viewing, and the title and service
+      charge checks set out above.</p>
       <div class="contact">
         <a class="btn btn-primary" href="https://wa.me/66960260875">WhatsApp +66 96-026-0875</a>
-        <a class="btn" href="mailto:alex.whayman@gmail.com?subject=L43%20%E2%80%94%20The%20Teak%20Phuket%20Phase%202">Email</a>
+        <a class="btn" href="mailto:alex.whayman@gmail.com?subject=Palm%20Jumeirah%20frond%20villa">Email</a>
       </div>
     </div>
   </section>
@@ -646,15 +347,13 @@ td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
 
 <footer class="foot">
   <div class="wrap">
-    <p><strong>About this document.</strong> Compiled from structured listing facts collected from
-    PropertyScout on 1 September 2026, under the desk reference L43. Statements marked as the
-    lister's have not been independently verified. Nothing here is legal, tax or investment
-    advice, and no figure is a projection of what this property will earn.</p>
-    <p><strong>On tenure.</strong> Foreign freehold of land is not available in Thailand. Where a
-    villa is offered on a lease, Thai law registers that lease for a maximum of 30 years; any
-    longer term is a contractual renewal option granted by the lessor, not a registered right, and
-    its enforceability against a future landowner is unsettled. Request the title deed and the
-    registered lease, and take Thai legal advice, before relying on any tenure statement.</p>
+    <p><strong>About this document.</strong> A draft record for a private resale on the Palm
+    Jumeirah. Location is published to frond level only, by instruction. Nothing here is legal,
+    tax or investment advice, and no figure is a projection of what this property will earn.</p>
+    <p><strong>On title.</strong> Dubai property statements should be checked against the title
+    deed and the Dubai Land Department record before a buyer relies on them. Service charges,
+    outstanding balances and any restriction on the plot are established from the developer and
+    the DLD, not from marketing material.</p>
     <p>Two Coasts Realty Partners · <span class="credentials">RERA Licence BRN 33206 · NFOPP ARLA
     qualified</span> · twocoastsrealty.com</p>
   </div>

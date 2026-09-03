@@ -75,6 +75,38 @@ check("no vendor ref pattern in the page", () => {
   if (m) throw new Error(`found ${[...new Set(m)].join(", ")}`);
 });
 
+// The contact firewall has no pattern for an address, so this is its own check.
+// See CLAUDE.md: published material gives the community and at most the frond.
+// The desk record is allowed the exact address; the page is not.
+console.log("\nAddress rule (published page)");
+const ADDRESS_PATTERNS = [
+  [/\bL\s?43\b/i, "the reference L43 — it encodes frond and plot"],
+  [/\bvilla\s*(?:no\.?|number|#)?\s*43\b/i, "a villa number"],
+  [/\b(?:plot|unit)\s*(?:no\.?|number|#)?\s*\d+\b/i, "a plot or unit number"],
+  [/\bfrond\s+[A-Z]\s*[-–,]?\s*\d+\b/i, "a frond-and-plot pair"],
+  [/\b\d+\s+(?:street|st\.?|road|rd\.?|avenue|ave\.?)\b/i, "a street address"],
+];
+check("no exact address in the page", () => {
+  const hits = [];
+  for (const [re, what] of ADDRESS_PATTERNS) {
+    const m = html.match(new RegExp(re.source, "gi"));
+    if (m) hits.push(`${what} → ${[...new Set(m)].join(", ")}`);
+  }
+  if (hits.length) throw new Error(hits.join("\n"));
+});
+
+// Control: the desk record does carry the address, so the same scan must find it there.
+// If it does not, the patterns have stopped matching and the check above proves nothing.
+const recRaw = readFileSync(resolve(here, "data/L43.json"), "utf8");
+const recHits = ADDRESS_PATTERNS.some(([re]) => re.test(recRaw));
+if (recHits) {
+  console.log("  PASS  control: the same scan does find the address in data/L43.json");
+} else {
+  console.log("  FAIL  control: the scan found no address in the desk record either —");
+  console.log("        the patterns are not matching, so the page check means nothing");
+  failures++;
+}
+
 const mb = Buffer.byteLength(html) / 1024 / 1024;
 console.log(`\nPage budget\n  ${mb.toFixed(3)} MB against the 15 MB build limit`);
 if (mb > 15) {
