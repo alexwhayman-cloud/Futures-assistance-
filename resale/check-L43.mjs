@@ -81,16 +81,49 @@ check("no vendor ref pattern in the page", () => {
 console.log("\nAddress rule (published page)");
 const ADDRESS_PATTERNS = [
   [/\bL\s?43\b/i, "the reference L43 — it encodes frond and plot"],
+  [/\bPJFR[A-Z]\s?\d{2,3}\b/i, "a Palm Jumeirah unit code (ours or a comparable's)"],
   [/\bvilla\s*(?:no\.?|number|#)?\s*43\b/i, "a villa number"],
   [/\b(?:plot|unit)\s*(?:no\.?|number|#)?\s*\d+\b/i, "a plot or unit number"],
   [/\bfrond\s+[A-Z]\s*[-–,]?\s*\d+\b/i, "a frond-and-plot pair"],
   [/\b\d+\s+(?:street|st\.?|road|rd\.?|avenue|ave\.?)\b/i, "a street address"],
+];
+
+// Third-party personal data from the source registers. The owner's name is not written
+// here — naming it to ban it would put it in the repo — so this catches the shapes:
+// UAE phone numbers and any non-Alex email. Alex's own details are stripped first,
+// exactly as contactFirewall does with allowOwn.
+const PII_PATTERNS = [
+  [/\b971[\s|)(-]?\d[\s\d|()-]{6,}/, "a UAE telephone number"],
+  [/\b0?5\d[\s-]?\d{3}[\s-]?\d{4}\b/, "a UAE mobile number"],
+  [/@emirates\.net\.ae\b/i, "an owner email address"],
 ];
 check("no exact address in the page", () => {
   const hits = [];
   for (const [re, what] of ADDRESS_PATTERNS) {
     const m = html.match(new RegExp(re.source, "gi"));
     if (m) hits.push(`${what} → ${[...new Set(m)].join(", ")}`);
+  }
+  if (hits.length) throw new Error(hits.join("\n"));
+});
+
+console.log("\nThird-party personal data");
+check("no owner contact details in the page", () => {
+  let scan = html;
+  for (const re of [/\+66[\s-]?96[\s-]?026[\s-]?0875/g, /\+?66960260875/g,
+                    /alex\.whayman@gmail\.com/gi]) scan = scan.replace(re, "");
+  const hits = [];
+  for (const [re, what] of PII_PATTERNS) {
+    const m = scan.match(new RegExp(re.source, "gi"));
+    if (m) hits.push(`${what} → ${[...new Set(m)].slice(0, 3).join(", ")}`);
+  }
+  if (hits.length) throw new Error(hits.join("\n"));
+});
+check("no owner contact details in the desk record", () => {
+  const raw = readFileSync(resolve(here, "data/L43.json"), "utf8");
+  const hits = [];
+  for (const [re, what] of PII_PATTERNS) {
+    const m = raw.match(new RegExp(re.source, "gi"));
+    if (m) hits.push(`${what} → ${[...new Set(m)].slice(0, 3).join(", ")}`);
   }
   if (hits.length) throw new Error(hits.join("\n"));
 });

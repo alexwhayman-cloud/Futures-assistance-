@@ -1,16 +1,20 @@
-<title>Palm Jumeirah Frond Villa</title>
+<title>Frond L Signature Villa</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600;700&display=swap">
 
 <style>
-/* Two Coasts — Dubai resale brochure.
+/* Two Coasts — Dubai desk sheet.
    Palette from brand/BRANDING.md: navy #0E2A3D, sand #C9A66B, teal #3F7C6B.
    Type follows the hub's Newsreader / Inter pairing.
    Every colour is declared on bare :root first, then redefined per theme — never only
    inside a media query, which is how a page ends up rendering one theme's text on the
-   other theme's ground. */
+   other theme's ground.
+
+   Chart colour: ONE hue. The sand/teal pair fails the categorical validator (normal-vision
+   ΔE 13.0, below the 15 floor), so the bars are a single series in the teal that already
+   means "recorded fact" in this house style, with direct value labels in text tokens. */
 
 :root {
   --ground:      #F4F7F8;
@@ -149,6 +153,13 @@ a:focus-visible {
 
 .standfirst { color: var(--ink-2); max-width: var(--readw); font-size: 1.01rem; }
 
+.meta-row {
+  display: flex; flex-wrap: wrap; gap: 10px 26px;
+  font-size: 0.84rem; color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.meta-row b { color: var(--ink); font-weight: 600; }
+
 /* ---------- the verification spine ---------- */
 
 .mark {
@@ -195,11 +206,21 @@ section { padding: 0 0 44px; }
 
 .table-scroll { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--line); }
 table { border-collapse: collapse; width: 100%; font-size: 0.9rem; background: var(--surface); }
+caption { text-align: left; padding: 0 0 8px; font-size: 0.84rem; color: var(--ink-3); }
 th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
-th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-3); font-weight: 600; }
+thead th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-3); font-weight: 600; }
 tbody th { font-weight: 600; color: var(--ink-2); text-transform: none; font-size: 0.9rem; letter-spacing: 0; white-space: nowrap; }
 tr:last-child td, tr:last-child th { border-bottom: 0; }
+td.num, th.num { font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right; }
+thead th.num { text-align: right; }
 td.pending { color: var(--ink-3); }
+
+/* ---------- chart ---------- */
+
+.chart-card { display: flex; flex-direction: column; gap: 10px; }
+.chart-scroll { overflow-x: auto; }
+.chart { display: block; width: 100%; min-width: 560px; height: auto; }
+.chart-note { font-size: 0.82rem; color: var(--ink-3); max-width: var(--readw); }
 
 /* ---------- checklist ---------- */
 
@@ -253,10 +274,16 @@ td.pending { color: var(--ink-3); }
       <span class="brand-tag">Two Coasts. One Introduction.</span>
     </div>
     <hr class="horizon">
-    <span class="eyebrow">Dubai · Palm Jumeirah · Frond villa</span>
-    <h1>Frond villa, Palm Jumeirah</h1>
-    <p class="standfirst">A private resale on one of the Palm's residential fronds. Location is
-    given to frond level and no further, by instruction.</p>
+    <span class="eyebrow">Dubai · Palm Jumeirah · Frond L</span>
+    <h1>Signature Villa, Frond L</h1>
+    <p class="standfirst">A six-bedroom Signature Villa on a Palm Jumeirah frond, held by the same
+    owner since 2007. Not currently for sale. This is the sheet for approaching it.</p>
+    <div class="meta-row">
+      <span><b>6</b> bed</span>
+      <span><b>7,000 sq ft</b> built-up</span>
+      <span><b>13,000 sq ft</b> plot</span>
+      <span>Gallery View model</span>
+    </div>
   </div>
 </header>
 
@@ -264,34 +291,34 @@ td.pending { color: var(--ink-3); }
 
   <section>
     <div class="spine is-stop">
-      <div><span class="mark mark-stop">Draft — not for circulation</span></div>
-      <p><strong>This page is a shell.</strong> The property has been identified and the
-      photography is in hand, but no specification, price or tenure detail has been entered yet.
-      Nothing below is a figure a buyer should act on, because there are no figures yet.</p>
-      <p>It is published so the link is stable while the detail is assembled. Do not send it to a
-      buyer in this state.</p>
+      <div><span class="mark mark-stop">Not a live listing</span></div>
+      <p><strong>There is no sale instruction, and no asking price exists.</strong> The villa does
+      not appear in any sale listing on file. It was marketed <em>to let</em> in February 2025, and
+      the registry shows the same owner since September 2007 with no sale recorded in the Land
+      Department data covering January 2018 to December 2024.</p>
+      <p>So this is an owner-approach sheet: what the villa is, and what its type has actually
+      transacted at. It is not a brochure to send a buyer, because there is nothing yet to sell.</p>
     </div>
   </section>
 
   <section>
-    <div class="section-head">
-      <h2>What is settled</h2>
-    </div>
+    <div class="section-head"><h2>The villa</h2></div>
     <div class="table-scroll">
       <table>
         <tbody>
-          <tr><th scope="row">Location</th><td>Palm Jumeirah — L frond</td></tr>
-          <tr><th scope="row">Emirate</th><td>Dubai</td></tr>
-          <tr><th scope="row">Type</th><td>Villa, frond plot</td></tr>
-          <tr><th scope="row">Address detail</th><td>Withheld by instruction — frond level is the
-          maximum published, and the villa number is never published</td></tr>
-          <tr><th scope="row">Photography</th><td>Supplied and held. Not yet reviewed or placed.</td></tr>
-          <tr><th scope="row">Asking price</th><td class="pending">Not yet entered</td></tr>
-          <tr><th scope="row">Plot and built-up area</th><td class="pending">Not yet entered</td></tr>
-          <tr><th scope="row">Bedrooms and bathrooms</th><td class="pending">Not yet entered</td></tr>
-          <tr><th scope="row">Villa type</th><td class="pending">Not yet entered</td></tr>
-          <tr><th scope="row">Tenure and title</th><td class="pending">Not yet entered</td></tr>
-          <tr><th scope="row">Service charge</th><td class="pending">Not yet entered</td></tr>
+          <tr><th scope="row">Community</th><td>Palm Jumeirah, Dubai</td></tr>
+          <tr><th scope="row">Frond</th><td>L</td></tr>
+          <tr><th scope="row">Type</th><td>Signature Villa</td></tr>
+          <tr><th scope="row">Model</th><td>Gallery View, Arabic elevation</td></tr>
+          <tr><th scope="row">Bedrooms</th><td class="num">6</td></tr>
+          <tr><th scope="row">Built-up area</th><td class="num">7,000 sq ft</td></tr>
+          <tr><th scope="row">Plot</th><td class="num">13,000 sq ft</td></tr>
+          <tr><th scope="row">Held since</th><td>September 2007, by the original purchaser</td></tr>
+          <tr><th scope="row">Sale history</th><td>None recorded, January 2018 to December 2024</td></tr>
+          <tr><th scope="row">Bathrooms</th><td class="pending">Not on file</td></tr>
+          <tr><th scope="row">Tenure and title</th><td class="pending">Not read — see below</td></tr>
+          <tr><th scope="row">Service charge</th><td class="pending">Not on file</td></tr>
+          <tr><th scope="row">Condition</th><td class="pending">Not inspected</td></tr>
         </tbody>
       </table>
     </div>
@@ -299,46 +326,207 @@ td.pending { color: var(--ink-3); }
 
   <section>
     <div class="section-head">
-      <h2>On the address</h2>
+      <h2>What the type transacts at</h2>
+      <p class="standfirst">Six- and five-bedroom Signature Villas on the standard plot, sold
+      across the Palm during 2024. These are registered transactions, not asking prices — the
+      distinction the rest of this market blurs.</p>
     </div>
-    <div class="card">
-      <p>Palm Jumeirah fronds are numbered plot by plot, so a villa number is an exact address.
-      Publishing one puts the owner on the map for anyone who reads the page.</p>
-      <p><strong>This brochure gives the frond and stops there.</strong> The plot number, the
-      title deed reference and the owner's identity stay on the desk record and out of every
-      client-facing document. A buyer gets the address when there is a reason to have it.</p>
+
+    <div class="stack">
+      <div class="card chart-card">
+        <div class="chart-scroll">
+          <svg class="chart" viewBox="0 0 720 268" role="img"
+               aria-label="Registered 2024 sales of Signature Villas on the standard plot: Frond M six-bed 61.5 million dirhams, Frond D five-bed 60 million, Frond F six-bed 59 million, Frond P six-bed 58 million, Frond K five-bed 53 million.">
+            <!-- gridlines -->
+            <line x1="302.9" y1="14" x2="302.9" y2="220" stroke="var(--line-soft)" stroke-width="1" />
+            <line x1="445.7" y1="14" x2="445.7" y2="220" stroke="var(--line-soft)" stroke-width="1" />
+            <line x1="588.6" y1="14" x2="588.6" y2="220" stroke="var(--line-soft)" stroke-width="1" />
+
+            <!-- bars, one series, 4px rounded data-ends anchored to the baseline -->
+            <path d="M160,20 H595.3 A4,4 0 0 1 599.3,24 V42 A4,4 0 0 1 595.3,46 H160 Z" fill="var(--teal)" />
+            <path d="M160,62 H584.6 A4,4 0 0 1 588.6,66 V84 A4,4 0 0 1 584.6,88 H160 Z" fill="var(--teal)" />
+            <path d="M160,104 H577.4 A4,4 0 0 1 581.4,108 V126 A4,4 0 0 1 577.4,130 H160 Z" fill="var(--teal)" />
+            <path d="M160,146 H570.3 A4,4 0 0 1 574.3,150 V168 A4,4 0 0 1 570.3,172 H160 Z" fill="var(--teal)" />
+            <path d="M160,188 H534.6 A4,4 0 0 1 538.6,192 V210 A4,4 0 0 1 534.6,214 H160 Z" fill="var(--teal)" />
+
+            <!-- row labels -->
+            <text x="150" y="37"  fill="var(--ink-2)" font-family="Inter, sans-serif" font-size="12" text-anchor="end">Frond M · 6 bed · May</text>
+            <text x="150" y="79"  fill="var(--ink-2)" font-family="Inter, sans-serif" font-size="12" text-anchor="end">Frond D · 5 bed · Jul</text>
+            <text x="150" y="121" fill="var(--ink-2)" font-family="Inter, sans-serif" font-size="12" text-anchor="end">Frond F · 6 bed · May</text>
+            <text x="150" y="163" fill="var(--ink-2)" font-family="Inter, sans-serif" font-size="12" text-anchor="end">Frond P · 6 bed · Aug</text>
+            <text x="150" y="205" fill="var(--ink-2)" font-family="Inter, sans-serif" font-size="12" text-anchor="end">Frond K · 5 bed · Apr</text>
+
+            <!-- direct value labels, in text tokens not the series colour -->
+            <text x="609.3" y="37"  fill="var(--ink)" font-family="Inter, sans-serif" font-size="12.5" font-weight="600">61.5</text>
+            <text x="598.6" y="79"  fill="var(--ink)" font-family="Inter, sans-serif" font-size="12.5" font-weight="600">60.0</text>
+            <text x="591.4" y="121" fill="var(--ink)" font-family="Inter, sans-serif" font-size="12.5" font-weight="600">59.0</text>
+            <text x="584.3" y="163" fill="var(--ink)" font-family="Inter, sans-serif" font-size="12.5" font-weight="600">58.0</text>
+            <text x="548.6" y="205" fill="var(--ink)" font-family="Inter, sans-serif" font-size="12.5" font-weight="600">53.0</text>
+
+            <!-- baseline -->
+            <line x1="160" y1="14" x2="160" y2="220" stroke="var(--line)" stroke-width="1.5" />
+
+            <!-- axis -->
+            <text x="160"   y="240" fill="var(--ink-3)" font-family="Inter, sans-serif" font-size="11" text-anchor="middle">0</text>
+            <text x="302.9" y="240" fill="var(--ink-3)" font-family="Inter, sans-serif" font-size="11" text-anchor="middle">20</text>
+            <text x="445.7" y="240" fill="var(--ink-3)" font-family="Inter, sans-serif" font-size="11" text-anchor="middle">40</text>
+            <text x="588.6" y="240" fill="var(--ink-3)" font-family="Inter, sans-serif" font-size="11" text-anchor="middle">60</text>
+            <text x="160"   y="260" fill="var(--ink-3)" font-family="Inter, sans-serif" font-size="11">AED, millions</text>
+          </svg>
+        </div>
+        <p class="chart-note">Land Department transaction register, 2024. Plot approximately 1,245
+        sq m with 650 sq m built — the same specification as this villa. Frond letters shown;
+        plot numbers deliberately not.</p>
+      </div>
+
+      <div class="spine is-fact">
+        <div><span class="mark mark-fact">Registered transactions</span></div>
+        <p>The type's 2024 range is <strong>AED 53M to 61.5M</strong>. That is the honest anchor
+        for a conversation with this owner — a recorded price for the same villa type on the same
+        plot size, not a marketing figure.</p>
+      </div>
     </div>
   </section>
 
   <section>
     <div class="section-head">
-      <h2>Before this becomes a brochure</h2>
+      <h2>What Frond L is asking</h2>
+      <p class="standfirst">Asking prices are what sellers hope for; the transactions above are
+      what buyers paid. Both belong on the page, labelled for what they are.</p>
+    </div>
+    <div class="stack">
+      <div class="table-scroll">
+        <table>
+          <caption>Frond L villas offered for sale during 2025, by asking price.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Asking</th>
+              <th scope="col">When</th>
+              <th scope="col">Note</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="num">AED 75,000,000</td><td>March 2025</td><td>Frond L villa</td></tr>
+            <tr><td class="num">AED 70,000,000</td><td>March 2025</td><td>Frond L villa</td></tr>
+            <tr><td class="num">AED 69,000,000</td><td>February 2025</td><td>Re-listed March</td></tr>
+            <tr><td class="num">AED 66,900,000</td><td>2025</td><td>Repeatedly offered from 63,000,000</td></tr>
+            <tr><td class="num">AED 63,000,000</td><td>2025</td><td>Frond L villa</td></tr>
+            <tr><td class="num">AED 65,000,000</td><td>2025</td><td>Reduced to 61,500,000</td></tr>
+            <tr><td class="num">AED 53,000,000</td><td>2025</td><td>Frond L villa</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="spine">
+        <div><span class="mark mark-claim">Read with care</span></div>
+        <p>In the source sheet the unit code and the listing link disagree on several rows, so a
+        given price cannot be tied to a given villa with confidence. <strong>Treat this as a range,
+        not a row-by-row record.</strong> The shape is what matters: Frond L was asking roughly
+        AED 53M to 75M in 2025, against a type that transacted at 53M to 61.5M in 2024.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Frond L, over time</h2>
+      <p class="standfirst">Registered sales of Signature-sized plots on this frond. The run from
+      2020 to 2024 is the context any owner conversation happens inside.</p>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <caption>Land Department register. Plot numbers withheld.</caption>
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col" class="num">Price</th>
+            <th scope="col" class="num">Plot</th>
+            <th scope="col" class="num">AED / sq ft of plot</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>February 2024</td><td class="num">88,000,000</td><td class="num">14,667 sq ft</td><td class="num">6,000</td></tr>
+          <tr><td>June 2023</td><td class="num">45,500,000</td><td class="num">13,404 sq ft</td><td class="num">3,395</td></tr>
+          <tr><td>November 2022</td><td class="num">39,000,000</td><td class="num">13,398 sq ft</td><td class="num">2,911</td></tr>
+          <tr><td>December 2021</td><td class="num">45,000,000</td><td class="num">13,398 sq ft</td><td class="num">3,359</td></tr>
+          <tr><td>December 2021</td><td class="num">35,500,000</td><td class="num">13,398 sq ft</td><td class="num">2,650</td></tr>
+          <tr><td>March 2021</td><td class="num">19,940,000</td><td class="num">13,404 sq ft</td><td class="num">1,488</td></tr>
+          <tr><td>September 2020</td><td class="num">17,500,000</td><td class="num">13,398 sq ft</td><td class="num">1,306</td></tr>
+          <tr><td>July 2020</td><td class="num">10,520,000</td><td class="num">13,398 sq ft</td><td class="num">785</td></tr>
+          <tr><td>November 2018</td><td class="num">22,000,000</td><td class="num">13,404 sq ft</td><td class="num">1,641</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>The rental record</h2>
+    </div>
+    <div class="card">
+      <p>This villa was offered to let in February 2025 at <strong>AED 5,000,000 a year</strong>,
+      raised within a fortnight to <strong>AED 5,500,000</strong>, through several agencies at
+      once. Comparable Frond L villas asked AED 6,500,000 to 7,500,000 over the same period.</p>
+      <p>Whether it let, and at what, is not on file. That is worth knowing before an approach: an
+      owner with a tenant in place and an owner with an empty villa are two different
+      conversations.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Title</h2>
+    </div>
+    <div class="spine is-stop">
+      <div><span class="mark mark-stop">Not established</span></div>
+      <p>Nobody has read the title deed. Palm Jumeirah is a designated freehold area, but that is
+      a fact about the area, not proof of what this deed says.</p>
+      <p>Before any tenure statement is made: read the deed, check the Land Department record for
+      mortgages and restrictions, and get the service charge position including any outstanding
+      balance on the plot.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Photography</h2>
+    </div>
+    <div class="card">
+      <p>A photographer has supplied a folder for this villa, shared in September 2026. It is held
+      on the desk record and has not been opened.</p>
+      <p><strong>No frame is published here.</strong> Three checks come first: that the frames show
+      this villa, that no identifiable person appears without their agreement, and that no frame
+      shows the villa number, a gate plate or a neighbour's plate. The last is a publication rule,
+      not a preference.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Before an approach</h2>
     </div>
     <ul class="checks">
-      <li><strong>Enter the specification</strong> — villa type, plot and built-up area,
-      bedrooms, bathrooms, orientation, pool and beach frontage.</li>
-      <li><strong>Enter the price</strong> and say whose figure it is: an owner's asking price and
-      an agent's guide are different things and should never read the same.</li>
-      <li><strong>Establish tenure from the title deed.</strong> Palm Jumeirah is a designated
-      freehold area, but that is a statement about the area, not proof of what this particular
-      deed says. Read it.</li>
-      <li><strong>Get the service charge</strong> per square foot and the current year's
-      statement, plus any outstanding balance on the plot.</li>
-      <li><strong>Review the photography</strong> for subject and for identifiable people, and
-      check no frame shows the villa number, a gate plate, or a neighbouring plate.</li>
-      <li><strong>Confirm the instruction</strong> — who holds it, on what terms, and whether it
-      is exclusive.</li>
+      <li><strong>Establish whether it is even available.</strong> Nineteen years with one owner,
+      and a rental campaign in 2025, does not read as a seller. Ask before assuming.</li>
+      <li><strong>Find out what happened to the letting.</strong> Tenanted or empty changes both
+      the approach and the price.</li>
+      <li><strong>Read the title deed</strong> and check the Land Department record for mortgages
+      and restrictions.</li>
+      <li><strong>Get the service charge</strong> per square foot, the current year's statement,
+      and any outstanding balance.</li>
+      <li><strong>Confirm the plot and built-up areas</strong> against the deed. The 7,000 and
+      13,000 sq ft figures come from a developer register, not from a survey.</li>
+      <li><strong>Review the photography</strong> for subject, for people, and for plates.</li>
     </ul>
   </section>
 
   <section>
     <div class="section-head"><h2>Enquiries</h2></div>
     <div class="card">
-      <p>Alex Whayman handles this personally — the owner, the viewing, and the title and service
-      charge checks set out above.</p>
+      <p>Alex Whayman handles this personally — the owner approach, the viewing, and the title and
+      service charge checks set out above.</p>
       <div class="contact">
         <a class="btn btn-primary" href="https://wa.me/66960260875">WhatsApp +66 96-026-0875</a>
-        <a class="btn" href="mailto:alex.whayman@gmail.com?subject=Palm%20Jumeirah%20frond%20villa">Email</a>
+        <a class="btn" href="mailto:alex.whayman@gmail.com?subject=Palm%20Jumeirah%20Frond%20L%20Signature%20Villa">Email</a>
       </div>
     </div>
   </section>
@@ -347,13 +535,16 @@ td.pending { color: var(--ink-3); }
 
 <footer class="foot">
   <div class="wrap">
-    <p><strong>About this document.</strong> A draft record for a private resale on the Palm
-    Jumeirah. Location is published to frond level only, by instruction. Nothing here is legal,
-    tax or investment advice, and no figure is a projection of what this property will earn.</p>
-    <p><strong>On title.</strong> Dubai property statements should be checked against the title
-    deed and the Dubai Land Department record before a buyer relies on them. Service charges,
-    outstanding balances and any restriction on the plot are established from the developer and
-    the DLD, not from marketing material.</p>
+    <p><strong>About this document.</strong> Compiled from developer and Land Department registers
+    and from agency listing records. Location is published to frond level only, by instruction: the
+    plot number, the title deed reference and the owner's identity stay on the desk record. The
+    same courtesy is extended to every comparable on this page — frond letters are shown, plot
+    numbers are not.</p>
+    <p><strong>On the figures.</strong> Transactions and asking prices are labelled separately and
+    should never be read as one series. Sale prices are as registered; areas come from a developer
+    register rather than a survey; the per-square-foot rates are arithmetic on those two, at
+    10.7639 sq ft to the square metre. Nothing here is a valuation, and nothing is legal, tax or
+    investment advice.</p>
     <p>Two Coasts Realty Partners · <span class="credentials">RERA Licence BRN 33206 · NFOPP ARLA
     qualified</span> · twocoastsrealty.com</p>
   </div>

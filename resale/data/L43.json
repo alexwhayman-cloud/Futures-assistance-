@@ -1,28 +1,65 @@
 {
-  "_note": "Desk record for L43. INTERNAL — this file carries the exact address; the published brochure must not. See CLAUDE.md at the repo root for the publication rule. Fields are null where nothing has been established: null means 'not known', never 'none'.",
+  "_note": "Desk record for L43. INTERNAL — it carries the exact address. The published brochure must not; see CLAUDE.md. Owner name, telephone numbers and email addresses are deliberately NOT copied into this repo: they are third-party personal data and they live in the source registers named under provenance.sources. null means 'not known', never 'none'.",
 
   "_publication": {
-    "maxPublishedLocation": "L frond, Palm Jumeirah",
+    "maxPublishedLocation": "Frond L, Palm Jumeirah",
     "preferredPublishedLocation": "Palm Jumeirah",
     "neverPublish": [
-      "villa/plot number",
+      "villa/plot number, ours or a comparable's",
+      "the unit code PJFRL043",
       "full street address",
       "title deed reference",
-      "owner identity",
+      "owner identity or contact details",
       "any photograph showing a villa number, gate plate or neighbouring plate"
     ]
   },
 
   "provenance": {
     "reference": "L43",
+    "unitCode": "PJFRL043",
     "meaning": "Frond L, villa 43, Palm Jumeirah, Dubai",
-    "confirmedBy": "Owner instruction, 3 September 2026",
+    "confirmedBy": "Owner instruction, 3 September 2026, corroborated by four independent registers",
+    "sources": [
+      {
+        "file": "Palm Jumeirah 140925.xlsx",
+        "driveId": "1Ip_WwAanTqcXJlUT0rHzyHYnIHI4ItGK",
+        "sheet": "Sheet1",
+        "row": 2549,
+        "gives": "Property name 'The Crown - Fronds', 6 beds, BUA 7000, plot 13000, booking date 2007-09-25. Also owner name, three telephone numbers and an email — NOT copied here."
+      },
+      {
+        "file": "Palm Villa List 2022.xlsx",
+        "driveId": "18oVG_Q7ACuPOgtAUOIdPvE3gWnxUXGwb",
+        "sheet": "FROND L row 43, also ALL FRONDS row 861",
+        "gives": "Model 'Gallery_View', elevation 'Arabic', status flag 'Green'. No header row — columns inferred positionally against the file above."
+      },
+      {
+        "file": "Palm-Villas.xlsx",
+        "driveId": "1TJOJD107ZYOF2_klwBApRUA_p-5TYDsR",
+        "sheet": "Sheet1",
+        "row": 1234,
+        "gives": "6 B/R, type Villa, plot ref PJFRL043-0."
+      },
+      {
+        "file": "PJ VILLAS - SALE and RENT.xlsx",
+        "driveId": "1U-SQ3Bf4IUV2q3XN2aHn-xbKGg70uVqv",
+        "sheet": "Hubspot List row 1577; RENT sheet",
+        "gives": "HubSpot record 'PJ Signature Villas Frond L 043', sublocation 'Signature Villas Frond L'. 2025 rental asks. NOT present on the SALE sheet."
+      },
+      {
+        "file": "Palm Jumeirah (Special 2025).xlsx",
+        "driveId": "1974TfC8srXiWz8jtxrpj6jrSw6lGSgp7",
+        "gives": "DLD transaction register 2018-01-04 to 2024-12. PJFRL043 does not appear at all — no recorded sale in that window."
+      }
+    ],
+    "ownerDetailsLocation": "Owner name, telephone numbers, email and nationality are in the first, second and third files above. They are not reproduced in this repo or in any published output.",
     "photography": {
       "driveFolder": "https://drive.google.com/drive/folders/1H0uRgJOpDNugSgPPmj1mWnxNjh6wp8Nk",
       "folderLabel": "L43",
       "suppliedBy": "photographer.ramee@gmail.com",
       "folderCreated": "2026-06-01",
       "sharedWithAlex": "2026-09-02",
+      "corroboration": "The photographer's address and the registered owner's email share the same business name, which supports the folder being this villa. Not proof — the frames still have to be opened.",
       "framesReviewed": false,
       "peopleReleaseChecked": false,
       "platesChecked": false
@@ -31,31 +68,49 @@
 
   "listing": {
     "id": "L43",
-    "name": "Frond villa, Palm Jumeirah",
-    "publishedLocation": "Palm Jumeirah — L frond",
+    "name": "Signature Villa, Frond L",
+    "publishedLocation": "Frond L, Palm Jumeirah",
     "market": "Dubai",
     "community": "Palm Jumeirah",
     "frond": "L",
     "segment": "Villa",
-    "status": null,
+    "villaType": "Signature Villa",
+    "model": "Gallery View",
+    "elevation": "Arabic",
+    "status": "not-for-sale",
 
     "via": null,
+    "instructionHeld": false,
     "listedAt": null,
-    "lastVerifiedAt": null,
+    "lastVerifiedAt": "2026-09-03",
     "vendorContact": null,
 
-    "beds": null,
+    "beds": 6,
     "bathrooms": null,
     "floors": null,
-    "villaType": null,
-    "sizeSqft": null,
-    "sizeBasis": null,
-    "plotSqft": null,
+    "sizeSqft": 7000,
+    "sizeBasis": "built-up",
+    "plotSqft": 13000,
+    "sizeNote": "Developer register figures, not a survey. The DLD record for this villa type gives 650.32 sq m built (≈7,000 sq ft) on a 1,244–1,246 sq m plot (≈13,398–13,415 sq ft).",
 
     "price": null,
     "pricePerSqft": null,
     "priceBasis": "on-application",
     "currency": "AED",
+    "priceNote": "No asking price exists — the villa is not offered for sale. The 2024 transaction range for the same type is AED 53,000,000–61,500,000.",
+
+    "heldSince": "2007-09-25",
+    "saleHistory": "None recorded in the DLD register covering January 2018 to December 2024.",
+
+    "rental": {
+      "askedAt": [
+        { "date": "2025-02-11", "annualAed": 5000000 },
+        { "date": "2025-02-18", "annualAed": 5500000 },
+        { "date": "2025-02-20", "annualAed": 5500000 }
+      ],
+      "note": "Marketed through several agencies simultaneously in February 2025. Whether it let, and at what, is not on file.",
+      "frondLComparableAsks": "AED 6,500,000–7,500,000 over the same period."
+    },
 
     "ownership": null,
     "tenure": {
@@ -76,6 +131,33 @@
     "beachFrontage": null,
     "orientation": null,
 
+    "comparables": {
+      "basis": "DLD transaction register, Signature Villas on the standard plot (≈1,245 sq m, 650.32 sq m built), calendar 2024. Frond letters only — comparables get the same address courtesy as the subject.",
+      "sales2024": [
+        { "frond": "M", "date": "2024-05-08", "beds": 6, "aed": 61500000 },
+        { "frond": "D", "date": "2024-07-31", "beds": 5, "aed": 60000000 },
+        { "frond": "F", "date": "2024-05-14", "beds": 6, "aed": 59000000 },
+        { "frond": "P", "date": "2024-08-01", "beds": 6, "aed": 58000000 },
+        { "frond": "K", "date": "2024-04-25", "beds": 5, "aed": 53000000 }
+      ],
+      "excluded": "One Frond M sale at AED 135,000,000 on 2024-10-22 is a custom villa on a different footprint (1,203.52 sq m built) and is not comparable.",
+      "frondLPlotSales": [
+        { "date": "2024-02-26", "aed": 88000000, "plotSqft": 14667 },
+        { "date": "2023-06-12", "aed": 45500000, "plotSqft": 13404 },
+        { "date": "2022-11-14", "aed": 39000000, "plotSqft": 13398 },
+        { "date": "2021-12-07", "aed": 45000000, "plotSqft": 13398 },
+        { "date": "2021-12-14", "aed": 35500000, "plotSqft": 13398 },
+        { "date": "2021-03-08", "aed": 19940000, "plotSqft": 13404 },
+        { "date": "2020-09-03", "aed": 17500000, "plotSqft": 13398 },
+        { "date": "2020-07-07", "aed": 10520000, "plotSqft": 13398 },
+        { "date": "2018-11-01", "aed": 22000000, "plotSqft": 13404 }
+      ],
+      "frondLAsks2025": {
+        "range": "AED 53,000,000–75,000,000",
+        "caveat": "In the source sheet the unit code and the listing URL disagree on several rows, so a price cannot be tied to a specific villa. Use as a range only."
+      }
+    },
+
     "features": [],
     "nearby": [],
 
@@ -91,28 +173,40 @@
 
     "flags": [
       {
-        "field": "all",
-        "summary": "No specification, price or tenure on file",
-        "detail": "Nothing about this villa has been entered beyond its location and the existence of the photography. The brochure is published as a shell so the link is stable, and says on its face that it is not for circulation. It must not go to a buyer until the specification, price and title position are entered.",
-        "values": []
+        "field": "status",
+        "summary": "Not for sale — no instruction, no asking price",
+        "detail": "The villa appears on no sale listing on file, and does not appear in the DLD sale register between January 2018 and December 2024. It was marketed to let in February 2025. Nineteen years with one owner and a recent rental campaign does not read as a seller. Establish availability before anything else.",
+        "values": ["Held since September 2007", "No recorded sale 2018–2024", "Let campaign February 2025"]
       },
       {
         "field": "tenure",
         "summary": "Title not read",
-        "detail": "Palm Jumeirah is a designated freehold area, but that is a fact about the area, not proof of what this deed says. Read the title deed and check the DLD record for restrictions, mortgages and outstanding service charge before any tenure statement is made.",
+        "detail": "Palm Jumeirah is a designated freehold area, but that is a fact about the area, not proof of what this deed says. Read the deed and check the DLD record for mortgages, restrictions and outstanding service charge before making any tenure statement.",
         "values": []
+      },
+      {
+        "field": "sizeSqft",
+        "summary": "Areas come from a developer register, not a survey",
+        "detail": "7,000 sq ft built and 13,000 sq ft plot are the register's round figures. The DLD record for the type gives 650.32 sq m built on a 1,244–1,246 sq m plot, which converts to ≈7,000 and ≈13,398–13,415 sq ft. Confirm against the deed before either number is used in a price per square foot a buyer relies on.",
+        "values": ["Register: 7,000 / 13,000 sq ft", "DLD type record: 650.32 / 1,244–1,246 sq m"]
       },
       {
         "field": "assets",
         "summary": "Photography not reviewed",
-        "detail": "The supplied Drive folder has not been opened. Three checks are outstanding: that the frames show this villa, that no identifiable person appears without agreement, and that no frame shows the villa number, a gate plate or a neighbour's plate. The last one is a publication rule, not a preference.",
+        "detail": "The supplied Drive folder has not been opened. Three checks outstanding: that the frames show this villa, that no identifiable person appears without agreement, and that no frame shows the villa number, a gate plate or a neighbour's plate. The last is a publication rule, not a preference.",
         "values": ["Frames reviewed: no", "People release: not checked", "Plates checked: no"]
       },
       {
-        "field": "via",
-        "summary": "Instruction not confirmed",
-        "detail": "Who holds the instruction, on what terms, and whether it is exclusive has not been recorded.",
-        "values": []
+        "field": "comparables",
+        "summary": "Frond L 2025 asking prices cannot be tied to specific villas",
+        "detail": "In the SALE sheet the unit code and the listing URL disagree on several rows — one row carries a Frond B code against a Frond L listing link. The asking range is usable; a row-by-row reading is not.",
+        "values": ["Asks AED 53M–75M", "Type transactions 2024: AED 53M–61.5M"]
+      },
+      {
+        "field": "identification",
+        "summary": "An unconnected Edwards & Towers listing should not be confused with this villa",
+        "detail": "An E&T Instagram draft in the Drive offers 'two villas, one owner' on an extended 20,494 sq ft plot at AED 97,500,000, described as a 6-bed Signature plus a 4-bed Garden Home. The same registered owner does hold a second Palm villa, a 4-bed on another frond. But the two plots are on different fronds and total 19,500 sq ft, not 20,494, so they cannot be the extended plot described. Do not merge the two records without evidence.",
+        "values": ["E&T draft: 20,494 sq ft, AED 97.5M", "This villa + the owner's other: 19,500 sq ft, two fronds"]
       }
     ],
 
