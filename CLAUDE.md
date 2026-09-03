@@ -22,6 +22,18 @@ and desk records; keep it out of page titles, headings and body copy.
 Photography counts. Check every frame for a villa number, a gate plate, a neighbour's plate or a
 street sign before a page goes out.
 
+## Use the contact number for the market
+
+| Market | Number | Used on |
+|---|---|---|
+| Dubai | +971 58 544 1388 | Palm Jumeirah and all other UAE material |
+| Phuket | +66 96 026 0875 | Thailand material |
+
+Source: the Dubai number is the WhatsApp link in the Edwards & Towers owner-outreach template
+(`property-bot`, `OUTREACH.md`). Both numbers are Alex's own, so a brochure may carry them — every
+*other* phone number and email still fails the check in `resale/check-L43.mjs`, and that exemption
+has its own control so widening it cannot silently disable the scan.
+
 ## Identify the property before writing about it
 
 A reference that looks like a match is not a match. Confirm which property a label refers to with

@@ -106,11 +106,20 @@ check("no exact address in the page", () => {
   if (hits.length) throw new Error(hits.join("\n"));
 });
 
+// Alex's own numbers, Thai and Dubai. A brochure exists to carry these, so they are
+// stripped before the scan — every OTHER phone number and email still fails.
+const OWN = [
+  /\+66[\s-]?96[\s-]?026[\s-]?0875/g,
+  /\+?66960260875/g,
+  /\+971[\s-]?58[\s-]?544[\s-]?1388/g,
+  /\+?971585441388/g,
+  /alex\.whayman@gmail\.com/gi,
+];
+const stripOwn = (s) => OWN.reduce((acc, re) => acc.replace(re, ""), s);
+
 console.log("\nThird-party personal data");
 check("no owner contact details in the page", () => {
-  let scan = html;
-  for (const re of [/\+66[\s-]?96[\s-]?026[\s-]?0875/g, /\+?66960260875/g,
-                    /alex\.whayman@gmail\.com/gi]) scan = scan.replace(re, "");
+  const scan = stripOwn(html);
   const hits = [];
   for (const [re, what] of PII_PATTERNS) {
     const m = scan.match(new RegExp(re.source, "gi"));
@@ -127,6 +136,20 @@ check("no owner contact details in the desk record", () => {
   }
   if (hits.length) throw new Error(hits.join("\n"));
 });
+
+// Control: a UAE number that is NOT Alex's must still be caught. Without this, widening
+// the OWN list to allow his Dubai number could silently disable the whole UAE scan.
+{
+  const planted = stripOwn(html).replace("</main>", "<p>+971 50 807 7438</p></main>");
+  const caught = PII_PATTERNS.some(([re]) => new RegExp(re.source, "i").test(planted));
+  if (caught) {
+    console.log("  PASS  control: a UAE number that is not Alex's is still caught");
+  } else {
+    console.log("  FAIL  control: a planted third-party UAE number was not caught —");
+    console.log("        the own-number exemption has disabled the scan");
+    failures++;
+  }
+}
 
 // Control: the desk record does carry the address, so the same scan must find it there.
 // If it does not, the patterns have stopped matching and the check above proves nothing.
