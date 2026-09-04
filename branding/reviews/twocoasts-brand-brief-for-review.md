@@ -18,9 +18,9 @@ Paste this whole file into Grok or ChatGPT and use the prompts at the end. It is
 >
 > - Dubai: desert gold, sunlit sand, clear skies, a polished and premium feel.
 > - Thailand: lagoon turquoise, deep tropical water, an easy warmth.
-> - Golf: the dimpled ball, the flag on the green, the discipline of clean lines.
+> - Golf: the flag on the green, the discipline of clean lines, the game played at the water's edge.
 >
-> The mark is a golf ball rising like a sun over two waves. The upper wave is the Andaman, the lower the deeper Gulf. A pin with a pennant stands on the crest, because on both coasts the game is played at the water's edge. Two waves, two coasts.
+> The mark is a sun rising over two waves. The upper wave is the Andaman, the lower the deeper Gulf. A pin with a pennant stands on the crest, because on both coasts the game is played at the water's edge. Two waves, two coasts.
 
 **Voice**: calm, confident and specific. Short sentences. Numbers over adjectives. Warm but never gushing. "Clear view", not "revolutionary insights".
 
@@ -31,7 +31,7 @@ Paste this whole file into Grok or ChatGPT and use the prompts at the end. It is
 A circular badge, 512 × 512 canvas. Elements, back to front:
 
 1. **Sky**: circle r 248 filled Sand `#F6ECD9` (day version) or Gulf Navy `#0B2545` (night version).
-2. **Sun / golf ball**: circle centre (236, 214), r 118, vertical gradient Sunlit Gold `#EFC65E` → Dubai Gold `#D9A64A`, with a hex grid of 30 small dimple dots in Bunker Gold `#B8862E` at 45% opacity.
+2. **Sun**: circle centre (236, 214), r 118, vertical gradient Sunlit Gold `#EFC65E` → Dubai Gold `#D9A64A`. Plain disc: the founder has ruled out a golf ball in the mark.
 3. **Upper wave** (the Andaman): a filled wave whose crest peaks at x 318, y 300. Andaman Teal `#0FA3B1` by day, Lagoon `#8EDCD9` at night.
 4. **Lower wave** (the Gulf): a second, deeper wave. Gulf Navy by day, Andaman Teal at night.
 5. **Pin and pennant**: a 9-unit-wide flagstick at x 318 from y 118 down to 302 (planted on the crest), with a triangular pennant 66 long × 44 tall pointing right. Navy by day, white at night.
@@ -52,7 +52,7 @@ const WAVE1 = 'M0 348 C70 348 118 366 176 366 C250 366 268 300 318 300 C376 300 
 const WAVE2 = 'M0 424 C80 424 118 392 198 394 C286 396 328 444 404 438 C462 434 490 412 512 408 V512 H0 Z';
 ```
 
-Full SVG of the day mark (dimples abbreviated):
+Full SVG of the day mark:
 
 ```svg
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-labelledby="t">
@@ -64,7 +64,6 @@ Full SVG of the day mark (dimples abbreviated):
   <g clip-path="url(#mark-day-badge)">
     <circle cx="256" cy="256" r="248" fill="#F6ECD9"/>
     <circle cx="236" cy="214" r="118" fill="url(#mark-day-sun)"/>
-    <!-- 30 dimple circles (r 6.5, hex grid step 27) clipped to the sun, fill #B8862E at 45% -->
     <path d="M0 348 C70 348 118 366 176 366 C250 366 268 300 318 300 C376 300 424 346 512 336 V512 H0 Z" fill="#0FA3B1"/>
     <path d="M0 424 C80 424 118 392 198 394 C286 396 328 444 404 438 C462 434 490 412 512 408 V512 H0 Z" fill="#0B2545"/>
     <path d="M313.5 118 H322.5 V322 H313.5 Z" fill="#0B2545"/>
@@ -98,9 +97,9 @@ Full SVG of the day mark (dimples abbreviated):
 | Andaman Teal | `#0FA3B1` | Primary accent. Buttons, links, the upper wave, 'coasts' in the wordmark. |
 | Deep Teal | `#0B7F8A` | Accessible teal for text and hover states on light backgrounds. |
 | Lagoon | `#8EDCD9` | Light tint. Highlights, tags, the upper wave on dark backgrounds. |
-| Dubai Gold | `#D9A64A` | Secondary accent. The sun/ball, taglines, premium touches. Decorative only on white. |
+| Dubai Gold | `#D9A64A` | Secondary accent. The sun, taglines, premium touches. Decorative only on white. |
 | Sunlit Gold | `#EFC65E` | Top of the sun gradient. Use only inside the mark and illustrations. |
-| Bunker Gold | `#B8862E` | Dimples on the ball, gold text on light backgrounds. |
+| Bunker Gold | `#B8862E` | Gold text on light backgrounds. |
 | Sand | `#F6ECD9` | Warm light surface. The sky in the mark, cards, section backgrounds. |
 | Ivory | `#FCFAF5` | Page background. |
 | Fairway Green | `#2F9E6B` | Success states, positive numbers, golf-specific accents. |
@@ -144,7 +143,7 @@ WCAG contrast ratios (text colour by row, background by column):
 
 ## 6. Graphic language
 
-Single soft wave lines as dividers; dimple-grid texture at under 20% opacity on gold/sand; 12 px card corners, 20 px panels, pill buttons; photography of coastlines at golden hour, fairways beside water, clean architecture; two-tone line icons in navy with a teal or gold accent.
+Single soft wave lines as dividers; 12 px card corners, 20 px panels, pill buttons; photography of coastlines at golden hour, fairways beside water, clean architecture; two-tone line icons in navy with a teal or gold accent.
 
 ## 7. What ships in the kit
 
@@ -153,7 +152,7 @@ SVG + PNG logos in every variant; favicon set (.svg, .ico, PNGs, Apple touch ico
 ## 8. Known open questions
 
 - Is "DUBAI · THAILAND" enough as a tagline, or does the brand need a slogan (working option: "Two coasts. One clear view.")?
-- Does the mark read as "golf" strongly enough, or does it read as a generic sun-and-sea travel logo?
+- Without a golf ball, does the flag pin alone carry the golf reference, or does the mark read as a generic sun-and-sea travel logo?
 - Is the "two" (500) / "coasts" (800) weight split intentional-looking or does it look like a mistake?
 - Andaman Teal fails AA for small text on white (3.0:1), so Deep Teal is used for UI text. Is that split clean enough for non-designers?
 - Sub-brands are written as `twocoasts | Futures`. Is a better system needed for a growing product family?

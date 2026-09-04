@@ -1,7 +1,7 @@
 {
   "name": "TwoCoasts",
   "version": "1.0.0",
-  "description": "TwoCoasts brand palette. Inspired by the Arabian Gulf at Dubai, the Andaman coast of Thailand, and links golf: deep water, sunlit sand, fairway green and a sunset ball.",
+  "description": "TwoCoasts brand palette. Inspired by the Arabian Gulf at Dubai, the Andaman coast of Thailand, and golf by the sea: deep water, sunlit sand, fairway green and a setting sun.",
   "colors": {
     "navy": {
       "name": "Gulf Navy",
@@ -51,7 +51,7 @@
         166,
         74
       ],
-      "role": "Secondary accent. The sun/ball, taglines on dark, premium touches. Decorative only on light backgrounds; never text outside the locked logo files."
+      "role": "Secondary accent. The sun, taglines on dark, premium touches. Decorative only on light backgrounds; never text outside the locked logo files."
     },
     "goldLight": {
       "name": "Sunlit Gold",
@@ -71,7 +71,7 @@
         134,
         46
       ],
-      "role": "Dimples on the ball, gold text on light backgrounds."
+      "role": "Gold text on light backgrounds (large sizes)."
     },
     "sand": {
       "name": "Sand",

@@ -12,7 +12,6 @@
   <g clip-path="url(#fv-badge)">
     
     <circle cx="236" cy="214" r="118" fill="url(#fv-sun)"/>
-    
     <path d="M0 348 C70 348 118 366 176 366 C250 366 268 300 318 300 C376 300 424 346 512 336 V512 H0 Z" fill="#8EDCD9"/>
     <path d="M0 424 C80 424 118 392 198 394 C286 396 328 444 404 438 C462 434 490 412 512 408 V512 H0 Z" fill="#0FA3B1"/>
     <path d="M303 118 H333 V322 H303 Z" fill="#FFFFFF"/>

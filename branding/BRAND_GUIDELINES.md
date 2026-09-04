@@ -20,9 +20,9 @@ The brand lives between two shorelines: the Arabian Gulf at Dubai and the Andama
 
 - **Dubai**: desert gold, sunlit sand, clear skies, a polished and premium feel.
 - **Thailand**: lagoon turquoise, deep tropical water, an easy warmth.
-- **Golf**: the dimpled ball, the flag on the green, the discipline of clean lines.
+- **Golf**: the flag on the green, the discipline of clean lines, the game played at the water's edge.
 
-The mark is a golf ball rising like a sun over two waves. The upper wave is the Andaman, the lower, darker one the Gulf. A pin with a pennant stands on the crest, because on both coasts the game is played at the water's edge. Two waves, two coasts.
+The mark is a sun rising over two waves. The upper wave is the Andaman, the lower, darker one the Gulf. A pin with a pennant stands on the crest, because on both coasts the game is played at the water's edge. Two waves, two coasts.
 
 **Voice.** Calm, confident and specific. Short sentences. Numbers over adjectives. Warm but never gushing. Lead with the number, make one claim per sentence, and hedge with probabilities, never with adjectives. Never promise an outcome: we show probabilities and edges, and the reader decides.
 
@@ -51,7 +51,7 @@ All files are in `logo/svg/` (vector, use these whenever you can) with PNG rende
 | **Mark (day)** | `twocoasts-mark-day.svg` | Icon-sized uses on light backgrounds: avatars, list icons, buttons. |
 | Mark (night) | `twocoasts-mark-night.svg` | Icon-sized uses on dark backgrounds. |
 | Mark mono | `twocoasts-mark-mono-*.svg` | One-colour icon uses. |
-| Mark simplified | `twocoasts-mark-day-simple.svg`, `-night-simple` | Any use at 96 px or smaller: no dimples, thicker pin. |
+| Mark simplified | `twocoasts-mark-day-simple.svg`, `-night-simple` | Any use at 96 px or smaller: thicker pin. |
 | **App icon** | `twocoasts-app-icon.svg`, `twocoasts-app-icon-dark.svg` | iOS, Android, macOS, Windows and PWA icons. Rounded square, full bleed. |
 | Wordmark | `twocoasts-wordmark*.svg` | Footers, page headers next to a product name, places the mark is shown separately. |
 | Favicon | `logo/favicon/` | Ready-made set: `favicon.svg`, `.ico`, PNG sizes, Apple touch icon, PWA icons, `site.webmanifest`. |
@@ -96,7 +96,7 @@ Source of truth: `colors/palette.json`. Ready-made exports: `colors/colors.css`,
 | ![](https://placehold.co/20x20/8EDCD9/8EDCD9.png) | Lagoon | `#8EDCD9` | 142, 220, 217 | Tints, tags, highlights, the upper wave at night. |
 | ![](https://placehold.co/20x20/D9A64A/D9A64A.png) | **Dubai Gold** | `#D9A64A` | 217, 166, 74 | The sun. Taglines on dark, premium accents. Decorative only on light backgrounds; never text outside the locked logo files. |
 | ![](https://placehold.co/20x20/EFC65E/EFC65E.png) | Sunlit Gold | `#EFC65E` | 239, 198, 94 | Top of the Sun gradient only. Not for UI or text. |
-| ![](https://placehold.co/20x20/B8862E/B8862E.png) | Bunker Gold | `#B8862E` | 184, 134, 46 | Gold text on light backgrounds (large sizes). Dimples. |
+| ![](https://placehold.co/20x20/B8862E/B8862E.png) | Bunker Gold | `#B8862E` | 184, 134, 46 | Gold text on light backgrounds (large sizes). |
 | ![](https://placehold.co/20x20/F6ECD9/F6ECD9.png) | **Sand** | `#F6ECD9` | 246, 236, 217 | Warm surfaces, cards, section backgrounds. |
 | ![](https://placehold.co/20x20/FCFAF5/FCFAF5.png) | Ivory | `#FCFAF5` | 252, 250, 245 | Page background. |
 | ![](https://placehold.co/20x20/2F9E6B/2F9E6B.png) | Fairway Green | `#2F9E6B` | 47, 158, 107 | Success, positive change, golf accents. |
@@ -161,7 +161,6 @@ The tagline "DUBAI · THAILAND" is always uppercase Montserrat 600 with wide tra
 ## 5. Graphic language
 
 - **The wave.** A single soft wave line can divide sections, sit under a heading, or run along the bottom of a slide. Use the shape from `.tc-wave` in `tokens/twocoasts.css` or copy the path from `tools/build.mjs`. One or two waves, never a pattern.
-- **The dimple grid.** Fine dots on a gold or sand field can texture a cover or a card corner at low opacity (under 20%). Use sparingly.
 - **Rounded shapes.** Corners of 12 px on cards and 20 px on panels; pill buttons. Nothing sharp-cornered except tables.
 - **Photography.** Coastlines at golden hour, fairways beside water, clean architecture, wide horizons. Warm light, low contrast, real places. No stock handshakes, no neon.
 - **Icons.** Simple two-tone line icons in Navy with a Teal or Gold accent. 2 px stroke at 24 px.

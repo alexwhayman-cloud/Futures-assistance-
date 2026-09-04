@@ -61,7 +61,7 @@ function flagPath() {
   return `M${x0} ${top} L${x0 + FLAG.len} ${top + FLAG.h / 2} L${x0} ${top + FLAG.h} Z`;
 }
 
-/** Hex-grid golf-ball dimples clipped to the sun disc. */
+/** Hex-grid dimples. Retired: the founder asked for no golf ball in the mark. Kept for reference; not called. */
 function dimples(fill, opacity) {
   const step = 32;
   const rows = [];
@@ -79,7 +79,7 @@ function dimples(fill, opacity) {
 
 /**
  * Colour mark. `sky` may be null for a transparent badge.
- * `simple` drops dimples and thickens the pin for tiny favicon sizes.
+ * `simple` thickens the pin for tiny favicon sizes.
  */
 function markColour({ id, sky, sun, sunTop, dimple, wave1, wave2, pin, simple = false }) {
   const grad = sunTop
@@ -99,7 +99,6 @@ function markColour({ id, sky, sun, sunTop, dimple, wave1, wave2, pin, simple = 
   <g clip-path="url(#${id}-badge)">
     ${sky ? `<circle cx="${CX}" cy="${CY}" r="${R}" fill="${sky}"/>` : ''}
     <circle cx="${SUN.cx}" cy="${SUN.cy}" r="${SUN.r}" fill="${sunFill}"/>
-    ${simple ? '' : dimples(dimple, 0.45)}
     <path d="${WAVE1}" fill="${wave1}"/>
     <path d="${WAVE2}" fill="${wave2}"/>
     <path d="${pinD}" fill="${pin}"/>
@@ -375,7 +374,7 @@ async function main() {
     }
   }
   // Mark size ladder for app stores / UI kits. At 96 px and below the
-  // simplified drawing (no dimples, thicker pin) is used.
+  // simplified drawing (thicker pin) is used.
   const simpleDay = svgDoc({ w: SIZE, h: SIZE, body: markColour({ id: 'sd', sky: MARK.skyDay, sun: C.gold, sunTop: C.goldLight, dimple: C.goldDeep, wave1: C.teal, wave2: C.navy, pin: C.navy, simple: true }), title: 'TwoCoasts mark (simplified)' });
   write(path.join(OUT.svg, 'twocoasts-mark-day-simple.svg'), simpleDay);
   const simpleNight = svgDoc({ w: SIZE, h: SIZE, body: markColour({ id: 'sn', sky: MARK.skyNight, sun: C.gold, sunTop: C.goldLight, dimple: C.goldDeep, wave1: C.lagoon, wave2: C.teal, pin: C.white, simple: true }), title: 'TwoCoasts mark (simplified, night)' });
