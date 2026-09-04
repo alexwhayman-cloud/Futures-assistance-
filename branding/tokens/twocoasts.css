@@ -1,0 +1,204 @@
+/* ==========================================================================
+   TwoCoasts theme  —  drop-in stylesheet for any app, site or HTML document.
+
+   <link rel="stylesheet" href="branding/tokens/twocoasts.css">
+
+   Contents
+     1. Fonts (Google Fonts import; local files are in branding/fonts/)
+     2. Design tokens as CSS custom properties (light + dark)
+     3. Base typography
+     4. Small component layer: buttons, cards, badges, tables, header/footer
+   Everything is prefixed --tc- / .tc- so it will not collide with your own CSS.
+   ========================================================================== */
+
+/* 1. Fonts ---------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+/* 2. Tokens --------------------------------------------------------------- */
+:root {
+  color-scheme: light dark;
+
+  /* Palette */
+  --tc-navy: #0B2545;
+  --tc-teal: #0FA3B1;
+  --tc-teal-deep: #0B7F8A;
+  --tc-lagoon: #8EDCD9;
+  --tc-gold: #D9A64A;
+  --tc-gold-light: #EFC65E;
+  --tc-gold-deep: #B8862E;
+  --tc-sand: #F6ECD9;
+  --tc-ivory: #FCFAF5;
+  --tc-green: #2F9E6B;
+  --tc-coral: #F0715F;
+  --tc-charcoal: #1E2A3A;
+  --tc-driftwood: #7A7266;
+  --tc-white: #FFFFFF;
+
+  --tc-gradient-sun: linear-gradient(180deg, #EFC65E 0%, #D9A64A 100%);
+  --tc-gradient-coast: linear-gradient(120deg, #0B2545 0%, #123A63 60%, #0B7F8A 100%);
+  --tc-gradient-shore: linear-gradient(180deg, #FCFAF5 0%, #F6ECD9 100%);
+
+  /* Semantic (light) */
+  --tc-bg: var(--tc-ivory);
+  --tc-surface: var(--tc-white);
+  --tc-surface-warm: var(--tc-sand);
+  --tc-text: var(--tc-charcoal);
+  --tc-heading: var(--tc-navy);
+  --tc-text-muted: var(--tc-driftwood);
+  --tc-link: var(--tc-teal-deep);
+  --tc-primary: var(--tc-teal-deep);
+  --tc-primary-hover: #096A73;
+  --tc-primary-text: var(--tc-white);
+  --tc-accent: var(--tc-gold);
+  --tc-border: #E6DCC8;
+  --tc-success: var(--tc-green);
+  --tc-danger: var(--tc-coral);
+  --tc-focus: var(--tc-teal);
+
+  /* Type */
+  --tc-font-display: 'Montserrat', 'Avenir Next', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --tc-font-body: 'Inter', 'SF Pro Text', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --tc-font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Scale */
+  --tc-space-1: .25rem; --tc-space-2: .5rem; --tc-space-3: .75rem; --tc-space-4: 1rem;
+  --tc-space-5: 1.5rem; --tc-space-6: 2rem; --tc-space-7: 3rem; --tc-space-8: 4rem; --tc-space-9: 6rem;
+  --tc-radius-sm: 6px; --tc-radius-md: 12px; --tc-radius-lg: 20px; --tc-radius-pill: 999px;
+  --tc-shadow-card: 0 4px 16px rgba(11, 37, 69, .08);
+  --tc-shadow-float: 0 12px 32px -4px rgba(11, 37, 69, .16);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --tc-bg: #071A33;
+    --tc-surface: var(--tc-navy);
+    --tc-surface-warm: #123A63;
+    --tc-text: var(--tc-sand);
+    --tc-heading: var(--tc-white);
+    --tc-text-muted: #A9B4C4;
+    --tc-link: var(--tc-lagoon);
+    --tc-primary: var(--tc-teal);
+    --tc-primary-hover: #1FB6C4;
+    --tc-primary-text: var(--tc-navy);
+    --tc-border: #1F3F66;
+    --tc-success: #4CBF8A;
+    --tc-danger: #FF8A78;
+    --tc-focus: var(--tc-gold);
+    --tc-shadow-card: 0 4px 16px rgba(0, 0, 0, .35);
+    --tc-shadow-float: 0 12px 32px -4px rgba(0, 0, 0, .5);
+  }
+}
+:root[data-theme="dark"] {
+  --tc-bg: #071A33;
+  --tc-surface: var(--tc-navy);
+  --tc-surface-warm: #123A63;
+  --tc-text: var(--tc-sand);
+  --tc-heading: var(--tc-white);
+  --tc-text-muted: #A9B4C4;
+  --tc-link: var(--tc-lagoon);
+  --tc-primary: var(--tc-teal);
+  --tc-primary-hover: #1FB6C4;
+  --tc-primary-text: var(--tc-navy);
+  --tc-border: #1F3F66;
+  --tc-success: #4CBF8A;
+  --tc-danger: #FF8A78;
+  --tc-focus: var(--tc-gold);
+  --tc-shadow-card: 0 4px 16px rgba(0, 0, 0, .35);
+  --tc-shadow-float: 0 12px 32px -4px rgba(0, 0, 0, .5);
+}
+
+/* 3. Base typography ------------------------------------------------------- */
+.tc, .tc body, body.tc {
+  background: var(--tc-bg);
+  color: var(--tc-text);
+  font-family: var(--tc-font-body);
+  font-size: 1rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.tc h1, .tc h2, .tc h3, .tc h4, .tc .tc-display {
+  font-family: var(--tc-font-display);
+  color: var(--tc-heading);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0 0 .5em;
+}
+.tc h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; }
+.tc h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 700; }
+.tc h3 { font-size: 1.375rem; font-weight: 700; }
+.tc h4 { font-size: 1.125rem; font-weight: 600; }
+.tc p { margin: 0 0 1em; }
+.tc a { color: var(--tc-link); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+.tc a:hover { text-decoration-thickness: 2px; }
+.tc small, .tc .tc-muted { color: var(--tc-text-muted); }
+.tc .tc-eyebrow {
+  font-family: var(--tc-font-display);
+  font-size: .75rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--tc-gold-deep);
+}
+:root[data-theme="dark"] .tc .tc-eyebrow { color: var(--tc-gold); }
+.tc code, .tc pre { font-family: var(--tc-font-mono); font-size: .9em; }
+.tc :focus-visible { outline: 3px solid var(--tc-focus); outline-offset: 2px; }
+
+/* 4. Components ------------------------------------------------------------ */
+.tc-btn {
+  display: inline-flex; align-items: center; gap: .5em;
+  font-family: var(--tc-font-display); font-weight: 600; font-size: .95rem;
+  padding: .7em 1.4em; border-radius: var(--tc-radius-pill);
+  border: 2px solid transparent; cursor: pointer; text-decoration: none;
+  transition: background .15s, color .15s, border-color .15s, transform .1s;
+}
+.tc-btn:active { transform: translateY(1px); }
+.tc-btn.tc-btn-primary { background: var(--tc-primary); color: var(--tc-primary-text); }
+.tc-btn.tc-btn-primary:hover { background: var(--tc-primary-hover); }
+.tc-btn.tc-btn-secondary { background: transparent; color: var(--tc-heading); border-color: var(--tc-heading); }
+.tc-btn.tc-btn-secondary:hover { background: var(--tc-heading); color: var(--tc-bg); }
+.tc-btn.tc-btn-gold { background: var(--tc-gold); color: var(--tc-navy); }
+.tc-btn.tc-btn-gold:hover { background: var(--tc-gold-light); }
+.tc-btn.tc-btn-ghost { background: transparent; color: var(--tc-link); }
+.tc-btn.tc-btn-ghost:hover { background: color-mix(in srgb, var(--tc-link) 12%, transparent); }
+
+.tc-card {
+  background: var(--tc-surface); border: 1px solid var(--tc-border);
+  border-radius: var(--tc-radius-md); padding: var(--tc-space-5);
+  box-shadow: var(--tc-shadow-card);
+}
+.tc-card-warm { background: var(--tc-surface-warm); }
+
+.tc-badge {
+  display: inline-block; font-family: var(--tc-font-display); font-size: .72rem; font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase; padding: .25em .7em; border-radius: var(--tc-radius-pill);
+  background: var(--tc-lagoon); color: var(--tc-navy);
+}
+.tc-badge-gold { background: var(--tc-gold); color: var(--tc-navy); }
+.tc-badge-green { background: var(--tc-green); color: #fff; }
+.tc-badge-coral { background: var(--tc-coral); color: #fff; }
+.tc-badge-navy { background: var(--tc-navy); color: var(--tc-sand); }
+
+.tc-table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.tc-table th {
+  font-family: var(--tc-font-display); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
+  text-align: left; color: var(--tc-text-muted); padding: .6em .8em; border-bottom: 2px solid var(--tc-border);
+}
+.tc-table td { padding: .7em .8em; border-bottom: 1px solid var(--tc-border); }
+.tc-table tbody tr:hover { background: color-mix(in srgb, var(--tc-lagoon) 18%, transparent); }
+.tc-num { font-variant-numeric: tabular-nums; text-align: right; }
+.tc-up { color: var(--tc-success); }
+.tc-down { color: var(--tc-danger); }
+
+.tc-header {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--tc-space-4);
+  padding: var(--tc-space-3) var(--tc-space-5); background: var(--tc-surface);
+  border-bottom: 1px solid var(--tc-border);
+}
+.tc-header .tc-logo { height: 40px; display: block; }
+.tc-hero { background: var(--tc-gradient-coast); color: var(--tc-sand); padding: var(--tc-space-8) var(--tc-space-5); }
+.tc-hero h1, .tc-hero h2 { color: #fff; }
+.tc-footer {
+  padding: var(--tc-space-6) var(--tc-space-5); font-size: .85rem; color: var(--tc-text-muted);
+  border-top: 1px solid var(--tc-border); display: flex; gap: var(--tc-space-4); align-items: center; flex-wrap: wrap;
+}
+.tc-footer .tc-logo { height: 28px; opacity: .85; }
+
+/* Wave divider between sections: <div class="tc-wave"></div> */
+.tc-wave { height: 48px; background: var(--tc-teal); mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 48' preserveAspectRatio='none'%3E%3Cpath d='M0 20C70 20 118 38 176 38C250 38 268 4 318 4C376 4 424 30 512 26V48H0Z'/%3E%3C/svg%3E") center/100% 100% no-repeat; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 48' preserveAspectRatio='none'%3E%3Cpath d='M0 20C70 20 118 38 176 38C250 38 268 4 318 4C376 4 424 30 512 26V48H0Z'/%3E%3C/svg%3E") center/100% 100% no-repeat; }

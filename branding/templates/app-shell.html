@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" class="tc">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TwoCoasts app shell</title>
+<!-- Favicons: copy branding/logo/favicon/* next to your index.html -->
+<link rel="icon" href="../logo/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../logo/favicon/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="../logo/favicon/apple-touch-icon.png">
+<link rel="manifest" href="../logo/favicon/site.webmanifest">
+<meta name="theme-color" content="#0B2545">
+<!-- Social preview -->
+<meta property="og:title" content="TwoCoasts">
+<meta property="og:image" content="../logo/social/twocoasts-og-image-1200x630.png">
+<link rel="stylesheet" href="../tokens/twocoasts.css">
+<style>
+  /* Bundled fonts so this file works offline; must come after the theme link. */
+  @font-face { font-family: 'Montserrat'; src: url('../fonts/Montserrat.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
+  @font-face { font-family: 'Inter'; src: url('../fonts/Inter.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
+</style>
+<style>
+  body { margin: 0; }
+  main { max-width: 1100px; margin: 0 auto; padding: var(--tc-space-6) var(--tc-space-5); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--tc-space-5); }
+  .stat { font-family: var(--tc-font-display); font-size: 2rem; font-weight: 800; color: var(--tc-heading); font-variant-numeric: tabular-nums; }
+  nav a { margin-left: var(--tc-space-4); font-family: var(--tc-font-display); font-weight: 600; text-decoration: none; color: var(--tc-heading); }
+  .theme-toggle { margin-left: var(--tc-space-4); }
+</style>
+</head>
+<body>
+<header class="tc-header">
+  <picture>
+    <!-- Reverse logo on dark backgrounds, primary on light -->
+    <source srcset="../logo/svg/twocoasts-logo-primary-reverse.svg" media="(prefers-color-scheme: dark)">
+    <img class="tc-logo" src="../logo/svg/twocoasts-logo-primary.svg" alt="TwoCoasts">
+  </picture>
+  <nav>
+    <a href="#">Dashboard</a><a href="#">Markets</a><a href="#">Reports</a>
+    <button class="tc-btn tc-btn-ghost theme-toggle" onclick="toggleTheme()">Theme</button>
+  </nav>
+</header>
+
+<section class="tc-hero">
+  <p class="tc-eyebrow" style="color:var(--tc-gold)">Dubai · Thailand</p>
+  <h1>Two coasts. One clear view.</h1>
+  <p style="max-width:52ch">Hero copy in Inter on the coast gradient. Buttons below show the primary, gold and secondary styles.</p>
+  <a class="tc-btn tc-btn-gold" href="#">Get started</a>
+  <a class="tc-btn tc-btn-secondary" style="color:#fff;border-color:#fff" href="#">Learn more</a>
+</section>
+<div class="tc-wave" style="background:var(--tc-bg);transform:scaleY(-1)"></div>
+
+<main>
+  <div class="grid">
+    <div class="tc-card">
+      <p class="tc-eyebrow">Today</p>
+      <div class="stat">1,240</div>
+      <p class="tc-muted">Card with a stat. <span class="tc-badge tc-badge-green">Up 3.2%</span></p>
+    </div>
+    <div class="tc-card tc-card-warm">
+      <p class="tc-eyebrow">Watchlist</p>
+      <div class="stat">18</div>
+      <p class="tc-muted">Warm sand card. <span class="tc-badge">New</span></p>
+    </div>
+    <div class="tc-card">
+      <p class="tc-eyebrow">Alerts</p>
+      <div class="stat">2</div>
+      <p class="tc-muted">Needs attention. <span class="tc-badge tc-badge-coral">Action</span></p>
+    </div>
+  </div>
+
+  <h2 style="margin-top:var(--tc-space-7)">Table</h2>
+  <table class="tc-table">
+    <thead><tr><th>Market</th><th>Coast</th><th class="tc-num">Price</th><th class="tc-num">24h</th></tr></thead>
+    <tbody>
+      <tr><td>Example A</td><td><span class="tc-badge tc-badge-gold">Dubai</span></td><td class="tc-num">102.40</td><td class="tc-num tc-up">+1.8%</td></tr>
+      <tr><td>Example B</td><td><span class="tc-badge">Thailand</span></td><td class="tc-num">36.10</td><td class="tc-num tc-down">-0.6%</td></tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top:var(--tc-space-6)">
+    <a class="tc-btn tc-btn-primary" href="#">Primary</a>
+    <a class="tc-btn tc-btn-secondary" href="#">Secondary</a>
+    <a class="tc-btn tc-btn-gold" href="#">Gold</a>
+    <a class="tc-btn tc-btn-ghost" href="#">Ghost</a>
+  </p>
+</main>
+
+<footer class="tc-footer">
+  <img class="tc-logo" src="../logo/svg/twocoasts-wordmark-mono-navy.svg" alt="TwoCoasts">
+  <span>© 2026 TwoCoasts · Dubai · Thailand</span>
+</footer>
+
+<script>
+  function toggleTheme() {
+    const r = document.documentElement;
+    const dark = r.getAttribute('data-theme') === 'dark' || (!r.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+    r.setAttribute('data-theme', dark ? 'light' : 'dark');
+  }
+</script>
+</body>
+</html>

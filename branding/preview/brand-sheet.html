@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en" class="tc">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TwoCoasts brand sheet</title>
+<link rel="stylesheet" href="../tokens/twocoasts.css">
+<style>
+  /* Bundled fonts so this file works offline; must come after the theme link. */
+  @font-face { font-family: 'Montserrat'; src: url('../fonts/Montserrat.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
+  @font-face { font-family: 'Inter'; src: url('../fonts/Inter.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
+</style>
+<style>
+  html { color-scheme: light; }
+  body { margin: 0; background: var(--tc-ivory); }
+  .sheet { max-width: 1320px; margin: 0 auto; padding: 48px 40px 80px; }
+  .row { display: grid; gap: 24px; margin-bottom: 40px; }
+  .r2 { grid-template-columns: 1fr 1fr; } .r4 { grid-template-columns: repeat(4, 1fr); } .r5 { grid-template-columns: repeat(5, 1fr); }
+  .tile { border-radius: var(--tc-radius-md); padding: 28px; display: flex; align-items: center; justify-content: center; min-height: 160px; border: 1px solid var(--tc-border); }
+  .tile img { max-width: 100%; max-height: 150px; }
+  .light { background: #fff; } .sand { background: var(--tc-sand); } .dark { background: var(--tc-navy); } .teal { background: var(--tc-teal); }
+  .lbl { font-family: var(--tc-font-display); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--tc-driftwood); margin: 0 0 10px; }
+  .swatch { border-radius: var(--tc-radius-md); overflow: hidden; border: 1px solid var(--tc-border); background: #fff; }
+  .swatch .c { height: 88px; }
+  .swatch .t { padding: 10px 12px; font-size: 12px; line-height: 1.4; }
+  .swatch .t b { font-family: var(--tc-font-display); display: block; color: var(--tc-navy); }
+  .swatch .t code { color: var(--tc-driftwood); font-size: 11px; }
+  .type p { margin: 0 0 6px; }
+  .hero { background: var(--tc-gradient-coast); border-radius: var(--tc-radius-lg); padding: 48px; color: var(--tc-sand); display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; margin-bottom: 40px; }
+  .hero h1 { color: #fff; font-size: 40px; margin: 8px 0 12px; }
+  .hero img { width: 100%; }
+  h2 { font-size: 22px; margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--tc-teal); }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="hero">
+    <div>
+      <p class="tc-eyebrow" style="color:var(--tc-gold)">Brand sheet · v1.0</p>
+      <h1>twocoasts</h1>
+      <p>Where the Arabian Gulf meets the Andaman Sea. A golf ball rising as a sun over two coastlines: Dubai's sand and skyline, Thailand's turquoise water, and the flag on the green that ties the two together.</p>
+    </div>
+    <img src="../logo/svg/twocoasts-logo-primary-reverse-tagline.svg" alt="TwoCoasts">
+  </div>
+
+  <h2>Logo</h2>
+  <div class="row r2">
+    <div><p class="lbl">Primary · light backgrounds</p><div class="tile light"><img src="../logo/svg/twocoasts-logo-primary-tagline.svg" alt=""></div></div>
+    <div><p class="lbl">Reverse · dark backgrounds</p><div class="tile dark"><img src="../logo/svg/twocoasts-logo-primary-reverse-tagline.svg" alt=""></div></div>
+  </div>
+  <div class="row r4">
+    <div><p class="lbl">Stacked</p><div class="tile sand"><img src="../logo/svg/twocoasts-logo-stacked-primary.svg" alt="" style="max-height:170px"></div></div>
+    <div><p class="lbl">Mono navy</p><div class="tile light"><img src="../logo/svg/twocoasts-logo-stacked-mono-navy.svg" alt="" style="max-height:170px"></div></div>
+    <div><p class="lbl">Mono white</p><div class="tile teal"><img src="../logo/svg/twocoasts-logo-stacked-mono-white.svg" alt="" style="max-height:170px"></div></div>
+    <div><p class="lbl">Wordmark</p><div class="tile light"><img src="../logo/svg/twocoasts-wordmark.svg" alt=""></div></div>
+  </div>
+
+  <h2>Mark</h2>
+  <div class="row r5">
+    <div><p class="lbl">Day</p><div class="tile light"><img src="../logo/svg/twocoasts-mark-day.svg" alt=""></div></div>
+    <div><p class="lbl">Night</p><div class="tile dark"><img src="../logo/svg/twocoasts-mark-night.svg" alt=""></div></div>
+    <div><p class="lbl">Mono navy</p><div class="tile light"><img src="../logo/svg/twocoasts-mark-mono-navy.svg" alt=""></div></div>
+    <div><p class="lbl">App icon</p><div class="tile sand"><img src="../logo/svg/twocoasts-app-icon.svg" alt="" style="border-radius:32px"></div></div>
+    <div><p class="lbl">App icon dark</p><div class="tile light"><img src="../logo/svg/twocoasts-app-icon-dark.svg" alt="" style="border-radius:32px"></div></div>
+  </div>
+
+  <h2>Colour</h2>
+  <div class="row r5" id="swatches">
+    <div class="swatch"><div class="c" style="background:#0B2545"></div><div class="t"><b>Gulf Navy</b><code>#0B2545 · rgb(11, 37, 69)</code></div></div>
+    <div class="swatch"><div class="c" style="background:#0FA3B1"></div><div class="t"><b>Andaman Teal</b><code>#0FA3B1 · rgb(15, 163, 177)</code></div></div>
+    <div class="swatch"><div class="c" style="background:#0B7F8A"></div><div class="t"><b>Deep Teal</b><code>#0B7F8A · rgb(11, 127, 138)</code></div></div>
+    <div class="swatch"><div class="c" style="background:#8EDCD9"></div><div class="t"><b>Lagoon</b><code>#8EDCD9 · rgb(142, 220, 217)</code></div></div>
+    <div class="swatch"><div class="c" style="background:#D9A64A"></div><div class="t"><b>Dubai Gold</b><code>#D9A64A · rgb(217, 166, 74)</code></div></div>
+    <div class="swatch"><div class="c" style="background:#EFC65E"></div><div class="t"><b>Sunlit Gold</b><code>#EFC65E · rgb(239, 198, 94)</code></div></div>
+    <div class="swatch"><div class="c" style="background:#B8862E"></div><div class="t"><b>Bunker Gold</b><code>#B8862E · rgb(184, 134, 46)</code></div></div>
+    <div class="swatch"><div class="c" style="background:#F6ECD9"></div><div class="t"><b>Sand</b><code>#F6ECD9 · rgb(246, 236, 217)</code></div></div>
+    <div class="swatch"><div class="c" style="background:#FCFAF5"></div><div class="t"><b>Ivory</b><code>#FCFAF5 · rgb(252, 250, 245)</code></div></div>
+    <div class="swatch"><div class="c" style="background:#2F9E6B"></div><div class="t"><b>Fairway Green</b><code>#2F9E6B · rgb(47, 158, 107)</code></div></div>
+    <div class="swatch"><div class="c" style="background:#F0715F"></div><div class="t"><b>Sunset Coral</b><code>#F0715F · rgb(240, 113, 95)</code></div></div>
+    <div class="swatch"><div class="c" style="background:#1E2A3A"></div><div class="t"><b>Charcoal</b><code>#1E2A3A · rgb(30, 42, 58)</code></div></div>
+    <div class="swatch"><div class="c" style="background:#7A7266"></div><div class="t"><b>Driftwood</b><code>#7A7266 · rgb(122, 114, 102)</code></div></div>
+  </div>
+
+  <h2>Typography</h2>
+  <div class="row r2">
+    <div class="tile light type" style="display:block">
+      <p class="lbl">Montserrat · display</p>
+      <p style="font-family:var(--tc-font-display);font-weight:800;font-size:40px;color:var(--tc-navy);letter-spacing:-.02em;line-height:1.1">Two coasts.<br>One clear view.</p>
+      <p style="font-family:var(--tc-font-display);font-weight:600;font-size:20px;color:var(--tc-navy)">Section heading in Montserrat 600</p>
+      <p class="tc-eyebrow">Eyebrow · Dubai · Thailand</p>
+    </div>
+    <div class="tile light type" style="display:block">
+      <p class="lbl">Inter · body</p>
+      <p style="font-size:16px">Body text is set in Inter at 16 px with a 1.55 line height. It stays legible on phones, in tables and in print, and its tabular figures keep numbers aligned: 1,240.00 / 980.50.</p>
+      <p style="font-size:14px;color:var(--tc-driftwood)">Secondary text at 14 px in Driftwood.</p>
+      <p><span class="tc-badge">Thailand</span> <span class="tc-badge tc-badge-gold">Dubai</span> <span class="tc-badge tc-badge-green">Up 3.2%</span> <span class="tc-badge tc-badge-coral">Alert</span></p>
+      <p><a class="tc-btn tc-btn-primary" href="#">Primary</a> <a class="tc-btn tc-btn-secondary" href="#">Secondary</a> <a class="tc-btn tc-btn-gold" href="#">Gold</a></p>
+    </div>
+  </div>
+
+  <h2>Social</h2>
+  <div class="row r2">
+    <div><p class="lbl">Open Graph 1200×630</p><img src="../logo/social/twocoasts-og-image-1200x630.png" alt="" style="width:100%;border-radius:12px"></div>
+    <div><p class="lbl">Banner 1500×500 and avatar</p><div style="display:flex;gap:16px;align-items:center"><img src="../logo/social/twocoasts-banner-1500x500.png" alt="" style="width:75%;border-radius:12px"><img src="../logo/social/twocoasts-avatar-1024.png" alt="" style="width:20%;border-radius:50%"></div></div>
+  </div>
+</div>
+</body>
+</html>

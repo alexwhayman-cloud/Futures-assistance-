@@ -1,0 +1,26 @@
+{
+  "name": "TwoCoasts",
+  "version": "1.0.0",
+  "description": "TwoCoasts brand palette. Inspired by the Arabian Gulf at Dubai, the Andaman coast of Thailand, and links golf: deep water, sunlit sand, fairway green and a sunset ball.",
+  "colors": {
+    "navy":      { "name": "Gulf Navy",      "hex": "#0B2545", "rgb": [11, 37, 69],    "role": "Primary. Headings, body text on light backgrounds, dark surfaces, the lower wave." },
+    "teal":      { "name": "Andaman Teal",   "hex": "#0FA3B1", "rgb": [15, 163, 177],  "role": "Primary accent. Buttons, links, the upper wave, 'coasts' in the wordmark." },
+    "tealDeep":  { "name": "Deep Teal",      "hex": "#0B7F8A", "rgb": [11, 127, 138],  "role": "Accessible teal for text and hover states on light backgrounds." },
+    "lagoon":    { "name": "Lagoon",         "hex": "#8EDCD9", "rgb": [142, 220, 217], "role": "Light tint. Highlights, tags, the upper wave on dark backgrounds." },
+    "gold":      { "name": "Dubai Gold",     "hex": "#D9A64A", "rgb": [217, 166, 74],  "role": "Secondary accent. The sun/ball, taglines, premium touches. Decorative only on white." },
+    "goldLight": { "name": "Sunlit Gold",    "hex": "#EFC65E", "rgb": [239, 198, 94],  "role": "Top of the sun gradient. Use only inside the mark and illustrations." },
+    "goldDeep":  { "name": "Bunker Gold",    "hex": "#B8862E", "rgb": [184, 134, 46],  "role": "Dimples on the ball, gold text on light backgrounds." },
+    "sand":      { "name": "Sand",           "hex": "#F6ECD9", "rgb": [246, 236, 217], "role": "Warm light surface. The sky in the mark, cards, section backgrounds." },
+    "ivory":     { "name": "Ivory",          "hex": "#FCFAF5", "rgb": [252, 250, 245], "role": "Page background." },
+    "green":     { "name": "Fairway Green",  "hex": "#2F9E6B", "rgb": [47, 158, 107],  "role": "Success states, positive numbers, golf-specific accents." },
+    "coral":     { "name": "Sunset Coral",   "hex": "#F0715F", "rgb": [240, 113, 95],  "role": "Alerts, errors, negative numbers, urgent highlights." },
+    "charcoal":  { "name": "Charcoal",       "hex": "#1E2A3A", "rgb": [30, 42, 58],    "role": "Body text where navy is too saturated; dark-mode surfaces." },
+    "driftwood": { "name": "Driftwood",      "hex": "#7A7266", "rgb": [122, 114, 102], "role": "Secondary text, captions, borders." },
+    "white":     { "name": "White",          "hex": "#FFFFFF", "rgb": [255, 255, 255], "role": "Text on dark surfaces, reversed logos." }
+  },
+  "gradients": {
+    "sun":   { "css": "linear-gradient(180deg, #EFC65E 0%, #D9A64A 100%)", "role": "Inside the mark only." },
+    "coast": { "css": "linear-gradient(120deg, #0B2545 0%, #123A63 60%, #0B7F8A 100%)", "role": "Hero and banner backgrounds." },
+    "shore": { "css": "linear-gradient(180deg, #FCFAF5 0%, #F6ECD9 100%)", "role": "Soft page or section backgrounds." }
+  }
+}

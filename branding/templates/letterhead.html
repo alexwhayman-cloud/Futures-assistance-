@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" class="tc">
+<head>
+<meta charset="utf-8">
+<title>TwoCoasts letterhead</title>
+<link rel="stylesheet" href="../tokens/twocoasts.css">
+<style>
+  /* Bundled fonts so this file works offline; must come after the theme link. */
+  @font-face { font-family: 'Montserrat'; src: url('../fonts/Montserrat.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
+  @font-face { font-family: 'Inter'; src: url('../fonts/Inter.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
+</style>
+<style>
+  /* A4 print document. Open in a browser and Print > Save as PDF, or use as the base for reports. */
+  @page { size: A4; margin: 22mm 20mm 24mm; }
+  html { color-scheme: light; }
+  :root { --tc-bg: #fff; }
+  body { margin: 0; background: #fff; }
+  .page { max-width: 170mm; margin: 0 auto; padding: 18mm 0; }
+  @media screen { body { background: var(--tc-sand); } .page { background: #fff; padding: 22mm 20mm; margin: 24px auto; box-shadow: var(--tc-shadow-float); } }
+
+  .lh-head { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid var(--tc-teal); padding-bottom: 8mm; margin-bottom: 10mm; }
+  .lh-head img { height: 18mm; }
+  .lh-head address { font-style: normal; font-size: 9pt; color: var(--tc-driftwood); text-align: right; line-height: 1.5; }
+  .lh-head address strong { color: var(--tc-navy); font-family: var(--tc-font-display); }
+  .lh-meta { display: grid; grid-template-columns: auto 1fr; gap: 2mm 6mm; font-size: 10pt; margin-bottom: 8mm; }
+  .lh-meta dt { color: var(--tc-driftwood); font-weight: 500; }
+  .lh-meta dd { margin: 0; }
+  .doc h1 { font-size: 22pt; margin-bottom: 4mm; }
+  .doc h2 { font-size: 14pt; margin-top: 8mm; }
+  .doc p, .doc li { font-size: 10.5pt; line-height: 1.55; }
+  .doc table { font-size: 10pt; }
+  .lh-foot { margin-top: 14mm; padding-top: 4mm; border-top: 1px solid var(--tc-border); display: flex; justify-content: space-between; align-items: center; font-size: 8.5pt; color: var(--tc-driftwood); }
+  .lh-foot img { height: 8mm; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="lh-head">
+    <img src="../logo/svg/twocoasts-logo-primary-tagline.svg" alt="TwoCoasts">
+    <address>
+      <strong>TwoCoasts</strong><br>
+      Dubai, United Arab Emirates<br>
+      Phuket, Thailand<br>
+      hello@twocoasts.example
+    </address>
+  </header>
+
+  <dl class="lh-meta">
+    <dt>Date</dt><dd>4 September 2026</dd>
+    <dt>To</dt><dd>Recipient name</dd>
+    <dt>Re</dt><dd>Subject of this document</dd>
+  </dl>
+
+  <main class="doc">
+    <p class="tc-eyebrow">Document type</p>
+    <h1>Document title goes here</h1>
+    <p>Replace this text with your content. Body copy is set in Inter at 10.5 pt with generous line height, and headings in Montserrat. Keep paragraphs short and lead with the conclusion.</p>
+
+    <h2>Section heading</h2>
+    <p>Tables use the brand table style. Numbers are right-aligned and tabular so columns line up.</p>
+    <table class="tc-table">
+      <thead><tr><th>Item</th><th class="tc-num">Value</th><th class="tc-num">Change</th></tr></thead>
+      <tbody>
+        <tr><td>Example row one</td><td class="tc-num">1,240.00</td><td class="tc-num tc-up">+3.2%</td></tr>
+        <tr><td>Example row two</td><td class="tc-num">980.50</td><td class="tc-num tc-down">-1.1%</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Closing</h2>
+    <p>Kind regards,</p>
+    <p><strong>Your name</strong><br><span class="tc-muted">Role, TwoCoasts</span></p>
+  </main>
+
+  <footer class="lh-foot">
+    <img src="../logo/svg/twocoasts-wordmark-mono-navy.svg" alt="">
+    <span>Dubai · Thailand &nbsp;|&nbsp; twocoasts.example</span>
+    <span>Page 1</span>
+  </footer>
+</div>
+</body>
+</html>

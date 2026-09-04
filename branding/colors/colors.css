@@ -1,0 +1,34 @@
+/* TwoCoasts colour tokens. Generated from colors/palette.json. */
+:root {
+  --tc-navy: #0B2545; /* Gulf Navy */
+  --tc-teal: #0FA3B1; /* Andaman Teal */
+  --tc-teal-deep: #0B7F8A; /* Deep Teal */
+  --tc-lagoon: #8EDCD9; /* Lagoon */
+  --tc-gold: #D9A64A; /* Dubai Gold */
+  --tc-gold-light: #EFC65E; /* Sunlit Gold */
+  --tc-gold-deep: #B8862E; /* Bunker Gold */
+  --tc-sand: #F6ECD9; /* Sand */
+  --tc-ivory: #FCFAF5; /* Ivory */
+  --tc-green: #2F9E6B; /* Fairway Green */
+  --tc-coral: #F0715F; /* Sunset Coral */
+  --tc-charcoal: #1E2A3A; /* Charcoal */
+  --tc-driftwood: #7A7266; /* Driftwood */
+  --tc-white: #FFFFFF; /* White */
+  --tc-navy-rgb: 11, 37, 69;
+  --tc-teal-rgb: 15, 163, 177;
+  --tc-teal-deep-rgb: 11, 127, 138;
+  --tc-lagoon-rgb: 142, 220, 217;
+  --tc-gold-rgb: 217, 166, 74;
+  --tc-gold-light-rgb: 239, 198, 94;
+  --tc-gold-deep-rgb: 184, 134, 46;
+  --tc-sand-rgb: 246, 236, 217;
+  --tc-ivory-rgb: 252, 250, 245;
+  --tc-green-rgb: 47, 158, 107;
+  --tc-coral-rgb: 240, 113, 95;
+  --tc-charcoal-rgb: 30, 42, 58;
+  --tc-driftwood-rgb: 122, 114, 102;
+  --tc-white-rgb: 255, 255, 255;
+  --tc-gradient-sun: linear-gradient(180deg, #EFC65E 0%, #D9A64A 100%);
+  --tc-gradient-coast: linear-gradient(120deg, #0B2545 0%, #123A63 60%, #0B7F8A 100%);
+  --tc-gradient-shore: linear-gradient(180deg, #FCFAF5 0%, #F6ECD9 100%);
+}
