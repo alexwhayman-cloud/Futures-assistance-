@@ -68,12 +68,12 @@ S.append(dict(kind="content", eyebrow="The opportunity",
     rows=[("75", "Verified projects", "Tenure, pricing and measurement traced to source documents."),
           ("GCC + global", "Distribution reach", "A trusted luxury audience ready for Phuket product."),
           ("5", "Revenue lines", "Sales, leasing and specialist investor mandates.")],
-    callout=("The result", "A new product line for LuxuryProperty.com—with no Thailand-side buildout."),
+    callout=("The result", "A new product line for LuxuryProperty.com, with no Thailand-side buildout."),
 ))
 
 S.append(dict(kind="content", eyebrow="Proof of execution",
     title="The platform already operates at scale",
-    sub="Live inventory and comparable pricing—not a future roadmap.",
+    sub="Live inventory and comparable pricing, not a future roadmap.",
     rows=[("75", "developer projects", "Across 15 Phuket areas"),
           ("2,001", "resale units tracked", ""),
           ("998", "direct sellers", ""),
@@ -99,9 +99,9 @@ S.append(dict(kind="statement", eyebrow="Market evidence",
 
 S.append(dict(kind="content", eyebrow="Strategic fit",
     title="Phuket diversifies a Dubai-led client base",
-    sub="A second coast adds a cycle hedge—not a substitute.",
+    sub="A second coast adds a cycle hedge, not a substitute.",
     group="Gulf demand in Phuket",
-    rows=[("~10%", "of Phuket off-plan sales", "From Gulf capital in 2024—and rising"),
+    rows=[("~10%", "of Phuket off-plan sales", "From Gulf capital in 2024, and rising"),
           ("+28%", "Saudi arrivals to Thailand", "2024")],
 ))
 
@@ -150,7 +150,7 @@ S.append(dict(kind="content", eyebrow="Buyer protection",
 
 S.append(dict(kind="content", eyebrow="Large-investor desk",
     title="BOI turns qualifying assets into investable structures",
-    sub="For hotels, branded hospitality and wellness—not residential-for-sale.",
+    sub="For hotels, branded hospitality and wellness, not residential-for-sale.",
     rows=[("100%", "foreign ownership", ""),
           ("s.27", "potential land rights", ""),
           ("3–13 yrs", "CIT exemption", "By activity group")],
@@ -205,7 +205,7 @@ S.append(dict(kind="hero", eyebrow="Operating case",
 ))
 
 S.append(dict(kind="content", eyebrow="Funding bridge",
-    title="AED 100k mobilises the venture—not the office",
+    title="AED 100k mobilises the venture, not the office",
     sub="The office remains gated until unit, lease and funding are approved.",
     rows=[("AED 492k", "opening cash", "Startup + three-month runway"),
           ("AED 100k", "launch contribution", "20.3% of opening cash"),
@@ -246,7 +246,7 @@ S.append(dict(kind="content", eyebrow="Risk discipline",
 ))
 
 S.append(dict(kind="statement", eyebrow="Risk discipline",
-    text="Underwrite today’s law, dated attribution and verified inventory—not launch hype.",
+    text="Underwrite today’s law, dated attribution and verified inventory, not launch hype.",
 ))
 
 S.append(dict(kind="closing", eyebrow="Decision",

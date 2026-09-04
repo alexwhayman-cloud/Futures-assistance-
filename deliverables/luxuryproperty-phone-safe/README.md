@@ -1,4 +1,4 @@
-# Two Coasts × LuxuryProperty.com — phone-safe proposal
+# Two Coasts × LuxuryProperty.com - phone-safe proposal
 
 Redesign of the partnership proposal for Jason Farr, optimised for iPhone viewing.
 
