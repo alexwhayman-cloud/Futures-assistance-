@@ -75,8 +75,8 @@ S.append(dict(kind="content", eyebrow="Proof of execution",
     title="The platform already operates at scale",
     sub="Live inventory and comparable pricing—not a future roadmap.",
     rows=[("75", "developer projects", "Across 15 Phuket areas"),
-          ("2,001", "resale units tracked", "~1,000 direct sellers"),
-          ("998", "currently available", "Reference-level status"),
+          ("2,001", "resale units tracked", ""),
+          ("998", "direct sellers", ""),
           ("12", "developer relationships", "")],
 ))
 
