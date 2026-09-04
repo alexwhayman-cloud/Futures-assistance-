@@ -217,7 +217,7 @@ S.append(dict(kind="hero", eyebrow="Funding bridge",
     note="No additional office capital is implied without a separate written decision.",
 ))
 
-S.append(dict(kind="content", eyebrow="Partnership design",
+S.append(dict(kind="content", eyebrow="Partnership design", compact=True,
     title="The commercial frame aligns contribution and reward",
     sub="Equity rewards commitment; deal income follows client source.",
     lettered=[("A", "Equity", "75% Alex / 25% Jason · moves to 85 / 15 if support is not delivered"),
@@ -273,17 +273,17 @@ CSS = f"""
 *{{box-sizing:border-box;margin:0;padding:0;}}
 html,body{{background:#888;}}
 body{{font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;font-feature-settings:'tnum' 0;}}
-.slide{{position:relative;width:1080px;height:1920px;overflow:hidden;background:{WHITE};color:{NAVY};margin:0 0 40px 0;}}
+.slide{{position:relative;width:1080px;height:1920px;overflow:hidden;background:{WHITE};color:{NAVY};margin:0 0 40px 0;text-align:center;}}
 .slide.dark{{background:{NAVY};color:{WHITE};}}
 .slide.tint{{background:{TINT};}}
 .eyebrow{{position:absolute;left:96px;right:96px;top:124px;font-weight:600;font-size:28px;line-height:36px;
-  letter-spacing:0.18em;text-transform:uppercase;color:{ACCENT};white-space:nowrap;}}
+  letter-spacing:0.18em;text-transform:uppercase;color:{ACCENT};white-space:nowrap;text-align:center;}}
 .dark .eyebrow{{color:{ACCENT_ON_DARK};}}
-.content{{position:absolute;left:96px;right:96px;top:250px;bottom:230px;display:flex;flex-direction:column;justify-content:center;}}
+.content{{position:absolute;left:96px;right:96px;top:250px;bottom:230px;display:flex;flex-direction:column;justify-content:center;align-items:stretch;}}
 .footer{{position:absolute;left:96px;right:96px;top:1776px;height:2px;background:{RULE};}}
 .dark .footer{{background:{RULE_ON_DARK};}}
-.foot{{position:absolute;left:96px;top:1802px;font-size:22px;line-height:28px;font-weight:500;letter-spacing:0.09em;
-  text-transform:uppercase;color:{FOOT};white-space:nowrap;}}
+.foot{{position:absolute;left:96px;right:96px;top:1802px;font-size:22px;line-height:28px;font-weight:500;letter-spacing:0.07em;
+  text-transform:uppercase;color:{FOOT};white-space:nowrap;text-align:center;}}
 .pagenum{{position:absolute;right:96px;top:1802px;font-size:22px;line-height:28px;font-weight:500;letter-spacing:0.14em;color:{FOOT};}}
 .dark .foot,.dark .pagenum{{color:{FOOT_ON_DARK};}}
 
@@ -305,9 +305,9 @@ body{{font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;font-fea
 .note{{margin-top:6px;font-size:38px;line-height:1.35;color:{GREY};text-wrap:balance;}}
 .dark .note{{color:{GREY_ON_DARK};}}
 
-.lrow{{display:grid;grid-template-columns:112px 1fr;column-gap:16px;border-bottom:2px solid {RULE};padding:30px 0 32px 0;}}
+.lrow{{display:block;border-bottom:2px solid {RULE};padding:22px 0 26px 0;}}
 .lrows{{border-top:2px solid {RULE};}}
-.marker{{font-family:'Playfair','Inter',serif;font-weight:600;font-size:52px;line-height:52px;color:{ACCENT};padding-top:0px;}}
+.marker{{font-family:'Playfair','Inter',serif;font-weight:600;font-size:44px;line-height:48px;color:{ACCENT};margin-bottom:6px;}}
 .dark .marker{{color:{ACCENT_ON_DARK};}}
 .lrow .label{{margin-top:0;}}
 
@@ -316,12 +316,12 @@ body{{font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;font-fea
 .tag{{font-weight:600;font-size:28px;line-height:36px;letter-spacing:0.16em;text-transform:uppercase;color:{ACCENT};}}
 .trow .label{{margin-top:8px;}}
 
-.nrow{{display:grid;grid-template-columns:112px 1fr;column-gap:16px;border-bottom:2px solid {RULE};padding:28px 0 30px 0;align-items:baseline;}}
+.nrow{{display:block;border-bottom:2px solid {RULE};padding:24px 0 28px 0;}}
 .nrows{{border-top:2px solid {RULE};}}
 .dark .nrows{{border-top-color:{RULE_ON_DARK};}} .dark .nrow{{border-bottom-color:{RULE_ON_DARK};}}
 .nrow .label{{margin-top:0;}}
 
-.compact .row{{padding:20px 0 22px 0;}} .compact .head{{margin-bottom:44px;}}
+.compact .row{{padding:20px 0 22px 0;}} .compact .lrow{{padding:18px 0 22px 0;}} .compact .head{{margin-bottom:40px;}}
 .callout{{margin-top:56px;}}
 .callout .tag{{margin-bottom:14px;}}
 .callout .text{{font-weight:600;font-size:40px;line-height:1.35;text-wrap:balance;}}
@@ -338,7 +338,7 @@ body{{font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;font-fea
 
 .cover .title{{font-size:86px;color:{WHITE};}}
 .cover .sub{{color:{GREY_ON_DARK};}}
-.photo{{margin-top:64px;width:888px;height:636px;border-radius:6px;overflow:hidden;}}
+.photo{{margin:64px auto 0 auto;width:888px;height:636px;border-radius:6px;overflow:hidden;}}
 .photo img{{width:100%;height:100%;object-fit:cover;display:block;}}
 .prepared{{margin-top:64px;font-size:38px;line-height:1.35;font-weight:600;color:{WHITE};text-wrap:balance;}}
 .prepared2{{font-size:38px;line-height:1.35;color:{GREY_ON_DARK};text-wrap:pretty;}}
@@ -353,8 +353,7 @@ photo_b64 = base64.b64encode((HERE / "cover_photo.jpg").read_bytes()).decode()
 
 
 def footer(n, dark=False):
-    return (f'<div class="footer"></div><div class="foot">{FOOTER_TEXT}</div>'
-            f'<div class="pagenum">{n:02d}</div>')
+    return (f'<div class="footer"></div><div class="foot">{FOOTER_TEXT} · {n:02d}</div>')
 
 
 def render_rows(rows, cls="rows", rowcls="row"):
