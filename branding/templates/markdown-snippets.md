@@ -23,7 +23,7 @@ Copy-paste blocks for READMEs, docs sites and GitHub. Paths assume the file live
 ## Badge
 
 ```markdown
-[![TwoCoasts project](https://img.shields.io/badge/twocoasts-Dubai%20%C2%B7%20Thailand-0FA3B1?labelColor=0B2545&style=flat-square)](#)
+[![TwoCoasts project](https://img.shields.io/badge/TwoCoasts-Dubai%20%C2%B7%20Thailand-0FA3B1?labelColor=0B2545&style=flat-square)](#)
 ```
 
 ## Section divider
@@ -38,7 +38,7 @@ Copy-paste blocks for READMEs, docs sites and GitHub. Paths assume the file live
 
 ```markdown
 ---
-<p align="center"><sub>A <b>twocoasts</b> project · Dubai · Thailand</sub></p>
+<p align="center"><sub>A <b>TwoCoasts</b> project · Dubai · Thailand</sub></p>
 ```
 
 ## Docs sites (MkDocs Material)

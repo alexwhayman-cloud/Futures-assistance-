@@ -9,16 +9,12 @@
 <link rel="icon" href="../logo/favicon/favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="../logo/favicon/apple-touch-icon.png">
 <link rel="manifest" href="../logo/favicon/site.webmanifest">
-<meta name="theme-color" content="#0B2545">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#FCFAF5">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0B2545">
 <!-- Social preview -->
 <meta property="og:title" content="TwoCoasts">
 <meta property="og:image" content="../logo/social/twocoasts-og-image-1200x630.png">
 <link rel="stylesheet" href="../tokens/twocoasts.css">
-<style>
-  /* Bundled fonts so this file works offline; must come after the theme link. */
-  @font-face { font-family: 'Montserrat'; src: url('../fonts/Montserrat.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
-  @font-face { font-family: 'Inter'; src: url('../fonts/Inter.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
-</style>
 <style>
   body { margin: 0; }
   main { max-width: 1100px; margin: 0 auto; padding: var(--tc-space-6) var(--tc-space-5); }
@@ -30,25 +26,26 @@
 </head>
 <body>
 <header class="tc-header">
-  <picture>
-    <!-- Reverse logo on dark backgrounds, primary on light -->
-    <source srcset="../logo/svg/twocoasts-logo-primary-reverse.svg" media="(prefers-color-scheme: dark)">
-    <img class="tc-logo" src="../logo/svg/twocoasts-logo-primary.svg" alt="TwoCoasts">
-  </picture>
+  <!-- Logo pair: the theme (OS or data-theme) shows one; on phones the mark alone. -->
+  <a href="#" aria-label="TwoCoasts home">
+    <img class="tc-logo tc-logo-light" src="../logo/svg/twocoasts-logo-primary.svg" alt="TwoCoasts">
+    <img class="tc-logo tc-logo-dark" src="../logo/svg/twocoasts-logo-primary-reverse.svg" alt="TwoCoasts">
+    <img class="tc-logo tc-logo-mark" src="../logo/svg/twocoasts-mark-day.svg" alt="TwoCoasts">
+  </a>
   <nav>
     <a href="#">Dashboard</a><a href="#">Markets</a><a href="#">Reports</a>
     <button class="tc-btn tc-btn-ghost theme-toggle" onclick="toggleTheme()">Theme</button>
   </nav>
 </header>
 
-<section class="tc-hero">
-  <p class="tc-eyebrow" style="color:var(--tc-gold)">Dubai · Thailand</p>
+<section class="tc-hero tc-on-dark">
+  <p class="tc-eyebrow">Dubai · Thailand</p>
   <h1>Two coasts. One clear view.</h1>
   <p style="max-width:52ch">Hero copy in Inter on the coast gradient. Buttons below show the primary, gold and secondary styles.</p>
   <a class="tc-btn tc-btn-gold" href="#">Get started</a>
-  <a class="tc-btn tc-btn-secondary" style="color:#fff;border-color:#fff" href="#">Learn more</a>
+  <a class="tc-btn tc-btn-secondary" href="#">Learn more</a>
 </section>
-<div class="tc-wave" style="background:var(--tc-bg);transform:scaleY(-1)"></div>
+<div class="tc-wave tc-wave-flip" style="--tc-wave-color:var(--tc-bg)"></div>
 
 <main>
   <div class="grid">
@@ -83,11 +80,13 @@
     <a class="tc-btn tc-btn-secondary" href="#">Secondary</a>
     <a class="tc-btn tc-btn-gold" href="#">Gold</a>
     <a class="tc-btn tc-btn-ghost" href="#">Ghost</a>
+    <button class="tc-btn tc-btn-primary" disabled>Disabled</button>
   </p>
 </main>
 
 <footer class="tc-footer">
-  <img class="tc-logo" src="../logo/svg/twocoasts-wordmark-mono-navy.svg" alt="TwoCoasts">
+  <img class="tc-logo tc-logo-light" src="../logo/svg/twocoasts-wordmark-mono-navy.svg" alt="TwoCoasts">
+  <img class="tc-logo tc-logo-dark" src="../logo/svg/twocoasts-wordmark-mono-white.svg" alt="TwoCoasts">
   <span>© 2026 TwoCoasts · Dubai · Thailand</span>
 </footer>
 

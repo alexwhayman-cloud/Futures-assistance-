@@ -34,6 +34,7 @@ for (const d of Object.values(OUT)) fs.mkdirSync(d, { recursive: true });
 // ---------------------------------------------------------------------------
 const palette = JSON.parse(fs.readFileSync(path.join(ROOT, 'colors', 'palette.json'), 'utf8'));
 const C = Object.fromEntries(Object.entries(palette.colors).map(([k, v]) => [k, v.hex]));
+const MARK = Object.fromEntries(Object.entries(palette.mark).map(([k, v]) => [k, v.hex]));
 
 // ---------------------------------------------------------------------------
 // Mark geometry (512 x 512 canvas)
@@ -43,7 +44,7 @@ const CX = 256;
 const CY = 256;
 const R = 248; // badge radius
 const SUN = { cx: 236, cy: 214, r: 118 };
-const PIN = { x: 318, top: 118, base: 302, w: 9 };
+const PIN = { x: 318, top: 118, base: 302, w: 14 };
 const FLAG = { h: 44, len: 66 }; // pennant from pin top pointing right
 
 // Two coasts = two wave crests. Upper wave (Andaman), lower wave (Gulf).
@@ -62,7 +63,7 @@ function flagPath() {
 
 /** Hex-grid golf-ball dimples clipped to the sun disc. */
 function dimples(fill, opacity) {
-  const step = 27;
+  const step = 32;
   const rows = [];
   for (let j = -4; j <= 4; j++) {
     const y = SUN.cy + j * step * 0.866;
@@ -70,7 +71,7 @@ function dimples(fill, opacity) {
     for (let i = -5; i <= 5; i++) {
       const x = SUN.cx + i * step + offset;
       const d = Math.hypot(x - SUN.cx, y - SUN.cy);
-      if (d < SUN.r - 18) rows.push(`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="6.5"/>`);
+      if (d < SUN.r - 18) rows.push(`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="8"/>`);
     }
   }
   return `<g fill="${fill}" opacity="${opacity}">${rows.join('')}</g>`;
@@ -85,10 +86,10 @@ function markColour({ id, sky, sun, sunTop, dimple, wave1, wave2, pin, simple = 
     ? `<linearGradient id="${id}-sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sunTop}"/><stop offset="1" stop-color="${sun}"/></linearGradient>`
     : '';
   const sunFill = sunTop ? `url(#${id}-sun)` : sun;
-  const pinW = simple ? 16 : PIN.w;
+  const pinW = simple ? 30 : PIN.w;
   const pinD = `M${PIN.x - pinW / 2} ${PIN.top} H${PIN.x + pinW / 2} V${PIN.base + 20} H${PIN.x - pinW / 2} Z`;
   const flagD = simple
-    ? `M${PIN.x + pinW / 2 - 1} ${PIN.top} L${PIN.x + pinW / 2 + 80} ${PIN.top + 30} L${PIN.x + pinW / 2 - 1} ${PIN.top + 60} Z`
+    ? `M${PIN.x + pinW / 2 - 1} ${PIN.top} L${PIN.x + pinW / 2 + 110} ${PIN.top + 34} L${PIN.x + pinW / 2 - 1} ${PIN.top + 68} Z`
     : flagPath();
   return `
   <defs>
@@ -111,12 +112,13 @@ function markColour({ id, sky, sun, sunTop, dimple, wave1, wave2, pin, simple = 
  * one ink and survives embossing, engraving and low-contrast placements.
  */
 function markMono({ id, ink }) {
-  const gap = 12;
+  const gap = 20;
   return `
   <defs>
-    <clipPath id="${id}-badge"><circle cx="${CX}" cy="${CY}" r="${R - 4}"/></clipPath>
+    <clipPath id="${id}-badge"><circle cx="${CX}" cy="${CY}" r="${R - 18}"/></clipPath>
     <mask id="${id}-cut">
       <rect width="${SIZE}" height="${SIZE}" fill="#fff"/>
+      <rect x="${PIN.x}" y="${PIN.top}" width="${SUN.cx + SUN.r - PIN.x}" height="${300 - PIN.top}" fill="#000"/>
       <path d="${WAVE1}" fill="none" stroke="#000" stroke-width="${gap}"/>
       <path d="${WAVE2}" fill="none" stroke="#000" stroke-width="${gap}"/>
       <path d="${pinPath()}" fill="#000" stroke="#000" stroke-width="${gap - 2}" stroke-linejoin="round"/>
@@ -170,7 +172,9 @@ function outline(text, { wght, em, x = 0, y = 0, tracking = 0 }) {
  * Wordmark lockup: "two" (weight 500) + "coasts" (weight 800), optional tagline.
  * Returns { svg, width, height } in local units with origin top-left.
  */
-function wordmark({ two, coasts, tagline, withTagline, em = 230, id = 'wm' }) {
+const TAGLINE = 'DUBAI · THAILAND';
+
+function wordmark({ two, coasts, tagline, withTagline, em = 230, id = 'wm', tagScale = 0.19, tagTracking = 0.28 }) {
   const baseline = em * 0.78; // ascender room above baseline
   const t = outline('two', { wght: 500, em, x: 0, y: baseline, tracking: -0.015 });
   const c = outline('coasts', { wght: 800, em, x: t.width + em * 0.02, y: baseline, tracking: -0.02 });
@@ -178,12 +182,12 @@ function wordmark({ two, coasts, tagline, withTagline, em = 230, id = 'wm' }) {
   let height = em * 1.0;
   let tag = '';
   if (withTagline) {
-    const tagEm = em * 0.19;
+    const tagEm = em * tagScale;
     const tagBase = baseline + em * 0.42;
-    const tg = outline('DUBAI  ·  THAILAND', { wght: 600, em: tagEm, tracking: 0.28 });
+    const tg = outline(TAGLINE, { wght: 600, em: tagEm, tracking: tagTracking });
     // centre the tagline under the wordmark
     const tx = (width - tg.width) / 2;
-    const tg2 = outline('DUBAI  ·  THAILAND', { wght: 600, em: tagEm, x: tx, y: tagBase, tracking: 0.28 });
+    const tg2 = outline(TAGLINE, { wght: 600, em: tagEm, x: tx, y: tagBase, tracking: tagTracking });
     tag = `<path id="${id}-tagline" d="${tg2.d}" fill="${tagline}"/>`;
     height = tagBase + tagEm * 0.05;
   }
@@ -206,11 +210,11 @@ function svgDoc({ w, h, body, title, bg }) {
 const MARKS = {
   'mark-day': {
     title: 'TwoCoasts mark',
-    build: (id) => markColour({ id, sky: C.sand, sun: C.gold, sunTop: C.goldLight, dimple: C.goldDeep, wave1: C.teal, wave2: C.navy, pin: C.navy }),
+    build: (id) => markColour({ id, sky: MARK.skyDay, sun: C.gold, sunTop: C.goldLight, dimple: C.goldDeep, wave1: C.teal, wave2: C.navy, pin: C.navy }),
   },
   'mark-night': {
     title: 'TwoCoasts mark (night, for dark backgrounds)',
-    build: (id) => markColour({ id, sky: C.navy, sun: C.gold, sunTop: C.goldLight, dimple: C.goldDeep, wave1: C.lagoon, wave2: C.teal, pin: C.white }),
+    build: (id) => markColour({ id, sky: MARK.skyNight, sun: C.gold, sunTop: C.goldLight, dimple: C.goldDeep, wave1: C.lagoon, wave2: C.teal, pin: C.white }),
   },
   'mark-mono-navy': { title: 'TwoCoasts mark, one colour (navy)', build: (id) => markMono({ id, ink: C.navy }) },
   'mark-mono-white': { title: 'TwoCoasts mark, one colour (white)', build: (id) => markMono({ id, ink: C.white }) },
@@ -279,18 +283,43 @@ for (const { name, mark, word } of LOCKUPS) {
 
 // Stacked lockups ------------------------------------------------------------
 for (const { name, mark, word } of LOCKUPS) {
-  const col = WORDMARKS[word];
-  const em = 150;
-  const wm = wordmark({ ...col, withTagline: true, em, id: `${name}-s` });
-  const markScale = 0.9;
-  const markW = SIZE * markScale;
-  const w = Math.ceil(Math.max(markW, wm.width) + PAD * 2);
-  const gapY = 30;
-  const h = Math.ceil(markW + gapY + wm.height + PAD * 2);
-  const body = `
+  for (const withTagline of [false, true]) {
+    const col = WORDMARKS[word];
+    const em = 150;
+    const wm = wordmark({ ...col, withTagline, em, id: `${name}-s`, tagScale: 0.22, tagTracking: 0.24 });
+    const markScale = 0.9;
+    const markW = SIZE * markScale;
+    const w = Math.ceil(Math.max(markW, wm.width) + PAD * 2);
+    const gapY = 30;
+    const h = Math.ceil(markW + gapY + wm.height + PAD * 2);
+    const body = `
   <g transform="translate(${((w - markW) / 2).toFixed(1)} ${PAD}) scale(${markScale})">${MARKS[mark].build(`${name}-sm`)}</g>
   <g transform="translate(${((w - wm.width) / 2).toFixed(1)} ${(PAD + markW + gapY).toFixed(1)})">${wm.svg}</g>`;
-  write(path.join(OUT.svg, `twocoasts-${name.replace('logo', 'logo-stacked')}.svg`), svgDoc({ w, h, body, title: 'TwoCoasts logo (stacked)' }));
+    const file = `twocoasts-${name.replace('logo', 'logo-stacked')}${withTagline ? '-tagline' : ''}.svg`;
+    write(path.join(OUT.svg, file), svgDoc({ w, h, body, title: 'TwoCoasts logo (stacked)' }));
+  }
+}
+
+// Product lockups: wordmark | rule | product name -------------------------
+const PRODUCTS = ['Futures'];
+for (const product of PRODUCTS) {
+  for (const [suffix, col, rule] of [['', WORDMARKS['wordmark'], C.driftwood], ['-reverse', WORDMARKS['wordmark-reverse'], '#A9B4C4']]) {
+    const em = 230;
+    const wm = wordmark({ ...col, withTagline: false, em, id: `prod-${product}${suffix}` });
+    const baseline = em * 0.78;
+    const gapX = em * 0.22;
+    const ruleX = wm.width + gapX;
+    const prod = outline(product, { wght: 500, em, x: ruleX + gapX, y: baseline, tracking: -0.01 });
+    const capTop = baseline - em * 0.7;
+    const w = Math.ceil(ruleX + gapX + prod.width + PAD * 2);
+    const h = Math.ceil(wm.height + PAD * 2);
+    const body = `
+  <g transform="translate(${PAD} ${PAD})">${wm.svg}
+    <rect x="${ruleX.toFixed(1)}" y="${capTop.toFixed(1)}" width="2" height="${(baseline - capTop).toFixed(1)}" fill="${rule}"/>
+    <path d="${prod.d}" fill="${col.two}"/>
+  </g>`;
+    write(path.join(OUT.svg, `twocoasts-logo-product-${product.toLowerCase()}${suffix}.svg`), svgDoc({ w, h, body, title: `TwoCoasts ${product}` }));
+  }
 }
 
 // App icon (rounded square, full bleed) -------------------------------------
@@ -345,9 +374,15 @@ async function main() {
       await renderSvg(src, path.join(OUT.png, `${base}@${scale}x.png`), W, H, { bg });
     }
   }
-  // Mark size ladder for app stores / UI kits
-  for (const s of [64, 128, 256, 1024, 2048]) {
-    await renderSvg(path.join(OUT.svg, 'twocoasts-mark-day.svg'), path.join(OUT.png, `twocoasts-mark-day-${s}.png`), s, s);
+  // Mark size ladder for app stores / UI kits. At 96 px and below the
+  // simplified drawing (no dimples, thicker pin) is used.
+  const simpleDay = svgDoc({ w: SIZE, h: SIZE, body: markColour({ id: 'sd', sky: MARK.skyDay, sun: C.gold, sunTop: C.goldLight, dimple: C.goldDeep, wave1: C.teal, wave2: C.navy, pin: C.navy, simple: true }), title: 'TwoCoasts mark (simplified)' });
+  write(path.join(OUT.svg, 'twocoasts-mark-day-simple.svg'), simpleDay);
+  const simpleNight = svgDoc({ w: SIZE, h: SIZE, body: markColour({ id: 'sn', sky: MARK.skyNight, sun: C.gold, sunTop: C.goldLight, dimple: C.goldDeep, wave1: C.lagoon, wave2: C.teal, pin: C.white, simple: true }), title: 'TwoCoasts mark (simplified, night)' });
+  write(path.join(OUT.svg, 'twocoasts-mark-night-simple.svg'), simpleNight);
+  for (const s of [32, 48, 64, 96, 128, 256, 1024, 2048]) {
+    const src = s <= 96 ? 'twocoasts-mark-day-simple.svg' : 'twocoasts-mark-day.svg';
+    await renderSvg(path.join(OUT.svg, src), path.join(OUT.png, `twocoasts-mark-day-${s}.png`), s, s);
   }
 
   // Favicons + PWA icons --------------------------------------------------
@@ -408,11 +443,11 @@ function socialAvatar() {
   <div style="width:760px;height:760px">${inlineSvg('twocoasts-mark-night.svg').replace('width="512" height="512"', 'width="760" height="760"')}</div></body>`;
 }
 function socialBanner(w, h) {
-  const logoH = Math.round(h * 0.5);
+  const logoH = Math.round(h * 0.42);
   return `<body style="margin:0;width:${w}px;height:${h}px;background:linear-gradient(120deg,${C.navy} 0%,#123a63 60%,${C.tealDeep} 100%);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative">
   <svg style="position:absolute;inset:0" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
-    <path d="M0 ${h * 0.78} C${w * 0.2} ${h * 0.78} ${w * 0.3} ${h * 0.62} ${w * 0.5} ${h * 0.66} S${w * 0.85} ${h * 0.86} ${w} ${h * 0.8} V${h} H0 Z" fill="${C.teal}" opacity="0.28"/>
-    <path d="M0 ${h * 0.9} C${w * 0.25} ${h * 0.9} ${w * 0.35} ${h * 0.76} ${w * 0.55} ${h * 0.8} S${w * 0.9} ${h * 0.98} ${w} ${h * 0.92} V${h} H0 Z" fill="${C.lagoon}" opacity="0.22"/>
+    <path d="M0 ${h * 0.9} C${w * 0.2} ${h * 0.9} ${w * 0.3} ${h * 0.8} ${w * 0.5} ${h * 0.82} S${w * 0.85} ${h * 0.96} ${w} ${h * 0.9} V${h} H0 Z" fill="${C.teal}" opacity="0.28"/>
+    <path d="M0 ${h * 0.96} C${w * 0.25} ${h * 0.96} ${w * 0.35} ${h * 0.88} ${w * 0.55} ${h * 0.9} S${w * 0.9} ${h * 1.02} ${w} ${h * 0.97} V${h} H0 Z" fill="${C.lagoon}" opacity="0.22"/>
   </svg>
   <div style="position:relative;height:${logoH}px">${inlineSvg('twocoasts-logo-primary-reverse-tagline.svg').replace(/width="[\d.]+" height="[\d.]+"/, `height="${logoH}"`)}</div></body>`;
 }

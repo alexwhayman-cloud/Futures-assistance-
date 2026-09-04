@@ -10,7 +10,11 @@ TwoCoasts is the umbrella brand for a family of apps, files and documents. This 
 
 ## 1. The idea
 
-Two coasts, one game.
+**Slogan.** Two coasts. One clear view.
+
+Use the slogan on hero areas, title slides and covers. The tagline "DUBAI · THAILAND" is a locator: it lives only inside the logo lockups and is never rewritten (not "DUBAI · PHUKET", not "UAE · THAILAND"). Dubai is the city, Thailand the country, because those are the two names people recognise.
+
+**Name.** Write **TwoCoasts**, one word with a capital T and C, in all running text, titles, legal lines and product names. Lowercase "twocoasts" exists only in the drawn wordmark, URLs, handles and code. Never "Two Coasts", "twoCoasts" or "Two-Coasts".
 
 The brand lives between two shorelines: the Arabian Gulf at Dubai and the Andaman coast of Thailand. Both are places of sand, warm water and golf played with the sea in view. The identity borrows from all three:
 
@@ -18,9 +22,17 @@ The brand lives between two shorelines: the Arabian Gulf at Dubai and the Andama
 - **Thailand**: lagoon turquoise, deep tropical water, an easy warmth.
 - **Golf**: the dimpled ball, the flag on the green, the discipline of clean lines.
 
-The mark is a golf ball rising like a sun over two waves. The upper wave is the Andaman, the lower the deeper Gulf. A pin with a pennant stands on the crest, because on both coasts the game is played at the water's edge. Two waves, two coasts.
+The mark is a golf ball rising like a sun over two waves. The upper wave is the Andaman, the lower, darker one the Gulf. A pin with a pennant stands on the crest, because on both coasts the game is played at the water's edge. Two waves, two coasts.
 
-**Voice.** Calm, confident and specific. Short sentences. Numbers over adjectives. Warm but never gushing. We say "clear view", not "revolutionary insights".
+**Voice.** Calm, confident and specific. Short sentences. Numbers over adjectives. Warm but never gushing. Lead with the number, make one claim per sentence, and hedge with probabilities, never with adjectives. Never promise an outcome: we show probabilities and edges, and the reader decides.
+
+| Say | Don't say |
+|---|---|
+| a clear view | a game-changing insight |
+| a 61% edge | a sure thing |
+| we estimate | we guarantee |
+| +3.2% on the week | huge gains |
+| worth backing | can't lose |
 
 ---
 
@@ -33,11 +45,13 @@ All files are in `logo/svg/` (vector, use these whenever you can) with PNG rende
 | **Primary logo** | `twocoasts-logo-primary.svg` | Default. Headers, documents, anything on white, ivory or sand. |
 | Primary with tagline | `twocoasts-logo-primary-tagline.svg` | Covers, letterheads, hero areas, anywhere the logo is 200 px or wider. |
 | **Reverse logo** | `twocoasts-logo-primary-reverse.svg` (+ `-tagline`) | On navy, charcoal, dark photos and the coast gradient. |
-| **Stacked logo** | `twocoasts-logo-stacked-primary.svg` | Square spaces: social tiles, app splash screens, badges. |
+| **Stacked logo** | `twocoasts-logo-stacked-primary.svg` (+ `-tagline`) | Square spaces: social tiles, app splash screens, badges. |
+| **Product lockup** | `twocoasts-logo-product-futures.svg` (+ `-reverse`) | Wordmark, a thin rule and the product name. The only way to show a product name with the brand. |
 | Mono navy / white / black | `twocoasts-logo-mono-*.svg` | Single-colour print, embroidery, engraving, watermarks, co-branding rows where colour would clash. |
 | **Mark (day)** | `twocoasts-mark-day.svg` | Icon-sized uses on light backgrounds: avatars, list icons, buttons. |
 | Mark (night) | `twocoasts-mark-night.svg` | Icon-sized uses on dark backgrounds. |
 | Mark mono | `twocoasts-mark-mono-*.svg` | One-colour icon uses. |
+| Mark simplified | `twocoasts-mark-day-simple.svg`, `-night-simple` | Any use at 96 px or smaller: no dimples, thicker pin. |
 | **App icon** | `twocoasts-app-icon.svg`, `twocoasts-app-icon-dark.svg` | iOS, Android, macOS, Windows and PWA icons. Rounded square, full bleed. |
 | Wordmark | `twocoasts-wordmark*.svg` | Footers, page headers next to a product name, places the mark is shown separately. |
 | Favicon | `logo/favicon/` | Ready-made set: `favicon.svg`, `.ico`, PNG sizes, Apple touch icon, PWA icons, `site.webmanifest`. |
@@ -45,7 +59,7 @@ All files are in `logo/svg/` (vector, use these whenever you can) with PNG rende
 
 ### Choosing a version
 
-1. Light background (white, ivory, sand, light photo): **primary**.
+1. White, ivory or a light photo: **primary**. On Sand or other warm panels use **mono navy**, so the mark's disc always shows.
 2. Dark background (navy, charcoal, coast gradient, dark photo): **reverse**.
 3. Only one ink, or the background is busy or a strong colour: **mono** navy, white or black, whichever contrasts most.
 4. Space narrower than it is tall: **stacked**.
@@ -54,8 +68,8 @@ All files are in `logo/svg/` (vector, use these whenever you can) with PNG rende
 ### Clear space and minimum size
 
 - Keep clear space of at least **half the mark's height** on all sides. Nothing else (text, other logos, edges) goes inside it.
-- Minimum sizes: horizontal logo 120 px / 30 mm wide, stacked logo 80 px / 20 mm, mark 24 px. Below 32 px use `favicon.svg`, which drops the dimples and thickens the pin so it stays legible.
-- Drop the tagline below 200 px wide.
+- Minimum sizes: horizontal logo 120 px / 30 mm wide, stacked logo 80 px / 20 mm, mark 32 px, any one-colour version 48 px / 12 mm. At 96 px and below use the `-simple` marks; `favicon.svg` covers 16 to 48 px.
+- Drop the tagline below 320 px / 80 mm wide (horizontal) or 240 px / 60 mm (stacked). Use the files without `-tagline` there.
 
 ### Don't
 
@@ -80,14 +94,17 @@ Source of truth: `colors/palette.json`. Ready-made exports: `colors/colors.css`,
 | ![](https://placehold.co/20x20/0FA3B1/0FA3B1.png) | **Andaman Teal** | `#0FA3B1` | 15, 163, 177 | Primary accent. The upper wave, "coasts". Large text and shapes only on white. |
 | ![](https://placehold.co/20x20/0B7F8A/0B7F8A.png) | Deep Teal | `#0B7F8A` | 11, 127, 138 | Accessible teal: links, button fills, small text on light. |
 | ![](https://placehold.co/20x20/8EDCD9/8EDCD9.png) | Lagoon | `#8EDCD9` | 142, 220, 217 | Tints, tags, highlights, the upper wave at night. |
-| ![](https://placehold.co/20x20/D9A64A/D9A64A.png) | **Dubai Gold** | `#D9A64A` | 217, 166, 74 | The sun. Taglines on dark, premium accents. Decorative on white. |
+| ![](https://placehold.co/20x20/D9A64A/D9A64A.png) | **Dubai Gold** | `#D9A64A` | 217, 166, 74 | The sun. Taglines on dark, premium accents. Decorative only on light backgrounds; never text outside the locked logo files. |
+| ![](https://placehold.co/20x20/EFC65E/EFC65E.png) | Sunlit Gold | `#EFC65E` | 239, 198, 94 | Top of the Sun gradient only. Not for UI or text. |
 | ![](https://placehold.co/20x20/B8862E/B8862E.png) | Bunker Gold | `#B8862E` | 184, 134, 46 | Gold text on light backgrounds (large sizes). Dimples. |
-| ![](https://placehold.co/20x20/F6ECD9/F6ECD9.png) | **Sand** | `#F6ECD9` | 246, 236, 217 | Warm surfaces. The sky in the mark. |
+| ![](https://placehold.co/20x20/F6ECD9/F6ECD9.png) | **Sand** | `#F6ECD9` | 246, 236, 217 | Warm surfaces, cards, section backgrounds. |
 | ![](https://placehold.co/20x20/FCFAF5/FCFAF5.png) | Ivory | `#FCFAF5` | 252, 250, 245 | Page background. |
 | ![](https://placehold.co/20x20/2F9E6B/2F9E6B.png) | Fairway Green | `#2F9E6B` | 47, 158, 107 | Success, positive change, golf accents. |
 | ![](https://placehold.co/20x20/F0715F/F0715F.png) | Sunset Coral | `#F0715F` | 240, 113, 95 | Errors, negative change, urgent highlights. |
 | ![](https://placehold.co/20x20/1E2A3A/1E2A3A.png) | Charcoal | `#1E2A3A` | 30, 42, 58 | Body text. Dark-mode surface. |
 | ![](https://placehold.co/20x20/7A7266/7A7266.png) | Driftwood | `#7A7266` | 122, 114, 102 | Secondary text, captions, borders. |
+
+Mark only: Dune `#EFE1C4` is the sky in the day mark and Night Gulf `#123A63` the sky in the night mark. They give the badge a visible disc on white, ivory and navy. Don't use them as UI colours.
 
 ### Proportions
 
@@ -108,9 +125,13 @@ Think of a page as a beach: mostly Ivory and Sand, a strong line of Navy, a stri
 
 Contrast ratios for every pairing are in `colors/contrast.md`. The short version:
 
-- Text on light backgrounds: Gulf Navy, Charcoal, Deep Teal or Driftwood. Andaman Teal, gold, green and coral only at 18 px bold and above, or as shapes and icons.
+- Text on light backgrounds: Gulf Navy, Charcoal, Deep Teal or Driftwood. Andaman Teal, gold, green and coral only at 18 px bold and above, or as shapes and icons. Gold is never text below 18 px on a light surface.
 - Text on Gulf Navy: White, Sand, Lagoon, Dubai Gold, Andaman Teal all pass.
 - Buttons: Deep Teal fill with white text (light mode), or Andaman Teal fill with navy text (dark mode). White on Andaman Teal is borderline; avoid it for small text.
+- Positive and negative numbers use the text tokens (`#1F7A52` and `#C0472F` on light; `#4CBF8A` and `#FF8A78` on dark), not the badge fills.
+- Status colours never carry meaning alone. Pair green and coral with a sign, an arrow or a label; the theme's up/down styles add the arrow for you.
+- Badges on green or coral fills use navy text, not white.
+- Hero body text on the Coast gradient is White, not Sand.
 
 ### Dark mode
 
@@ -120,7 +141,7 @@ Swap surfaces to `#071A33` / Gulf Navy, body text to Sand, headings to White, li
 
 ## 4. Typography
 
-Montserrat for display and headings, Inter for everything else. Both are free (SIL OFL) and included in `fonts/`. Full scale and rules in `typography/typography.md`.
+Montserrat for headings, eyebrows, taglines, buttons, badges, navigation, table headers and hero KPI figures. Inter for running text, form fields, table cells, captions and any data column. Both are free (SIL OFL) and included in `fonts/`, including Inter Italic. Full scale and rules in `typography/typography.md`.
 
 | Role | Face | Weight | Size |
 |---|---|---|---|
@@ -133,7 +154,7 @@ Montserrat for display and headings, Inter for everything else. Both are free (S
 | Small / table | Inter | 400 | 14 px |
 | Caption | Inter | 500 | 12 px |
 
-The tagline "DUBAI · THAILAND" is always uppercase Montserrat 600 with wide tracking, in Dubai Gold on dark or Bunker Gold on light.
+The tagline "DUBAI · THAILAND" is always uppercase Montserrat 600 with wide tracking, in Dubai Gold, and only inside the logo files. Eyebrows (small uppercase labels above headings) are Deep Teal on light backgrounds and Dubai Gold on dark; uppercase labels use 0.18 em tracking for eyebrows and 0.08 em for badges, table headers and navigation.
 
 ---
 
@@ -151,7 +172,7 @@ The tagline "DUBAI · THAILAND" is always uppercase Montserrat 600 with wide tra
 
 ### Apps and websites
 
-1. Link `tokens/twocoasts.css` (fonts, tokens, light/dark, base components) or import `tokens/tokens.json` into your design tool.
+1. Link `tokens/twocoasts.css` (fonts, tokens, light/dark, base components) or import `tokens/tokens.json` into your design tool. Copy `fonts/` with it: the stylesheet self-hosts the fonts. It follows the OS theme; force one with `data-theme="light"` or `data-theme="dark"` on the root element. Put both logo versions in the page with the `tc-logo-light` and `tc-logo-dark` classes and the theme shows the right one.
 2. Copy `logo/favicon/*` next to your `index.html` and paste the `<link>` tags from `templates/app-shell.html`.
 3. Use the primary logo in the header at 36 to 44 px tall, the reverse logo in dark mode, and the mark alone on mobile.
 4. Tailwind: `colors/tailwind.colors.js`.
@@ -160,14 +181,16 @@ The tagline "DUBAI · THAILAND" is always uppercase Montserrat 600 with wide tra
 
 - **Letters, reports, proposals**: start from `templates/letterhead.html` (A4, prints to PDF from any browser).
 - **Word / Google Docs**: install the fonts from `fonts/`, use Montserrat 800 for the title, 700 for headings, Inter 11 pt for body. Put `twocoasts-logo-primary-tagline.svg` (or the `@2x` PNG) top-left at 18 mm wide, and the navy mono wordmark in the footer.
-- **Slides**: navy title slide with the reverse logo and a coast gradient; ivory content slides with the primary logo small in a corner; Gold for the one number you want remembered.
+- **Slides**: navy title slide with the reverse logo centred at 80 mm wide on a coast gradient and the slogan beneath; ivory content slides with the primary logo bottom-right at 30 mm wide; Gold for the one number you want remembered. Title 40 pt Montserrat 800, section titles 28 pt Montserrat 700, body 18 to 20 pt Inter, captions 12 pt.
+- **Office fonts**: install Montserrat and Inter from `fonts/`. If they cannot be installed, use Arial for both. Never substitute a serif.
+- **Office theme colours** (PowerPoint and Word "Customize Colors"): Dark 1 Gulf Navy `#0B2545`, Light 1 Ivory `#FCFAF5`, Dark 2 Charcoal `#1E2A3A`, Light 2 Sand `#F6ECD9`, Accent 1 Deep Teal `#0B7F8A`, Accent 2 Dubai Gold `#D9A64A`, Accent 3 Andaman Teal `#0FA3B1`, Accent 4 Fairway Green `#2F9E6B`, Accent 5 Sunset Coral `#F0715F`, Accent 6 Driftwood `#7A7266`, Hyperlink Deep Teal.
 - **Spreadsheets**: header row Gulf Navy with white Montserrat 600 text; alternate rows Ivory and Sand; positive numbers Fairway Green, negative Sunset Coral.
 - **Email**: `templates/email-signature.html`.
 - **READMEs and docs sites**: `templates/markdown-snippets.md`.
 
 ### Sub-brands and product names
 
-Products sit next to the wordmark, separated by a thin Driftwood rule, set in Montserrat 500 Navy at the same cap height: `twocoasts | Futures`. Products do not get their own marks. If a product needs an icon, use the app icon with a small product glyph in the bottom-right corner, never a different mark.
+Use the product lockup files (`twocoasts-logo-product-futures.svg` and `-reverse`): the wordmark, a thin rule, then the product name in Montserrat 500 at cap height. Never type it yourself. In prose write "TwoCoasts Futures" on first mention and "Futures" after that; never "Futures by TwoCoasts". Products do not get their own marks; they share the TwoCoasts mark and app icon.
 
 ### Co-branding
 
@@ -182,14 +205,15 @@ branding/
 ├── BRAND_GUIDELINES.md         this document
 ├── README.md                   quick start
 ├── logo/
-│   ├── svg/                    all logo variants (vector, preferred)
+│   ├── svg/                    all logo variants (vector, preferred), incl. product lockups and -simple marks
 │   ├── png/                    1x and 2x renders, mark size ladder
 │   ├── favicon/                favicon.svg/.ico, PNGs, apple-touch-icon, PWA icons, site.webmanifest
 │   └── social/                 avatar, X banner, LinkedIn banner, Open Graph image
 ├── colors/                     palette.json, colors.css, colors.scss, tailwind.colors.js, twocoasts.gpl, contrast.md
 ├── tokens/                     tokens.json (W3C design tokens), twocoasts.css (drop-in theme)
 ├── typography/                 typography.md, fonts.css
-├── fonts/                      Montserrat and Inter variable TTFs + OFL licences
+├── fonts/                      Montserrat, Inter and Inter Italic variable TTFs + OFL licences
+├── reviews/                    design team review reports and the Creative Director's decisions
 ├── templates/                  letterhead, app shell, email signature, markdown snippets
 ├── preview/                    brand-sheet.html and brand-sheet.png
 └── tools/build.mjs             regenerates every logo, PNG, favicon and social image

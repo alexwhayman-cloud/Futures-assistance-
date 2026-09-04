@@ -1,15 +1,10 @@
 <!doctype html>
-<html lang="en" class="tc">
+<html lang="en" class="tc" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TwoCoasts brand sheet</title>
 <link rel="stylesheet" href="../tokens/twocoasts.css">
-<style>
-  /* Bundled fonts so this file works offline; must come after the theme link. */
-  @font-face { font-family: 'Montserrat'; src: url('../fonts/Montserrat.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
-  @font-face { font-family: 'Inter'; src: url('../fonts/Inter.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
-</style>
 <style>
   html { color-scheme: light; }
   body { margin: 0; background: var(--tc-ivory); }
@@ -37,8 +32,8 @@
   <div class="hero">
     <div>
       <p class="tc-eyebrow" style="color:var(--tc-gold)">Brand sheet · v1.0</p>
-      <h1>twocoasts</h1>
-      <p>Where the Arabian Gulf meets the Andaman Sea. A golf ball rising as a sun over two coastlines: Dubai's sand and skyline, Thailand's turquoise water, and the flag on the green that ties the two together.</p>
+      <h1>TwoCoasts brand kit</h1>
+      <p><b>Two coasts. One clear view.</b> The mark is a golf ball rising like a sun over two waves. The upper wave is the Andaman, the lower, darker one the Gulf. A pin with a pennant stands on the crest, because on both coasts the game is played at the water's edge.</p>
     </div>
     <img src="../logo/svg/twocoasts-logo-primary-reverse-tagline.svg" alt="TwoCoasts">
   </div>
@@ -49,10 +44,14 @@
     <div><p class="lbl">Reverse · dark backgrounds</p><div class="tile dark"><img src="../logo/svg/twocoasts-logo-primary-reverse-tagline.svg" alt=""></div></div>
   </div>
   <div class="row r4">
-    <div><p class="lbl">Stacked</p><div class="tile sand"><img src="../logo/svg/twocoasts-logo-stacked-primary.svg" alt="" style="max-height:170px"></div></div>
-    <div><p class="lbl">Mono navy</p><div class="tile light"><img src="../logo/svg/twocoasts-logo-stacked-mono-navy.svg" alt="" style="max-height:170px"></div></div>
+    <div><p class="lbl">Stacked</p><div class="tile light"><img src="../logo/svg/twocoasts-logo-stacked-primary.svg" alt="" style="max-height:170px"></div></div>
+    <div><p class="lbl">Stacked with tagline (240 px+)</p><div class="tile light"><img src="../logo/svg/twocoasts-logo-stacked-primary-tagline.svg" alt="" style="max-height:170px"></div></div>
+    <div><p class="lbl">Mono navy on Sand</p><div class="tile sand"><img src="../logo/svg/twocoasts-logo-stacked-mono-navy.svg" alt="" style="max-height:170px"></div></div>
     <div><p class="lbl">Mono white</p><div class="tile teal"><img src="../logo/svg/twocoasts-logo-stacked-mono-white.svg" alt="" style="max-height:170px"></div></div>
-    <div><p class="lbl">Wordmark</p><div class="tile light"><img src="../logo/svg/twocoasts-wordmark.svg" alt=""></div></div>
+  </div>
+  <div class="row r2">
+    <div><p class="lbl">Product lockup</p><div class="tile light"><img src="../logo/svg/twocoasts-logo-product-futures.svg" alt=""></div></div>
+    <div><p class="lbl">Product lockup · reverse</p><div class="tile dark"><img src="../logo/svg/twocoasts-logo-product-futures-reverse.svg" alt=""></div></div>
   </div>
 
   <h2>Mark</h2>
@@ -86,14 +85,15 @@
     <div class="tile light type" style="display:block">
       <p class="lbl">Montserrat · display</p>
       <p style="font-family:var(--tc-font-display);font-weight:800;font-size:40px;color:var(--tc-navy);letter-spacing:-.02em;line-height:1.1">Two coasts.<br>One clear view.</p>
-      <p style="font-family:var(--tc-font-display);font-weight:600;font-size:20px;color:var(--tc-navy)">Section heading in Montserrat 600</p>
-      <p class="tc-eyebrow">Eyebrow · Dubai · Thailand</p>
+      <h3>Card title in Montserrat 700 at 22 px</h3>
+      <p class="tc-eyebrow">Eyebrow · Deep Teal on light</p>
     </div>
     <div class="tile light type" style="display:block">
       <p class="lbl">Inter · body</p>
       <p style="font-size:16px">Body text is set in Inter at 16 px with a 1.55 line height. It stays legible on phones, in tables and in print, and its tabular figures keep numbers aligned: 1,240.00 / 980.50.</p>
-      <p style="font-size:14px;color:var(--tc-driftwood)">Secondary text at 14 px in Driftwood.</p>
-      <p><span class="tc-badge">Thailand</span> <span class="tc-badge tc-badge-gold">Dubai</span> <span class="tc-badge tc-badge-green">Up 3.2%</span> <span class="tc-badge tc-badge-coral">Alert</span></p>
+      <p class="tc-small tc-muted">Secondary text at 14 px in Driftwood. <em>Inter Italic for emphasis.</em></p>
+      <p class="tc-caption">Caption at 12 px, weight 500.</p>
+      <p><span class="tc-badge">Thailand</span> <span class="tc-badge tc-badge-gold">Dubai</span> <span class="tc-badge tc-badge-green">Open</span> <span class="tc-badge tc-badge-coral">Alert</span> &nbsp; <span class="tc-up">3.2%</span> &nbsp; <span class="tc-down">1.1%</span></p>
       <p><a class="tc-btn tc-btn-primary" href="#">Primary</a> <a class="tc-btn tc-btn-secondary" href="#">Secondary</a> <a class="tc-btn tc-btn-gold" href="#">Gold</a></p>
     </div>
   </div>

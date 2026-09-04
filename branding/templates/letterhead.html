@@ -1,21 +1,16 @@
 <!doctype html>
-<html lang="en" class="tc">
+<html lang="en" class="tc" data-theme="light">
 <head>
 <meta charset="utf-8">
 <title>TwoCoasts letterhead</title>
 <link rel="stylesheet" href="../tokens/twocoasts.css">
 <style>
-  /* Bundled fonts so this file works offline; must come after the theme link. */
-  @font-face { font-family: 'Montserrat'; src: url('../fonts/Montserrat.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
-  @font-face { font-family: 'Inter'; src: url('../fonts/Inter.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
-</style>
-<style>
   /* A4 print document. Open in a browser and Print > Save as PDF, or use as the base for reports. */
-  @page { size: A4; margin: 22mm 20mm 24mm; }
+  @page { size: A4; margin: 18mm 18mm 22mm; }
   html { color-scheme: light; }
   :root { --tc-bg: #fff; }
   body { margin: 0; background: #fff; }
-  .page { max-width: 170mm; margin: 0 auto; padding: 18mm 0; }
+  .page { max-width: 174mm; margin: 0 auto; padding: 0 0 16mm; }
   @media screen { body { background: var(--tc-sand); } .page { background: #fff; padding: 22mm 20mm; margin: 24px auto; box-shadow: var(--tc-shadow-float); } }
 
   .lh-head { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid var(--tc-teal); padding-bottom: 8mm; margin-bottom: 10mm; }
@@ -31,6 +26,10 @@
   .doc table { font-size: 10pt; }
   .lh-foot { margin-top: 14mm; padding-top: 4mm; border-top: 1px solid var(--tc-border); display: flex; justify-content: space-between; align-items: center; font-size: 8.5pt; color: var(--tc-driftwood); }
   .lh-foot img { height: 8mm; }
+  @media print {
+    .lh-foot { position: fixed; bottom: 0; left: 0; right: 0; margin: 0; background: #fff; }
+    .lh-head { break-after: avoid; }
+  }
 </style>
 </head>
 <body>
@@ -41,7 +40,7 @@
       <strong>TwoCoasts</strong><br>
       Dubai, United Arab Emirates<br>
       Phuket, Thailand<br>
-      hello@twocoasts.example
+      [hello@yourdomain]
     </address>
   </header>
 
@@ -73,8 +72,8 @@
 
   <footer class="lh-foot">
     <img src="../logo/svg/twocoasts-wordmark-mono-navy.svg" alt="">
-    <span>Dubai · Thailand &nbsp;|&nbsp; twocoasts.example</span>
-    <span>Page 1</span>
+    <span>Dubai · Thailand &nbsp;|&nbsp; [yourdomain]</span>
+    <span>TwoCoasts</span>
   </footer>
 </div>
 </body>

@@ -7,7 +7,7 @@
 
 # Futures-assistance-
 
-Helps choose good bets to make. A **twocoasts** project.
+TwoCoasts Futures ranks upcoming bets by expected value so you back the ones worth backing. A **TwoCoasts** project.
 
 ## Branding
 

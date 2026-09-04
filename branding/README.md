@@ -15,20 +15,25 @@ Everything needed to make an app, file or document look like a TwoCoasts product
 |---|---|
 | Logo on a light background | `logo/svg/twocoasts-logo-primary.svg` |
 | Logo on a dark background | `logo/svg/twocoasts-logo-primary-reverse.svg` |
-| Square space | `logo/svg/twocoasts-logo-stacked-primary.svg` |
-| Icon only | `logo/svg/twocoasts-mark-day.svg` (light) / `twocoasts-mark-night.svg` (dark) |
+| Square space | `logo/svg/twocoasts-logo-stacked-primary.svg` (add `-tagline` above 240 px) |
+| Product lockup | `logo/svg/twocoasts-logo-product-futures.svg` (+ `-reverse`) |
+| Icon only | `logo/svg/twocoasts-mark-day.svg` (light) / `twocoasts-mark-night.svg` (dark); `-simple` versions at 96 px and below |
 | One colour | `logo/svg/twocoasts-logo-mono-navy.svg`, `-white`, `-black` |
 | App / store icon | `logo/svg/twocoasts-app-icon.svg` or `logo/favicon/icon-512.png` |
 | Browser favicon | copy `logo/favicon/*` |
 | Social | `logo/social/` |
 
-PNG versions of every SVG are in `logo/png/` at 1x and 2x. Add `-tagline` to any lockup name for the "DUBAI · THAILAND" version.
+PNG versions of every SVG are in `logo/png/` at 1x and 2x. Add `-tagline` to any lockup name for the "DUBAI · THAILAND" version (only above 320 px wide horizontal / 240 px stacked).
+
+Write the name as **TwoCoasts** in text. Lowercase "twocoasts" exists only in the drawn wordmark, URLs and code. Slogan: *Two coasts. One clear view.*
 
 ## Use the colours
 
-```css
-@import "branding/tokens/twocoasts.css";   /* fonts + tokens + light/dark + buttons, cards, tables */
+```html
+<link rel="stylesheet" href="branding/tokens/twocoasts.css">  <!-- fonts + tokens + light/dark + components -->
 ```
+
+The stylesheet loads the fonts from `branding/fonts/`, so copy `tokens/` and `fonts/` together. It follows the OS light/dark preference; force one with `data-theme="light"` or `data-theme="dark"` on `<html>` (print documents should force light). Put both logo versions in the page with `tc-logo-light` / `tc-logo-dark` and the theme shows the right one.
 
 | Name | Hex |
 |---|---|
@@ -48,7 +53,7 @@ Other formats: `colors/colors.scss`, `colors/tailwind.colors.js`, `colors/twocoa
 
 ## Use the fonts
 
-Montserrat (headings) and Inter (body). Both load from Google Fonts through `tokens/twocoasts.css`, and the TTFs are in `fonts/` for installing locally or embedding in documents.
+Montserrat (headings) and Inter (body). `tokens/twocoasts.css` self-hosts them from `fonts/`; `typography/fonts.css` is the Google Fonts alternative. Install the TTFs from `fonts/` for Word, PowerPoint and design tools.
 
 ## Templates
 

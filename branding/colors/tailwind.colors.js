@@ -1,4 +1,4 @@
-// TwoCoasts colours for Tailwind CSS. Generated from colors/palette.json.
+// TwoCoasts colours for Tailwind CSS. Mirrors colors/palette.json (keep in sync by hand).
 // tailwind.config.js:  const tc = require('./branding/colors/tailwind.colors.js');
 //                      theme: { extend: { colors: { tc } } }
 // Then use classes such as bg-tc-navy, text-tc-teal-deep, border-tc-sand.
