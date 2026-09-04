@@ -2,6 +2,10 @@
 
 **Purpose:** Define the process for reviewing, prioritizing, and assigning GitHub issues.
 
+**GitHub Project Board:** [Issue Triage Board](https://github.com/users/alexwhayman-cloud/projects/2)
+- Columns: Triage → Ready → In-Progress → Review → Done
+- View all issues in workflow at a glance
+
 ## Triage Schedule
 
 - **Daily:** Review new issues (first thing each morning)
